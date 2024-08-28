@@ -1,6 +1,6 @@
 ---
 title: "Class Reference"
-author: "Derek Willis"
+author: "Marijke Friedman"
 output:
   html_document:
     theme: cerulean
