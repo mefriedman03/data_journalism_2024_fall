@@ -24,12 +24,101 @@ Consider this a personal guide to the commands and functions you will learn. In 
 The command to set a working directory is setwd(). For example, this sets the working directory to a directory called data_journalism_2024_fall inside a directory called jour472 located inside your home directory (the ~ is equivalent of /Users/[youruser] on a Mac).
 
 ```{r}
-setwd("~/jour472/data_journalism_2024_fall")
+setwd("~/Documents/GitHub/data_journalism_2024_fall")
 ```
 
-### How to install and load the tidyverse
+### How to install and load the Tidyverse
+
+This command loads and installs the Tidyverse libraries.
 
 ```{r}
 install.packages("tidyverse")
 library(tidyverse)
+```
+
+### How to install and load R Markdown
+
+This command allows me to use R Markdown files and is related to the Tidyverse.
+
+```{r}
+install.packages('rmarkdown')
+```
+
+### How to use assignment operators and do basic math in R
+
+This command assigns and stores a value in a variable. I can use the variables to do math, including the multiplication I did below
+
+```{r}
+numberone <- 4 
+numbertwo <- 2
+numberone * numbertwo
+```
+
+### How to add the readr and dplyr libraries
+
+This code loads the readr dplyr libraries in order to be able to read data. Loading library(tidyverse) is a shortcut to doing this. 
+
+```{r}
+library(readr)
+library(dplyr)
+```
+
+### How to import data
+
+This would help me import data if I had the file. The first part of the code is the name of a variable. The part following the assignment operator reads the data and stuffs it into the variable. read_rds only works when the Tidyverse has been loaded. It is a type of function
+
+```{r}
+maryland_winred_contributions <- read_rds("maryland_winred.rds")
+```
+
+### How to load a file from the internet
+
+```{r}
+maryland_winred_contributions <- read_rds("https://thescoop.org/files/maryland_winred.rds")
+
+```
+
+### How to easily view our data
+
+The first function gives us a list of columns and their first few values and the data type in each column. The second function prints out the columns and the first six rows of data.
+
+```{r}
+glimpse(maryland_winred_contributions)
+head(maryland_winred_contributions)
+
+```
+
+### How to do a specific action to a data set
+
+This is taking your data set and doing a specific action to it. (data |> function)
+ 
+A common pattern: data |> group_by(COLUMN NAME) |> summarize(VARIABLE NAME = AGGREGATE FUNCTION(COLUMN NAME))
+
+The example below counts the number of contributions to each recipient.
+
+
+```{r}
+maryland_winred_contributions |>
+  group_by(memo_text) |>
+  summarise(
+    count_contribs = n()
+  )
+```
+
+### How to find the total, mean, median, minimum, and maximum
+ 
+These functions can do math with our data.
+
+```{r}
+sum()
+mean()
+median()
+min_amount()
+max_amount()
+```
+
+### This function can arange our data from highest to lowest.
+
+```{r}
+arrange(desc())
 ```
