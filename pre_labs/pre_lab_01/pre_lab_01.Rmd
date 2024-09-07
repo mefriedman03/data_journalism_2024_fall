@@ -136,7 +136,7 @@ Describe what you think this code is doing below. What does the answer represent
 **Task** Run the following codeblock:
 
 ```{r}
-contribs_by_date <- maryland_winred_contributions |>
+maryland_winred_contributions |>
   group_by(date) |>
   summarise(
     count_contribs = n()
