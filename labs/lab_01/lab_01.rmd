@@ -79,11 +79,11 @@ arrange(count_contribs)
 
 **Q4** What's your best educated guess to explain why the city identified in question 2 had more contributions compared to the cities identified in question 3? Hint: you won't find the answer in the data, you'll need to do some quick web research. You do not need to write any code for this question, so no codeblock is provided.
 
-**A4**Charleston is the capital of West Virginia so probably has a larger population than a lot of these other cities. Also, since the state government is primary located in this capital city, its population may be more politically aware and active. 
+**A4**Charleston is the capital of West Virginia so probably has a larger population than a lot of these other cities. Also, since the state government is primary located in this capital city, its population may be more politically aware and active. The other cities are smaller and not the capital city.
 
 **Q5** What recipient got the largest total amount of money? How many contributions did they receive and what was the average donation?
 
-**A5** The Trump National Committee JFC, Inc. It received 14063 donations and $463,944.40
+**A5** The Trump National Committee JFC, Inc. It received 14063 donations and $463,944.40. The average donation was $32.99.
 
 ```{r}
 west_virginia_winred_contributions |>
@@ -103,7 +103,7 @@ west_virginia_winred_contributions |>
 
 Store it as a variable object called `wv_summary` so that you can examine it with the data viewer. What newsworthy nuggets jump out at you that you could imagine dropping into a news story? Write a few summary sentences with overall findings.
 
-**A7**I noticed that the largest average for campaign contributions was for Guthrie for Congress at $3,300. Even though the Trump campaign got the most contributions and money total, its average contribution was a lot smaller. It could be interesting to look at why these the Guthrie campaign and others draw in larger contributions on average. There are also big gaps between the maximum amounts of contribution. The Trump National Committee JFC had a $10,000 maximum contribution and and everything else was a lot less. The refund of earmarked contribution was also something that jumped out. I am curious why so many contributions were refunded and think that is something I would want to explore and possibly include in a news story. 
+**A7**I noticed that the largest average for campaign contributions was for Guthrie for Congress at $3,300. Even though the Trump campaign got the most contributions and money total, its average contribution was a lot smaller. It could be interesting to look at why the Guthrie campaign and others draw in larger contributions on average. There are also big gaps between the maximum amounts of contribution. The Trump National Committee JFC had a $10,000 maximum contribution and and everything else was a lot less. The refund of earmarked contribution was also something that jumped out. I am curious why so many contributions were refunded and think that is something I would want to explore and possibly include in a news story. 
 
 ```{r}
 'wv_summary' <- west_virginia_winred_contributions |>
