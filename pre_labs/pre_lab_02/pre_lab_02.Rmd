@@ -342,4 +342,4 @@ So the month of June 2022 had the most expenditures by far in this data. We'll b
 
 Describe the values in the new `month` column - what do you think the data is showing here?
 
-**Answer**The values in the new 'month' column say the first date of the month but encapsulate all dates in a month. 
+**Answer**The values in the new 'month' column say the first date of the month but encapsulate all dates in a month. All values in a month were grouped. THe data is showing the total amount of expenditures for each month. 
