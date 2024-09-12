@@ -53,11 +53,14 @@ new_registrants |>
     number_of_registrants = n()
   ) |>
   arrange(desc(number_of_registrants))
+
+glimpse(new_registrants)
+
 ```
 
 **Q2** A better question is whether the new voters you found in Q1 are an outlier compared to other weeks this year. Using the original dataframe with 2024 registrants, use `mutate()` and lubridate to produce week numbers from the COUNTY_REGISTRATION_DATE (Lubridate has a function that turns a date into a week number. Use that to answer this question). Save that to the original dataframe. Then calculate how many voters are in each week. Describe the distribution of voters groups in a sentence - are the weeks from July 21-August 7 different from the rest, and if so, how?
 
-**A2** Yes, two of the weeks in that time period had a large total amount of voter registrations. However, neither are the highest weeks for registrations. There were also high registrations following Trump getting shot. I can't remember what happened the week of June 9, which has the highest number of registrants.
+**A2** Yes, two of the weeks in that time period had a large total amount of voter registrations. However, neither are the highest weeks for registrations. There were also high registrations following Trump getting shot. I can't remember what happened the week of June 9, which has the highest number of registrants. Overall, more people registered to vote in the summer. 
 
 ```{r}
 md_voters_2024 <- md_voters_2024 |>
@@ -72,7 +75,7 @@ md_voters_2024 |>
 
 **Q3** Using lubridate, show which month saw the largest number of registrations. Does the answer help shed more light on Q2?
 **A3** 
-July saw the largest number of registrations. This helps us see that Trump's shooting and Biden dropping out likely had some role in pushing people to register to vote. 
+July saw the largest number of registrations. This helps us see that Trump's shooting and Biden dropping out likely had some role in pushing people to register to vote. Yes, it helps us shed more light by showing us that one month had drastically more registrations. 
 ```{r}
 md_voters_2024 <- md_voters_2024 |>
   mutate(month = floor_date(STATE_REGISTRATION_DATE, "month")) 
