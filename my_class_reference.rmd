@@ -122,3 +122,139 @@ max_amount()
 ```{r}
 arrange(desc())
 ```
+
+### This function groups the data by city and finds the total number of contributions in each city. The arrange part of the function arranges the data in descending order based on which city had the most contributions. Taking out "desc" will arrange in ascending order. 
+
+```{r}
+wv_winred_contribs |>
+  group_by(city) |>
+  summarise(
+    total_contribs = n()
+  ) |>
+  arrange(desc(total_contribs))
+```
+
+### This function finds what recipient got the largest total amount of money and how many contributions they received. It also shows me the average donation for each recipient. 
+
+```{r}
+wv_winred_contribs |>
+  group_by(memo_text) |>
+  summarise(
+    total_contribs = n(),
+    total_amount = sum(amount),
+    average_amount = mean(amount
+    )
+  ) |>
+  arrange(desc(total_amount))
+```
+
+#### This function produces  a summary table that has the following information for each recipient: \* count of contributions \* total amount of all contributions \* the average contribution amount \* the median contribution amount \* the smallest contribution amount \* the largest contribution amount. The first part of the function stores it as a variable object called `wv_summary` so that I can examine it with the data viewer. 
+
+```{r}
+wv_summary <- wv_winred_contribs |>
+  group_by(memo_text) |>
+   summarise(
+    count_contribs = n(),
+    total_amount = sum(amount),
+    mean_amount = mean(amount),
+    median_amount = median(amount),
+    min_amount = min(amount),
+    max_amount = max(amount)
+  ) |>
+  arrange(desc(total_amount))
+```
+
+### This function installs the lubridate package.
+
+```{r}
+library(lubridate)
+```
+
+### This function tells me how many new voters registered since July 21. The first part creates a new dataframe for those new registrants and filters it so it is only people since that date. Then it shows me what county had the most registrants since that date. 
+
+```{r}
+new_registrants <- md_voters_2024 |> filter(STATE_REGISTRATION_DATE >= "2024-07-22")
+
+new_registrants |>
+  group_by(COUNTY) |>
+  summarise(
+    number_of_registrants = n()
+  ) |>
+  arrange(desc(number_of_registrants))
+
+glimpse(new_registrants)
+```
+
+### This function mutates the original dataframe to add a new column called "week." This is all through lubridate. The second part of the function groups and summarizes the information by week and then arranges the weeks in order by number of new registrants per week. 
+
+```{r}
+md_voters_2024 <- md_voters_2024 |>
+  mutate(week = floor_date(STATE_REGISTRATION_DATE, "week")) 
+md_voters_2024 |>
+   group_by(week) |>
+   summarise(
+    number_of_registrants = n()
+  ) |>
+  arrange(desc(number_of_registrants))
+```
+
+### This function does the same thing as the last one and just does it by month instead of week using lubridate. 
+
+```{r}
+md_voters_2024 <- md_voters_2024 |>
+  mutate(month = floor_date(STATE_REGISTRATION_DATE, "month")) 
+md_voters_2024 |>
+   group_by(month) |>
+   summarise(
+    number_of_registrants = n()
+  ) |>
+  arrange(desc(number_of_registrants))
+```
+
+### The below code does a lot. First, it mutates the original dataframe to add a column called "region." It also uses case_when to assign a region to each county. The second part arranges the regions in order based on the number of new registrants. The last part groups and summarizes the new registrants by political party and arranges them in order of which party had the most new registrants. 
+
+```{r}
+md_voters_2024 <- md_voters_2024 |>
+  mutate(
+    region = case_when(
+        COUNTY == "Garrett" ~ "Western Maryland",
+        COUNTY == "Allegany" ~ "Western Maryland",
+        COUNTY == "Washington" ~ "Western Maryland",
+        COUNTY == "Frederick" ~ "Capital Region",
+        COUNTY == "Montgomery" ~ "Capital Region",
+        COUNTY == "Prince George's" ~ "Capital Region",
+        COUNTY == "Anne Arundel" ~ "Central Maryland",
+        COUNTY == "Baltimore City" ~ "Central Maryland",
+        COUNTY == "Baltimore County" ~ "Central Maryland",
+        COUNTY == "Carroll" ~ "Central Maryland",
+        COUNTY == "Harford" ~ "Central Maryland",
+        COUNTY == "Howard" ~ "Central Maryland",
+        COUNTY == "Calvert" ~ "Southern Maryland",
+        COUNTY == "Charles" ~ "Southern Maryland",
+        COUNTY == "Saint Mary's" ~ "Southern Maryland",
+        COUNTY == "Kent" ~ "Eastern Shore",
+        COUNTY == "Queen Anne's" ~ "Eastern Shore",
+        COUNTY == "Talbot" ~ "Eastern Shore",
+        COUNTY == "Caroline" ~ "Eastern Shore",
+        COUNTY == "Dorchester" ~ "Eastern Shore",
+        COUNTY == "Somerset" ~ "Eastern Shore",
+        COUNTY == "Worcester" ~ "Eastern Shore",
+        COUNTY == "Cecil" ~ "Eastern Shore",
+        COUNTY == "Kent" ~ "Eastern Shore"
+        )
+  )
+md_voters_2024 |>
+   group_by(region) |>
+   summarise(
+    number_of_registrants = n()
+  ) |>
+  arrange(desc(number_of_registrants))
+
+md_voters_2024 |>
+   group_by(PARTY) |>
+   summarise(
+    number_of_registrants = n()
+  ) |>
+  arrange(desc(number_of_registrants))
+```
+
