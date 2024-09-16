@@ -204,7 +204,7 @@ And let's examine the full data set.
 
 **Task** Run the following codeblock to examine the data. Name three problems the book chapter says exist in this data set that could prevent us from answering questions?
 
-**Answer**MARIJKE COME BACK TO THIS
+**Answer**Numbers in the front of column names, upper case and lowercase column names, numbers being stored in chr columns. Duplicated rows
 
 ```{r}
 conowingo
@@ -276,7 +276,7 @@ cleaned_conowingo
 
 ### Task 10: Try again to summarize the amount column
 
-**Task** Run the following codeblock to add up the amount of all contributions in this data. What is the total? Answer below. **Answer**
+**Task** Run the following codeblock to add up the amount of all contributions in this data. What is the total? Answer below. **Answer** The total is 226.
 
 ```{r}
 # cleaning function
@@ -318,7 +318,7 @@ cleaned_conowingo
 
 ### Task 13: Clean up ZIP code
 
-**Task** Run the following codeblock to use str_sub() to convert the ZIP codes that have nine digits to five digits, standardizing the field. Look at the difference in the result - what changed? **Answer**
+**Task** Run the following codeblock to use str_sub() to convert the ZIP codes that have nine digits to five digits, standardizing the field. Look at the difference in the result - what changed? **Answer**The zipcodes are standardized and are each five digits now. 
 
 ```{r}
 # cleaning function
@@ -337,7 +337,9 @@ cleaned_conowingo
 
 ### Task 14: Clean up city field
 
-**Task** Run the following codeblock to use str_tot_title() to standarize capitalization in the "city" field. How many mispellings of Conowingo remain after running this code? Answer below. Add a description of what this code does to your reference notebook.
+**Task** Run the following codeblock to use str_tot_title() to standarize capitalization in the "city" field. How many mispellings of Conowingo remain after running this code? Answer below. Add a description of what this code does to your reference notebook. 
+
+**Answer** I still see two misspellings of Conowingo.
 
 ```{r}
 # cleaning function
@@ -357,7 +359,7 @@ cleaned_conowingo
 
 ### Task 15: Clean up city field more with case_when()
 
-**Task** Run the following codeblock to use case_when() to fix misspellings of Conowingo in the "city" field. How many mispellings of Conowingo remain after running this code? Answer below. **Answer**
+**Task** Run the following codeblock to use case_when() to fix misspellings of Conowingo in the "city" field. How many mispellings of Conowingo remain after running this code? Answer below. **Answer** I still see 1 misspelling of Conowingo.
 
 ```{r}
 # cleaning function
@@ -380,7 +382,7 @@ cleaned_conowingo
 
 ### Task 16: Clean up city field more with case_when()
 
-**Task** Run the following codeblock to use case_when() to fix misspellings of Conowingo in the "city" field using both the exact match method and the str_detect() method. How many mispellings of Conowingo remain after running this code? Answer below. Add a description of what this code does to your reference notebook. **Answer**
+**Task** Run the following codeblock to use case_when() to fix misspellings of Conowingo in the "city" field using both the exact match method and the str_detect() method. How many mispellings of Conowingo remain after running this code? Answer below. Add a description of what this code does to your reference notebook. **Answer** There are zero misspellings left. 
 
 ```{r}
 # cleaning function
