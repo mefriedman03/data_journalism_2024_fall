@@ -81,13 +81,12 @@ Q2: Find the 5-digit ZIP code in Maryland that had the highest total amount of c
 
 Where is that zip code and what kind of area is it, demographically? Which committee is the largest recipient of money from that zip code? How many of the top five recipients are Maryland candidates?
 
-A2: The zipcode that had the highest total amount of contributions was 20817 with $731,489.80. That zipcode is in Bethesda which is rich and white. The committee with the largest amount of money from 20817 is HELMER FOR CONGRESS with $17,878.00. Only 2 of the top 5 recipients are Maryland candidates. 
+A2: The zipcode that had the highest total amount of contributions was 20817 with $731,489.80. That zipcode is in North Bethesda which a pretty wealthy and white area. The committee with the largest amount of money from 20817 is HELMER FOR CONGRESS with $17,878.00. Only 2 of the top 5 recipients are Maryland candidates. 
 
 ```{r}
 cleaned_typos <- cleaned_typos |>
-  mutate(contributor_zip = str_sub(contributor_zip, start=1L, end=5L))|>
-  mutate(contributor_zip = as.numeric(contributor_zip)) 
-
+  mutate(contributor_zip = str_sub(contributor_zip, start=1L, end=5L))
+  
 sort_by_zip <- cleaned_typos |>
     group_by(contributor_zip) |>
   summarise(
