@@ -109,7 +109,7 @@ zip_recipients <- zip_recipients|>
 
 Q3: Let's look at top individual donors. Write code to generate a list of top donors using name and city, adding up the total amount of contributions. What does the original data say about the top two donors - who are they and what do they do? Do you see anything in the list of top 10 donors that would make you uncertain about the accuracy of these results?
 
-A3: I notice that that the top 2 donors share the same address so I think they are probably a couple from Bethesda, Maryland. Mark Jacobsen, the top donor, works for IntraFi Network, which is a financial services company. The original data says Melanie Jacobsen, the second top donor, works as a farmer at Clinton Farm. In the top donors list, I see a Bill Pugh and a William Pugh who might be the same person. They are both from Bethesda. I also see a Mark Jacobsen and a Mark P. Jacobsen who are both from Bethesda. This makes me think there are duplicates of people and that I would need to clean up the name column.
+A3: I notice that that the top 2 donors share the same address so I think they are probably a couple from Bethesda, Maryland. Mark Jacobsen, the top donor, works for IntraFi Network, which is a financial services company. The original data says Melanie Jacobsen, the second top donor, works as a farmer at Clinton Farm. In the top donors list, I see a Bill Pugh and a William Pugh who might be the same person. They are both from Bethesda. I also see a Mark Jacobsen and a Mark P. Jacobsen who are both from Bethesda. This makes me think there are duplicates of people and that I would need to clean up the name column. I am uncertain the results are accurate because of this. 
 
 ```{r}
 top_donors <-cleaned_typos |>
