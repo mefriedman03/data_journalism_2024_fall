@@ -258,3 +258,234 @@ md_voters_2024 |>
   arrange(desc(number_of_registrants))
 ```
 
+### This reads and loads only the first ten rows of data.
+
+```{r}
+texas_precinct_20 <- read_csv("data/tx_precinct_2020.csv", guess_max=10)
+```
+
+### This checks for problems. It gives us how many rows have problems and sort of shows us what the problems are. 
+
+```{r}
+problems(texas_precinct_20)
+```
+
+### This allows us to find where the data type is a problem. It read in as a number (chr), even though there clearly are numbers in it judging from our initial inspection. Here's why: the original file has a single value in that column that is "5+".
+
+```{r}
+texas_precinct_20 |> filter(election_day == "5+")
+
+```
+
+### This fixes the above value and changes the "election_day" field data type. 
+
+### ".default = election_day leaves all the others unchanged 
+
+### as.numeric converts column type into number
+
+```{r}
+texas_precinct_20 <- texas_precinct_20 |>
+  mutate(election_day = case_when(
+    election_day == '5+' ~ '49',
+    .default = election_day
+  ))
+
+texas_precinct_20 <- texas_precinct_20 |> mutate(election_day = as.numeric(election_day))
+
+glimpse(texas_precinct_20)
+```
+
+### This creates a new column called "registration_month" that extracts the month and year from the "registr_dt" column. It groups by the new "registration_month" column, count, and sort by "registration_month". 
+
+```{r}
+yadkin_voters |> 
+  mutate(registration_month = floor_date(registr_dt, "month")) |>
+  group_by(registration_month) |> 
+   summarise(
+    count=n()
+  ) |>
+  arrange(registration_month)
+```
+
+### This installs and loads the janitor package.
+
+```{r}
+install.packages('janitor')
+library(janitor)
+```
+
+### This cleans the dataset and assigns the cleaned dataset a new name and then displays it.
+
+```{r}
+# cleaning function
+cleaned_conowingo <- conowingo |>
+  clean_names()
+
+# display the cleaned dataset
+cleaned_conowingo
+```
+
+### This cleans and renames column names.
+
+### Rename and clean name only work on column names. The rename comes first in the function.
+
+```{r}
+cleaned_conowingo <- conowingo |>
+  clean_names() |> 
+  rename(linenumber = x1_linenumber)
+
+# display the cleaned dataset
+cleaned_conowingo
+```
+
+### This changes the data type to dbl instead of chr so we can do math with it. 
+
+```{r}
+# cleaning function
+cleaned_conowingo <- conowingo |>
+  clean_names() |> 
+  rename(linenumber = x1_linenumber) |> 
+  mutate(amount = as.numeric(amount))
+  
+
+# display the cleaned dataset
+cleaned_conowingo
+```
+
+### This checks for duplicate rows.
+
+```{r}
+cleaned_conowingo |> 
+  get_dupes()
+```
+
+### This gets rid of duplicate rows.
+
+```{r}
+# cleaning function
+cleaned_conowingo <- conowingo |>
+  clean_names() |> 
+  rename(linenumber = x1_linenumber) |> 
+  mutate(amount = as.numeric(amount)) |> 
+  distinct()
+```
+
+### This standardizes zipcodes to 5 numbers.
+
+```{r}
+# cleaning function
+cleaned_conowingo <- conowingo |>
+  clean_names() |> 
+  rename(linenumber = x1_linenumber) |> 
+  mutate(amount = as.numeric(amount)) |> 
+  distinct() |>
+  mutate(zip = str_sub(zip, start=1L, end=5L))
+  
+
+# display the cleaned dataset
+cleaned_conowingo
+
+```
+
+### This standardizes capitalization of the cities.
+```{r}
+# cleaning function
+cleaned_conowingo <- conowingo |>
+  clean_names() |> 
+  rename(linenumber = x1_linenumber) |> 
+  mutate(amount = as.numeric(amount)) |> 
+  distinct() |>
+  mutate(zip = str_sub(zip, start=1L, end=5L)) |>
+  mutate(city = str_to_title(city))
+  
+
+# display the cleaned dataset
+cleaned_conowingo
+```
+
+### This fixes some misspellings.
+
+```{r}
+# cleaning function
+cleaned_conowingo <- conowingo |>
+  clean_names() |> 
+  rename(linenumber = x1_linenumber) |> 
+  mutate(amount = as.numeric(amount)) |> 
+  distinct() |>
+  mutate(zip = str_sub(zip, start=1L, end=5L)) |>
+  mutate(city = str_to_title(city)) |>
+  mutate(city = case_when(
+    city == "Conowing" ~ "Conowingo",
+    TRUE ~ city
+  ))
+
+# display the cleaned dataset
+cleaned_conowingo
+
+```
+
+### This creates a new dataframe that is just by contributor cities and arranges them. Then it cleans typos in that datagrame and makes sure the rows are distinct. Then it organizes again. 
+
+```{r}
+contribs_by_city <- md_contribs |>
+  group_by(contributor_city) |>
+  summarise(
+    total_contribs = n()
+  ) |>
+  arrange((contributor_city))
+
+cleaned_typos <- md_contribs |>
+  clean_names() |> 
+  mutate(contributor_city = case_when(
+    contributor_city == "BALRIMORE" ~ "BALTIMORE",
+    contributor_city == "BLATIMORE" ~ "BALTIMORE",
+    contributor_city == "ANAPOLIS" ~ "ANNAPOLIS",
+    contributor_city == "POTAMIC" ~ "POTOMAC",
+    contributor_city == "SILVER SPRINGS" ~ "SILVER SPRING",
+    contributor_city == "4615 NORTH PARK AVE APT. 1410" ~ "CHEVY CHASE",
+    TRUE ~ contributor_city)) |> 
+  distinct()
+
+cleaned_contribs_by_city <- cleaned_typos |>
+  group_by(contributor_city) |>
+  summarise(
+    total_contribs = n()
+  ) |>
+  arrange((contributor_city))
+```
+
+### This converts to a 5 digit zipcode. Then it sorts and groups by zipcode and contibutor and also arranges. Then it looks at a new dataframe filtered for the top zipcode and groups by committee name. 
+
+```{r}
+cleaned_typos <- cleaned_typos |>
+  mutate(contributor_zip = str_sub(contributor_zip, start=1L, end=5L))
+  
+sort_by_zip <- cleaned_typos |>
+    group_by(contributor_zip) |>
+  summarise(
+    total_amount = sum(contribution_receipt_amount
+    )
+  ) |>
+  arrange(desc(total_amount))
+
+zip_recipients <- cleaned_typos |> filter(contributor_zip == "20817")
+ 
+zip_recipients <- zip_recipients|>
+  group_by(committee_name) |>
+  summarise(
+    total_amount = sum(contribution_receipt_amount
+    )
+  ) |>
+  arrange(desc(total_amount))
+  
+```
+
+### This makes a new top donors dataframe and groups by contributor name and contributor city. It also sums the contribution amount and then arranges. 
+
+```{r}
+top_donors <-cleaned_typos |>
+  group_by(contributor_name,contributor_city)|>
+  summarise(total_amount = sum(contribution_receipt_amount))|>
+  arrange(desc(total_amount))
+
+```

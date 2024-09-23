@@ -332,7 +332,6 @@ cleaned_conowingo <- conowingo |>
 
 # display the cleaned dataset
 cleaned_conowingo
-
 ```
 
 ### Task 14: Clean up city field
