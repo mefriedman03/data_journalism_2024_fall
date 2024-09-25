@@ -48,8 +48,6 @@ You'll need to load one data set, a CSV file of campaign expenditures located in
 senate_expenses <- read_csv("data/md_senate_expenses.csv")
 glimpse(senate_expenses)
 new_senate_expenses <- read_csv("data/new_md_senate_expenses.csv")
-
-
 ```
 
 ## Answer questions
@@ -62,22 +60,51 @@ Then, when you are done standardizing `purpose_clean`, export it as a new CSV fi
 
 Then, using that `purpose_clean` column, write code to find the largest amounts of spending on categories by both campaigns.
 
-**A1.**
+**A1.** The largest category for both Alsobrooks and Hogan was "Advertisements and marketing."
 
 ```{r}
+ new_senate_expenses |>
+  group_by(purpose_clean) |>
+  summarise(
+    total_contribs = n(),
+    total_amount = sum(amount)
+  ) |>
+  arrange(desc(total_amount))
 
+hogan_expenses <- new_senate_expenses |> filter(candidate == "Hogan") |>
+ group_by(purpose_clean) |>
+  summarise(
+    total_contribs = n(),
+    total_amount = sum(amount)
+  ) |>
+  arrange(desc(total_amount))
+ 
+alsobrooks_expenses <- new_senate_expenses |> filter(candidate == "Alsobrooks") |>
+ group_by(purpose_clean) |>
+  summarise(
+    total_contribs = n(),
+    total_amount = sum(amount)
+  ) |>
+  arrange(desc(total_amount))
 ```
 
 **Q2.** Let's do some research on the top purposes from A1. Feel free to search the Web to understand those terms better if need be, and then write a description comparing and contrasting the two campaigns' largest categories of spending.
 
-**A2.**
+**A2.** I found that advertising and marketing was the top purpose for both. The second top purpose for Alsobrooks was consulting and the third top purpose was salary. The second top purpose for Hogan was salary and the third was fundraising services. I think fundraising services is pretty similar to consulting. It makes sense that ads and salary were high up for both campaigns. It looks like Alsobrooks spent more on advertising and marketing than Hogan and more on salary. 
 
 **Q3.** Pick one of the top categories for each campaign and write code that shows how that spending has changed over time, if at all. You'll need to use lubridate for this. Write a couple of sentences describing that pattern.
 
 **A3.**
 
 ```{r}
-
+alsobrooks_by_date <- new_senate_expenses |> filter(candidate == "Alsobrooks") |>
+  mutate(week = floor_date(date, "week")) 
+alsobrooks_by_date |>
+   group_by(week) |>
+   summarise(
+    total_contribs = n(),
+    total_amount = sum(amount)  ) |>
+  arrange(desc(total_amount))
 
 ```
 
