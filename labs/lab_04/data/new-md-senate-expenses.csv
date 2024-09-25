@@ -1,0 +1,78 @@
+linenumber,fec_committee_id,transaction_id,entity_type,organization_name,last_name,first_name,middle_name,prefix,suffix,street_1,street_2,city,state,zip_code,election_code,date,amount,purpose,purpose_clean,memo_code,memo_text,cycle,candidate
+SB17,C00840017,500662922,ORG,Martins Catering,NA,NA,NA,NA,NA,7400 Greenway Center Dr,NA,Greenbelt,MD,207703503,NA,2024-05-21,6454,Catering,Catering/Site rental,NA,NA,2024,Alsobrooks
+SB17,C00840017,500663072,ORG,Country Club At Woodmore,NA,NA,NA,NA,NA,12320 Pleasant Prospect Rd,NA,Bowie,MD,207212515,NA,2024-05-18,3515.51,Site Rental/Catering,Catering/Site rental,X,*,2024,Alsobrooks
+SB17,C00840017,500673565,ORG,The Center Club,NA,NA,NA,NA,NA,100 Light St,Fl 16,Baltimore,MD,212021153,NA,2024-05-29,2500,Catering,Catering/Site rental,NA,NA,2024,Alsobrooks
+SB17,C00840017,500673715,ORG,Events 4 Good People,NA,NA,NA,NA,NA,5886 Pimlico Rd,NA,Baltimore,MD,212094203,NA,2024-06-19,1500,Site Rental,Catering/Site rental,X,*,2024,Alsobrooks
+SB17,C00840017,500663076,ORG,Guilford Hall Brewery,NA,NA,NA,NA,NA,320 N Charles St,NA,Baltimore,MD,212014354,NA,2024-05-18,896.62,Site Rental/Catering,Catering/Site rental,X,*,2024,Alsobrooks
+SB17,C00840017,6098294I,IND,NA,Wynn,Albert,R,NA,NA,2410 Enterprise Rd,NA,Bowie,MD,207212529,NA,2024-05-11,494.59,Catering,Catering/Site rental,NA,* In-Kind Received,2024,Alsobrooks
+SB17,C00840017,5869729I,IND,NA,Graham,Bradley,NA,NA,NA,7020 Glenbrook Rd,NA,Bethesda,MD,208141223,NA,2024-04-18,2025.48,Catering,Catering/Site rental,NA,* In-Kind Received,2024,Alsobrooks
+SB17,C00840017,500656734,ORG,Taste 222,NA,NA,NA,NA,NA,222 N Canal St,NA,Chicago,IL,606061206,NA,2024-04-16,1835.27,Catering,Catering/Site rental,X,*,2024,Alsobrooks
+SB17,C00840017,500656731,ORG,Montgomery County,NA,NA,NA,NA,NA,101 Monroe St,Fl 2,Rockville,MD,208502503,NA,2024-04-16,960,Site Rental,Catering/Site rental,X,*,2024,Alsobrooks
+SB17,C00840017,500656729,ORG,Guilford Hall Brewery,NA,NA,NA,NA,NA,320 N Charles St,NA,Baltimore,MD,212014354,NA,2024-04-16,896.63,Site Rental/Catering,Catering/Site rental,X,*,2024,Alsobrooks
+SB17,C00840017,500656728,ORG,Country Club At Woodmore,NA,NA,NA,NA,NA,12320 Pleasant Prospect Rd,NA,Bowie,MD,207212515,NA,2024-04-16,750,Site Rental,Catering/Site rental,X,*,2024,Alsobrooks
+SB17,C00840017,500656716,ORG,Cava,NA,NA,NA,NA,NA,9140 Woodmore Center Dr,NA,Lanham,MD,207061653,NA,2024-04-16,194.19,Catering,Catering/Site rental,X,*,2024,Alsobrooks
+SB17,C00840017,500656711,ORG,Cava,NA,NA,NA,NA,NA,9140 Woodmore Center Dr,NA,Lanham,MD,207061653,NA,2024-04-16,141.51,Catering,Catering/Site rental,X,*,2024,Alsobrooks
+SB17,C00840017,500656695,ORG,Montgomery County,NA,NA,NA,NA,NA,101 Monroe St,Fl 2,Rockville,MD,208502503,NA,2024-04-16,72,Site Rental,Catering/Site rental,X,*,2024,Alsobrooks
+SB17,C00840017,500642305,ORG,Martins Catering,NA,NA,NA,NA,NA,7400 Greenway Center Dr,NA,Greenbelt,MD,207703503,NA,2024-03-08,26696.92,Catering,Catering/Site rental,NA,NA,2024,Alsobrooks
+SB17,C00840017,500644802,ORG,The Center Club,NA,NA,NA,NA,NA,100 Light St,Fl 16,Baltimore,MD,212021153,NA,2023-12-19,20807.66,Site Rental/Catering,Catering/Site rental,X,*,2024,Alsobrooks
+SB17,C00840017,500644805,ORG,The Classic Catering People,NA,NA,NA,NA,NA,99 Painters Mill Rd,NA,Owings Mills,MD,211173616,NA,2023-12-05,6716.32,Catering,Catering/Site rental,X,*,2024,Alsobrooks
+SB17,C00840017,500638231,ORG,Martins Catering,NA,NA,NA,NA,NA,7400 Greenway Center Dr,NA,Greenbelt,MD,207703503,NA,2024-02-16,6000,Catering,Catering/Site rental,NA,NA,2024,Alsobrooks
+SB17,C00840017,500642306,ORG,Occasions Catering,NA,NA,NA,NA,NA,655 Taylor St NE,NA,Washington,DC,200172063,NA,2024-03-11,5833.4,Catering,Catering/Site rental,NA,NA,2024,Alsobrooks
+SB17,C00840017,500643558,ORG,Martins Catering,NA,NA,NA,NA,NA,7400 Greenway Center Dr,NA,Greenbelt,MD,207703503,NA,2024-03-20,3933.95,Catering,Catering/Site rental,NA,NA,2024,Alsobrooks
+SB17,C00840017,5804463I,IND,NA,Mason,Christina,NA,NA,NA,13301 Moran Dr,NA,North Potomac,MD,208783926,NA,2024-03-25,3300,Catering,Catering/Site rental,NA,* In-Kind Received,2024,Alsobrooks
+SB17,C00840017,500644815,ORG,The Center Club,NA,NA,NA,NA,NA,100 Light St,Fl 16,Baltimore,MD,212021153,NA,2023-12-29,2560,Site Rental/Catering,Catering/Site rental,X,*,2024,Alsobrooks
+SB17,C00840017,500638243,ORG,Seasons Culinary Services,NA,NA,NA,NA,NA,1899 Pennsylvania Ave NW,NA,Washington,DC,200063602,NA,2024-02-20,1698.75,Catering,Catering/Site rental,NA,NA,2024,Alsobrooks
+SB17,C00840017,500645115,ORG,The Woman'S Club Of Chevy Chase,NA,NA,NA,NA,NA,7931 Connecticut Ave,NA,Chevy Chase,MD,208155922,NA,2024-03-29,1675,Catering,Catering/Site rental,NA,NA,2024,Alsobrooks
+SB17,C00840017,500644816,ORG,Country Club At Woodmore,NA,NA,NA,NA,NA,12320 Pleasant Prospect Rd,NA,Bowie,MD,207212515,NA,2024-01-24,1552.8,Site Rental,Catering/Site rental,X,*,2024,Alsobrooks
+SB17,C00840017,500644819,ORG,Taste 222,NA,NA,NA,NA,NA,222 N Canal St,NA,Chicago,IL,606061206,NA,2024-01-24,1484.2,Catering,Catering/Site rental,X,*,2024,Alsobrooks
+SB17,C00840017,5760359I,IND,NA,Seymour,Kimberly,P,NA,NA,PO Box 1725,NA,Bowie,MD,207171725,NA,2024-03-10,1003.52,Catering,Catering/Site rental,NA,* In-Kind Received,2024,Alsobrooks
+SB17,C00840017,5554575I,IND,NA,Solomon,Cathy,NA,NA,NA,1744 Swann St NW,NA,Washington,DC,200095535,NA,2024-02-01,924,Catering,Catering/Site rental,NA,* In-Kind Received,2024,Alsobrooks
+SB17,C00840017,5554456I,IND,NA,Whitaker,Laura,NA,NA,NA,1634 Argonne Pl NW,NA,Washington,DC,200095901,NA,2024-02-02,924,Catering,Catering/Site rental,NA,* In-Kind Received,2024,Alsobrooks
+SB17,C00840017,5804467I,IND,NA,Mason,Taelor,NA,NA,NA,9925 Bentcross Dr,NA,Potomac,MD,208544741,NA,2024-03-25,437,Catering,Catering/Site rental,NA,* In-Kind Received,2024,Alsobrooks
+SB17,C00840017,500644809,ORG,Dream Weaver Events & Catering,NA,NA,NA,NA,NA,114 Solomons Island Rd N,NA,Prince Frederick,MD,206783906,NA,2023-12-16,427.18,Catering,Catering/Site rental,X,*,2024,Alsobrooks
+SB17,C00840017,5115488I,IND,NA,Moton,Tatiana,NA,NA,NA,10605 Rivers Bend Ct,NA,Potomac,MD,208541236,NA,2023-11-02,3300,Catering/Site Rental,Catering/Site rental,NA,* In-Kind Received,2024,Alsobrooks
+SB17,C00840017,5115487I,IND,NA,Moton,Jerrod,NA,NA,NA,10605 Rivers Bend Ct,NA,Potomac,MD,208541236,NA,2023-11-02,3200,Catering/Site Rental,Catering/Site rental,NA,* In-Kind Received,2024,Alsobrooks
+SB17,C00840017,500532761,ORG,Monument City Brewing Company,NA,NA,NA,NA,NA,1 N Haven St,NA,Baltimore,MD,212241614,NA,2023-10-24,2250,Catering,Catering/Site rental,NA,NA,2024,Alsobrooks
+SB17,C00840017,4760439I,IND,NA,Rifkin,Leslie,NA,NA,NA,11541 Manorstone Ln,NA,Columbia,MD,210445413,NA,2023-10-15,2024.43,Catering,Catering/Site rental,NA,* In-Kind Received,2024,Alsobrooks
+SB17,C00840017,4760448I,ORG,Rifkin Weiner Livingston LLC,NA,NA,NA,NA,NA,225 Duke Of Gloucester St,NA,Annapolis,MD,214012506,NA,2023-10-15,1999.78,Catering,Catering/Site rental,NA,* In-Kind Received,2024,Alsobrooks
+SB17,C00840017,500614255,ORG,Oaks Bed & Breakfast,NA,NA,NA,NA,NA,9201 Laurel Oak Dr,NA,Bethesda,MD,208171937,NA,2023-11-07,1500,Site Rental,Catering/Site rental,X,*,2024,Alsobrooks
+SB17,C00840017,500605922,ORG,Phil Sardi's Catering,NA,NA,NA,NA,NA,5005 Garrett Ave,NA,Beltsville,MD,207051926,NA,2023-12-15,1087.35,Catering,Catering/Site rental,X,*,2024,Alsobrooks
+SB17,C00840017,500557217,ORG,Roland E. Powell Convention Center,NA,NA,NA,NA,NA,4001 Coastal Hwy,NA,Ocean City,MD,218423235,NA,2023-10-16,1046.58,Catering,Catering/Site rental,X,*,2024,Alsobrooks
+SB17,C00840017,5458905I,COM,Will Smith For Maryland,NA,NA,NA,NA,NA,PO Box 8801,NA,Silver Spring,MD,209078801,NA,2023-11-29,999,Catering. Permissible Under the Act,Catering/Site rental,NA,* In-Kind Received,2024,Alsobrooks
+SB17,C00840017,500605893,ORG,Big City Foods,NA,NA,NA,NA,NA,9009 Central Ave,NA,Capitol Heights,MD,207433805,NA,2023-12-15,945,Catering,Catering/Site rental,X,*,2024,Alsobrooks
+SB17,C00840017,4712254I,IND,NA,Ginsberg,David,NA,NA,NA,6508 Wiscasset Rd,NA,Bethesda,MD,208162113,NA,2023-11-06,735,Catering,Catering/Site rental,NA,* In-Kind Received,2024,Alsobrooks
+SB17,C00840017,500557167,ORG,Brothers Bistro,NA,NA,NA,NA,NA,1109 Atlantic Ave,NA,Ocean City,MD,218427347,NA,2023-10-20,665.94,Catering,Catering/Site rental,X,*,2024,Alsobrooks
+SB17,C00840017,500590773,ORG,Oakland Mills Interfaith Inc,NA,NA,NA,NA,NA,5885 Robert Oliver Pl,NA,Columbia,MD,210453734,NA,2023-11-17,650,Site Rental,Catering/Site rental,NA,NA,2024,Alsobrooks
+SB17,C00840017,4221630I,IND,NA,Crutchfield,Charlotte,NA,NA,NA,13207 Osterport Dr,NA,Silver Spring,MD,209065912,NA,2023-10-08,538.64,Catering,Catering/Site rental,NA,* In-Kind Received,2024,Alsobrooks
+SB17,C00840017,500506132,ORG,Cava,NA,NA,NA,NA,NA,9140 Woodmore Center Dr,NA,Lanham,MD,207061653,NA,2023-10-16,537.53,Catering,Catering/Site rental,X,*,2024,Alsobrooks
+SB17,C00840017,500631141,ORG,Montgomery County,NA,NA,NA,NA,NA,101 Monroe St,Fl 2,Rockville,MD,208502503,NA,2023-12-15,500,Site Rental,Catering/Site rental,X,*,2024,Alsobrooks
+SB17,C00840017,4221631I,IND,NA,Powell,Angela,R,NA,NA,12801 Penny Ln,NA,Silver Spring,MD,209047127,NA,2023-10-08,500,Catering,Catering/Site rental,NA,* In-Kind Received,2024,Alsobrooks
+SB17,C00840017,4371597I,IND,NA,Parker,Pearl,NA,NA,NA,17817 Hazelcrest Dr,NA,Gaithersburg,MD,208773759,NA,2023-10-08,500,Catering,Catering/Site rental,NA,* In-Kind Received,2024,Alsobrooks
+SB17,C00840017,4223445I,IND,NA,Massey-Ball,Marilyn,NA,NA,NA,6021 Riggs Rd,NA,Gaithersburg,MD,208821831,NA,2023-10-13,500,Catering,Catering/Site rental,NA,* In-Kind Received,2024,Alsobrooks
+SB17,C00840017,4530575I,IND,NA,Cyrus,Allora,Goode,NA,NA,1816 Chapel Hill Rd,NA,Silver Spring,MD,209061113,NA,2023-10-26,500,Catering,Catering/Site rental,NA,* In-Kind Received,2024,Alsobrooks
+SB17,C00840017,500505869,ORG,Verizon,NA,NA,NA,NA,NA,1300 I St NW,NA,Washington,DC,200053314,NA,2023-10-11,400,Site Rental,Catering/Site rental,NA,NA,2024,Alsobrooks
+SB17,C00840017,4760460I,IND,NA,Livingston,Scott,NA,NA,NA,3606 Thornapple St,NA,Chevy Chase,MD,208154114,NA,2023-10-15,399.96,Catering,Catering/Site rental,X,* In-Kind Received,2024,Alsobrooks
+SB17,C00840017,4760841I,IND,NA,Rozner,Joel,D,NA,Esq,659 Santa Maria Ln,NA,Davidsonville,MD,210351329,NA,2023-10-15,399.96,Catering,Catering/Site rental,X,* In-Kind Received,2024,Alsobrooks
+SB17,C00840017,4760843I,IND,NA,Johansen,Michael,V,NA,NA,225 Duke Of Gloucester St,NA,Annapolis,MD,214012506,NA,2023-10-15,399.95,Catering,Catering/Site rental,X,* In-Kind Received,2024,Alsobrooks
+SB17,C00840017,4760846I,IND,NA,Bruce,Celeste,NA,NA,NA,6101 Beech Ave,NA,Bethesda,MD,208173427,NA,2023-10-15,399.95,Catering,Catering/Site rental,X,* In-Kind Received,2024,Alsobrooks
+SB17,C00840017,500557218,ORG,Phil Sardi's Catering,NA,NA,NA,NA,NA,5005 Garrett Ave,NA,Beltsville,MD,207051926,NA,2023-09-26,390.4,Catering,Catering/Site rental,X,*,2024,Alsobrooks
+SB17,C00840017,500595302,ORG,Congressional Country Club,NA,NA,NA,NA,NA,8500 River Rd,NA,Bethesda,MD,208172635,NA,2023-12-04,386.06,Site Rental / Catering,Catering/Site rental,X,*,2024,Alsobrooks
+SB17,C00840017,500595301,ORG,Congressional Country Club,NA,NA,NA,NA,NA,8500 River Rd,NA,Bethesda,MD,208172635,NA,2023-12-04,386.06,Site Rental / Catering,Catering/Site rental,X,*,2024,Alsobrooks
+SB17,C00840017,500592856,ORG,Montgomery County,NA,NA,NA,NA,NA,101 Monroe St,Fl 2,Rockville,MD,208502503,NA,2023-11-07,360,Site Rental,Catering/Site rental,X,*,2024,Alsobrooks
+SB17,C00840017,500506120,ORG,Montgomery County,NA,NA,NA,NA,NA,101 Monroe St,Fl 2,Rockville,MD,208502503,NA,2023-10-16,112.5,Site Rental,Catering/Site rental,X,*,2024,Alsobrooks
+SB17,C00840017,500372933,ORG,Martins Catering,NA,NA,NA,NA,NA,7400 Greenway Center Dr,NA,Greenbelt,MD,207703503,NA,2023-09-15,19842.32,Catering,Catering/Site rental,NA,NA,2024,Alsobrooks
+SB17,C00840017,500226299,ORG,Martins Catering,NA,NA,NA,NA,NA,7400 Greenway Center Dr,NA,Greenbelt,MD,207703503,NA,2023-07-07,6000,Catering,Catering/Site rental,NA,NA,2024,Alsobrooks
+SB17,C00840017,500278689,ORG,Le Meridien,NA,NA,NA,NA,NA,123 S Illinois St,NA,Indianapolis,IN,462251005,NA,2023-08-03,1074.06,Catering,Catering/Site rental,X,*,2024,Alsobrooks
+SB17,C00840017,3984693I,IND,NA,Gill,Gregory,M,NA,NA,11100 Brookes Reserve Rd,NA,Upper Marlboro,MD,207726648,NA,2023-09-24,966.85,Catering,Catering/Site rental,NA,* In-Kind Received,2024,Alsobrooks
+SB17,C00840017,3984699I,IND,NA,Rogers,Thomasina,NA,NA,NA,11100 Brookes Reserve Rd,NA,Upper Marlboro,MD,207726648,NA,2023-09-24,966.85,Catering,Catering/Site rental,NA,* In-Kind Received,2024,Alsobrooks
+SB17,C00840017,500278679,ORG,Delta Sigma Theta,NA,NA,NA,NA,NA,1707 New Hampshire Ave NW,NA,Washington,DC,200092501,NA,2023-08-03,695,Site Rental,Catering/Site rental,X,*,2024,Alsobrooks
+SB17,C00840017,500278680,ORG,Delta Sigma Theta,NA,NA,NA,NA,NA,1707 New Hampshire Ave NW,NA,Washington,DC,200092501,NA,2023-08-03,685,Site Rental,Catering/Site rental,X,*,2024,Alsobrooks
+SB17,C00840017,2676344I,IND,NA,Lierman,Brooke,E,NA,NA,1719 Lancaster St,NA,Baltimore,MD,212313412,NA,2023-08-02,500,Catering,Catering/Site rental,NA,* In-Kind Received,2024,Alsobrooks
+SB17,C00840017,500278685,ORG,Flour & Branch,NA,NA,NA,NA,NA,303 2Nd St,Ste 800,San Francisco,CA,941071366,NA,2023-08-03,484.85,Catering,Catering/Site rental,X,*,2024,Alsobrooks
+SB17,C00840017,500226323,ORG,Overlook Patio,NA,NA,NA,NA,NA,800 N Wolfe St,NA,Baltimore,MD,212052104,NA,2023-07-12,425.74,Catering,Catering/Site rental,X,*,2024,Alsobrooks
+SB17,C00840017,500278675,ORG,Bittersweet Catering,NA,NA,NA,NA,NA,103 1 2 North Alfred St,NA,Alexandria,VA,22314,NA,2023-08-03,307.81,Catering,Catering/Site rental,X,*,2024,Alsobrooks
+SB17,C00840017,500393248,ORG,Martins Catering,NA,NA,NA,NA,NA,7400 Greenway Center Dr,NA,Greenbelt,MD,207703503,NA,2023-09-22,197.16,Catering,Catering/Site rental,NA,NA,2024,Alsobrooks
+SB17,C00840017,2676343I,IND,NA,Ness,Susan,Paula,NA,NA,5505 Devon Rd,NA,Bethesda,MD,208141009,NA,2023-07-30,192.05,Catering,Catering/Site rental,NA,* In-Kind Received,2024,Alsobrooks
+SB17,C00840017,500365472,ORG,Bittersweet Catering,NA,NA,NA,NA,NA,103 1 2 North Alfred St,NA,Alexandria,VA,22314,NA,2023-09-06,30,Catering,Catering/Site rental,X,*,2024,Alsobrooks
+SB17,C00840017,500098232,ORG,Invariant LLC,NA,NA,NA,NA,NA,901 7Th St NW,Ste 600,Washington,DC,200014496,NA,2023-05-24,450,Site Rental,Catering/Site rental,NA,NA,2024,Alsobrooks
+SB17,C00840017,500206532,ORG,Chopsmith,NA,NA,NA,NA,NA,11 District Sq SW,NA,Washington,DC,200242490,NA,2023-06-19,308.75,Catering,Catering/Site rental,X,*,2024,Alsobrooks
