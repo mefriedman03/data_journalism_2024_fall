@@ -94,25 +94,57 @@ alsobrooks_expenses <- new_senate_expenses |> filter(candidate == "Alsobrooks") 
 
 **Q3.** Pick one of the top categories for each campaign and write code that shows how that spending has changed over time, if at all. You'll need to use lubridate for this. Write a couple of sentences describing that pattern.
 
-**A3.**
+**A3.** The first week of the campaign there was a lot of spending for ads and media by Alsobrooks' campaign. Then it went lower for awhile until early 2024. It looks especially high in the weeks leading up to the primary. Hogan's campaign started a lot later so there are less weeks to look at. His funding ramped up in the months leading up to the primary in May. Both candidate's spending seem to go in waves. 
 
 ```{r}
-alsobrooks_by_date <- new_senate_expenses |> filter(candidate == "Alsobrooks") |>
-  mutate(week = floor_date(date, "week")) 
-alsobrooks_by_date |>
-   group_by(week) |>
-   summarise(
-    total_contribs = n(),
-    total_amount = sum(amount)  ) |>
-  arrange(desc(total_amount))
+top_category <- alsobrooks_expenses |>
+  slice (1)|>
+  pull(purpose_clean)
 
+alsobrooks_by_date <- new_senate_expenses|>
+  filter(candidate=="Alsobrooks", purpose_clean == top_category)|>
+   mutate(week = floor_date(date, "week")) |>
+    group_by(week) |>
+    summarise(
+    total_amount = sum(amount))|>
+    arrange(week)
+
+top_category <- hogan_expenses |>
+  slice (1)|>
+  pull(purpose_clean)
+
+hogan_by_date <- new_senate_expenses|>
+  filter(candidate=="Hogan", purpose_clean == top_category)|>
+   mutate(week = floor_date(date, "week")) |>
+    group_by(week) |>
+    summarise(
+    total_amount = sum(amount))|>
+    arrange(week)
 ```
 
 **Q4.** Which committee has the larger payroll or salary spending so far? How many unique recipients of payroll/staff spending are there for each candidate?
 
-**A4.**
+**A4.** I only see 2 unique recipients for Hogan. I see 21 for Alsobrooks. 
 
 ```{r}
+alsobrooks_salary <- new_senate_expenses |>
+  filter(candidate == "Alsobrooks", purpose_clean == "Salary")
+
+hogan_salary <- new_senate_expenses |>
+  filter(candidate == "Hogan", purpose_clean == "Salary")
+
+total_alsobrooks_salary <- alsobrooks_salary |>
+  summarise(total_amount = sum(amount))
+
+total_hogan_salary <- hogan_salary |>
+  summarise(total_amount = sum(amount))
+
+unique_alsobrooks_recipients <- alsobrooks_salary |>
+  summarise(unique_recipients = n_distinct(first_name))
+
+unique_hogan_recipients <- hogan_salary |>
+  summarise(unique_recipients = n_distinct(organization_name))
+
 
 ```
 
