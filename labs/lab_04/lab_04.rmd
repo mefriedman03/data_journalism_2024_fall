@@ -124,7 +124,7 @@ hogan_by_date <- new_senate_expenses|>
 
 **Q4.** Which committee has the larger payroll or salary spending so far? How many unique recipients of payroll/staff spending are there for each candidate?
 
-**A4.** I only see 2 unique recipients for Hogan. I see 21 for Alsobrooks. 
+**A4.** It looks like Alsobrooks has had the larger payroll or salary spending so far which makes sense given that she has been campaigning for longer. I only see 2 unique recipients for Hogan. I see 21 for Alsobrooks. 
 
 ```{r}
 alsobrooks_salary <- new_senate_expenses |>
@@ -150,4 +150,4 @@ unique_hogan_recipients <- hogan_salary |>
 
 **Q5** What's the most interesting story idea you've found in this data?
 
-**A5**
+**A5** I would be interested in looking at why there are only 2 recipients (if I did the clustering right) of payroll/staff spending for Hogan's campaign and learning more about what Purple Surfboard is and what it does. I also think I would want to  break down types of media/advertisement spending a lot more to see if one campaign spends more on digital and another on television and things like that!
