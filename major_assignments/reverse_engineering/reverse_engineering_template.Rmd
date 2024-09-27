@@ -1,7 +1,7 @@
 ---
 title: "Reverse Engineering Project"
-author: "Student names here"
-date: "Date here"
+author: "Marijke Friedman, Brendan Weissel, Sade Ajishegiri"
+date: "Sept. 27, 2024"
 output:
   html_document:
     theme: cerulean
@@ -18,14 +18,17 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Introduction 
 
-In this notebook, we are reverse engineering the story, [STORY NAME](STORY URL)
+In this notebook, we are reverse engineering the story, "Congress Today Is Older Than It's Ever Been."(https://fivethirtyeight.com/features/aging-congress-boomers/)
 
 ## Load libraries
 
 Loading required libraries for this analysis.
 
 ```{r echo=FALSE, message=FALSE}
-
+options(scipen=999)
+library(tidyverse)
+library(janitor)
+library(lubridate)
 ```
 
 ## Load and Cleaning Data
@@ -39,6 +42,8 @@ In this section, describe the source of the data, write a basic data dictionary 
 
 # Clean required data and prepare for analysis if needed. 
 
+congress_age_data <- read_csv("data/data_aging_congress.csv")
+
 
 ```
 
@@ -47,13 +52,19 @@ In this notebook, we are reverse engineering five sentences from the story.
 
 ### Sentence 1
 
-* **Sentence text**: [Paste in sentence to engineer here]
-* **Analysis summary**: [Write up two to three sentences describing the results of your analysis.  Were you able to confirm the finding? If not, why not?]
+* **Sentence text**: Forty-eight percent of the current Congress is made up of boomers, even though they only represented about 21 percent of the population in the most recent census.
+* **Analysis summary**: Our analysis filtered the data by current members of Congress and then grouped by generation. We created found that 259 members of congress are Boomers. We know that there are 535 members of Congress so using simple math (259/535) we were able to find that 48% of the current Congress is made up of boomers, which confirms the findings from the article.
 
 ```{r}
-# Put code to reverse engineer sentence here
 
-# Display results of code below this codeblock
+current_congress <- congress_age_data |> filter(start_date == "2023-01-03") |>
+ group_by(generation) |>
+  summarise(
+    total_contribs = n(),
+  ) |>
+  arrange(desc(total_contribs))
+
+259/535
 
 ```
 
