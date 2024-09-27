@@ -489,3 +489,82 @@ top_donors <-cleaned_typos |>
   arrange(desc(total_amount))
 
 ```
+
+### This uses data that has been cleaned in open refine to find the largest amounts of spending on categories by both campaigns.
+
+```{r}
+ new_senate_expenses |>
+  group_by(purpose_clean) |>
+  summarise(
+    total_contribs = n(),
+    total_amount = sum(amount)
+  ) |>
+  arrange(desc(total_amount))
+
+hogan_expenses <- new_senate_expenses |> filter(candidate == "Hogan") |>
+ group_by(purpose_clean) |>
+  summarise(
+    total_contribs = n(),
+    total_amount = sum(amount)
+  ) |>
+  arrange(desc(total_amount))
+ 
+alsobrooks_expenses <- new_senate_expenses |> filter(candidate == "Alsobrooks") |>
+ group_by(purpose_clean) |>
+  summarise(
+    total_contribs = n(),
+    total_amount = sum(amount)
+  ) |>
+  arrange(desc(total_amount))
+```
+
+### This allows us to pick one of the top categories for each campaign and shows how that spending has changed over time.
+
+```{r}
+top_category <- alsobrooks_expenses |>
+  slice (1)|>
+  pull(purpose_clean)
+
+alsobrooks_by_date <- new_senate_expenses|>
+  filter(candidate=="Alsobrooks", purpose_clean == top_category)|>
+   mutate(week = floor_date(date, "week")) |>
+    group_by(week) |>
+    summarise(
+    total_amount = sum(amount))|>
+    arrange(week)
+
+top_category <- hogan_expenses |>
+  slice (1)|>
+  pull(purpose_clean)
+
+hogan_by_date <- new_senate_expenses|>
+  filter(candidate=="Hogan", purpose_clean == top_category)|>
+   mutate(week = floor_date(date, "week")) |>
+    group_by(week) |>
+    summarise(
+    total_amount = sum(amount))|>
+    arrange(week)
+```
+
+### This shows us which committee has the larger payroll or salary spending so far and how many unique recipients of payroll/staff spending there are for each candidate. 
+
+```{r}
+alsobrooks_salary <- new_senate_expenses |>
+  filter(candidate == "Alsobrooks", purpose_clean == "Salary")
+
+hogan_salary <- new_senate_expenses |>
+  filter(candidate == "Hogan", purpose_clean == "Salary")
+
+total_alsobrooks_salary <- alsobrooks_salary |>
+  summarise(total_amount = sum(amount))
+
+total_hogan_salary <- hogan_salary |>
+  summarise(total_amount = sum(amount))
+
+unique_alsobrooks_recipients <- alsobrooks_salary |>
+  summarise(unique_recipients = n_distinct(first_name))
+
+unique_hogan_recipients <- hogan_salary |>
+  summarise(unique_recipients = n_distinct(organization_name))
+```
+
