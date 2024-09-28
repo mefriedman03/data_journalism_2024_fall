@@ -35,6 +35,7 @@ library(lubridate)
 
 In this section, describe the source of the data, write a basic data dictionary for data you are working with, and discuss any caveats or issues you discovered working with this data. 
 
+Our data comes from a GitHub from the article we are working with. Sources include voteview.com, the U.S. House of Representatives, the biographical directory of the U.S. Congress, and Pew Research Center.
 ```{r}
 # Load required data
 
@@ -53,7 +54,7 @@ In this notebook, we are reverse engineering five sentences from the story.
 ### Sentence 1
 
 * **Sentence text**: Forty-eight percent of the current Congress is made up of boomers, even though they only represented about 21 percent of the population in the most recent census.
-* **Analysis summary**: Our analysis filtered the data by current members of Congress and then grouped by generation. We created found that 259 members of congress are Boomers. We know that there are 535 members of Congress so using simple math (259/535) we were able to find that 48% of the current Congress is made up of boomers, which confirms the findings from the article.
+* **Analysis summary**: Our analysis filtered the data by current members of Congress and then grouped by generation. We found that 259 members of congress are Boomers. We know that there are 535 members of Congress so using simple math (259/535) we were able to find that 48% of the current Congress is made up of boomers, which confirms the findings from the article.
 
 ```{r}
 
