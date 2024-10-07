@@ -115,7 +115,7 @@ print(silent_plurality)
 ### Sentence 5
 
 * **Sentence text**: Coming up behind the boomers is Gen X, which makes up 36 percent of Congress, and beyond them are millennials (10 percent), who now constitute a larger segment of the overall population than boomers.
-* **Analysis summary**: [Write up two to three sentences describing the results of your analysis.  Were you able to confirm the finding? If not, why not?]
+* **Analysis summary**: [
 
 ```{r}
 # Put code to reverse engineer sentence here
