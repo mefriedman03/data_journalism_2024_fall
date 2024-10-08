@@ -51,7 +51,7 @@ You can now export that extracted table to a CSV file using the "Export" button.
 **Task** Load the Maryland voters by county data by running the following codeblock.
 
 ```{r}
-voters_by_county <- read_csv("tabula-Eligible Active Voters by County.csv")
+voters_by_county <- read_csv("tabula-Eligible_Active_Voters_by_County.csv")
 View(voters_by_county)
 ```
 
@@ -97,10 +97,10 @@ You can now export that extracted table to a CSV file using the "Export" button.
 
 ### Task 5: Export the CSV file
 
-**Task** Export the CSV file to your pre_lab_06 folder and read it into R by running the following codeblock. What problems do you see with the data? **Answer**
+**Task** Export the CSV file to your pre_lab_06 folder and read it into R by running the following codeblock. What problems do you see with the data? **Answer** I see that the column names are numbers which means that there are not headers and that there are a lot of NAs.
 
 ```{r}
-benzie_2024 <- read_csv("tabula-Benzie Aug 6,2024 Official Precinct Results.csv")
+benzie_2024 <- read_csv("benzie_one.csv")
 
 benzie_2024
 ```
@@ -113,10 +113,10 @@ Then we've got rows with NAs, plus office names mixed up with candidate names. L
 
 ### Task 6: Cleaning up & getting rid of rows we don't need
 
-**Task** Get rid of rows we don't need by running the codeblock below. What problems remain? **Answer**
+**Task** Get rid of rows we don't need by running the codeblock below. What problems remain? **Answer** Most of the NAs are gone and the numbers are no longer the column names, but there are now place holder column names. There are also still some columns that are basically just filled with NAs.
 
 ```{r}
-benzie_2024 <- read_csv("tabula-Benzie Aug 6,2024 Official Precinct Results.csv", col_names = FALSE)
+benzie_2024 <- read_csv("benzie_one.csv", col_names = FALSE)
 
 benzie_2024 <- benzie_2024 |>
   filter(!is.na(X2)) |> 
@@ -129,7 +129,7 @@ Ok, now we have numbers and candidates, but we still need better headers and a w
 
 ### Task 7: Making a party column, changing headers and adding an office column.
 
-**Task** Run the codeblock below. What changed, and what issues or problems remain? **Answer**
+**Task** Run the codeblock below. What changed, and what issues or problems remain? **Answer** There are now proper column names and there is a party and an office column. There are still some column names unlabeled and some empty looking rows and columns. 
 
 ```{r}
 benzie_2024 <- benzie_2024 |>
