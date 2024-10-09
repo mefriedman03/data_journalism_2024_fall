@@ -20,7 +20,8 @@ knitr::opts_chunk$set(echo = TRUE)
 options(scipen=999)
 
 # Load the tidyverse and any other libraries you'll need
-
+library(tidyverse)
+library(janitor)
 ```
 
 ## Get Our PDF
@@ -33,7 +34,7 @@ Start Tabula, then go to <http://127.0.0.1:8080/> in your browser. Click the "Br
 
 This PDF has multiple possible tables to extract. We're going to make four dataframes: 
 
-* new registrations by party
+* new registrations by party 
 * removals by party
 * changes in registration
 * current registrations by county.
@@ -50,21 +51,33 @@ You will need to read in and clean up the data so that it can be used for analys
 
 ```{r}
 # Party registrations
+party_registrations_2024 <- read_csv("data/24_new_registration_party.csv")
 
+colnames(party_registrations_2024)[1]="Reason"
 ```
 
 ```{r}
 # Removals
-
+removals_2024 <- read_csv("data/24_removals_party.csv")
+removals_2024 <-removals_2024 |>
+  filter(!is.na(...1)) |>
+  rename(TYPE=...1, DEM=...2, REP=...3, NLM=...4, LIB=...5, GRN=...6, UNAF=...7, OTH=...8, TOTAL=...9)
 ```
+
 
 ```{r}
 # Changes
-
+changes_2024 <- read_csv("data/24_changes.csv")
+changes_2024 <- changes_2024 |>
+  rename(COUNTY=...1)
 ```
 
 ```{r}
 # Current registrations
+current_registrations_2024 <- read_csv("data/24_reg_current.csv")
+current_registrations_2024 <-current_registrations_2024[,-c(1,3,4,5,6,7,8,9,10,11,12,13,14,15,24,25,26,27)] |>
+  filter(!is.na(...2)) |>
+  rename(COUNTY=...2, DEM=DEM...16, REP=REP...17, NLM=NLM...18, LIB=LIB...19, GRN=GRN...20, UNAF=UNAF...21, OTH=OTH...22, TOTAL=TOTAL...23)
 
 ```
 
@@ -76,6 +89,8 @@ To answer the following questions, you'll need to calculate percentages and do o
 
 ```{r}
 # Party registrations
+party_registrations_2022 <- read_csv("data/22_new_registration_party.csv")
+colnames(party_registrations_2022)[1]="Reason"
 
 ```
 
