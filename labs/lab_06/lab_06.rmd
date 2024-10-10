@@ -53,7 +53,7 @@ You will need to read in and clean up the data so that it can be used for analys
 # Party registrations
 party_registrations_2024 <- read_csv("data/24_new_registration_party.csv")
 
-colnames(party_registrations_2024)[1]="Reason"
+colnames(party_registrations_2024)[1]="TYPE"
 ```
 
 ```{r}
@@ -63,7 +63,6 @@ removals_2024 <-removals_2024 |>
   filter(!is.na(...1)) |>
   rename(TYPE=...1, DEM=...2, REP=...3, NLM=...4, LIB=...5, GRN=...6, UNAF=...7, OTH=...8, TOTAL=...9)
 ```
-
 
 ```{r}
 # Changes
@@ -89,24 +88,32 @@ To answer the following questions, you'll need to calculate percentages and do o
 
 ```{r}
 # Party registrations
-party_registrations_2022 <- read_csv("data/22_new_registration_party.csv")
-colnames(party_registrations_2022)[1]="Reason"
+party_registrations_2022 <- read_csv("data/22-new-registration-party.csv")
+colnames(party_registrations_2022)[1]="TYPE"
 
 ```
 
 ```{r}
 # Removals
-
+removals_2022 <- read_csv("data/22_removals_by_party.csv")
+removals_2022 <-removals_2022 |>
+  filter(!is.na(...1)) |>
+  rename(TYPE=...1)
 ```
 
 ```{r}
 # Changes
-
+changes_2022 <- read_csv("data/22_changes.csv")
+changes_2022 <- changes_2022 |>
+  rename(COUNTY=...1)
 ```
 
 ```{r}
 # Current registrations
-
+current_registrations_2022 <- read_csv("data/22_reg_current.csv")
+current_registrations_2022 <-current_registrations_2022[,-c(2,3,4,5,6,7,8,9,10,11)]  |>
+ rename(COUNTY=...1, DEM=DEM...12, REP=REP...13, GRN=GRN...14, LIB=LIB...15, WCP=WCP...16, UNAF=UNAF...17, OTH=OTH...18, TOTAL=TOTAL...19)
+  
 ```
 
 ## Answer questions
@@ -116,7 +123,32 @@ Q1. Calculate the percentage of registered Democrats, Republicans and unaffiliat
 A1.
 
 ```{r}
+dems24 <- 2219417 / 4231403
+print(dems24)
 
+reps24 <- 1009323 / 4231403
+print(reps24)
+
+unaf24 <- 923927 / 4231403
+print(unaf24)
+
+dems22 <- 2250961/4161637
+print(dems22)
+
+reps22 <- 998905/4161637
+print(reps22)
+
+unaf22 <- 841573/4161637
+print(unaf22)
+
+(dems24-dems22)/(dems22)
+
+(reps24-reps22)/(reps22)
+
+(unaf24-unaf22)/(unaf22)
+
+
+  
 ```
 
 Q2. Among the Maryland jurisdictions with the most registered voters, which one had the biggest percentage increase in unaffiliated voters between 2022 and 2024? How did that county vote for governor in 2022 and for president in 2020? Contrast the partisan percentages of that county with the county that had the eighth-largest percentage increase in unaffiliated voters. You should display information from the data that shows the counties with the largest percentage increase first.
