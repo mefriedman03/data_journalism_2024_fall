@@ -206,7 +206,7 @@ Let's read in some campaign finance data of Maryland donors:
 md_contribs <- read_rds("data/pre_lab_07.rds")
 ```
 
-**Task** We need a 5- digit zip code (again), so run the following codeblock to create a populate a new column called `zip5`, then find the zip code with the largest total amount of contributions.
+**Task** We need a 5- digit zip code (again), so run the following codeblock to create a populate a new column called `zip5`, then find the zip code with the largest total amount of contributions. 
 
 ```{r}
 md_contribs <- md_contribs |>
@@ -224,11 +224,11 @@ Note that the year is 2019, which is the latest year that we have data from ever
 
 Of the 20 zip codes with the largest amounts, which ones have estimated median household incomes of less than \$50,000?
 
-**Answer** 
+**Answer** It looks like only 21202 has an estimated household income of less than $50,000.
 ```{r}
 md_zipcodes <- get_acs(geography="zcta", variables = "B19013_001", state='MD', year=2019)
 md_zips_with_acs <- top_zips |> left_join(md_zipcodes, join_by(zip5==GEOID))
 md_zips_with_acs <- md_zips_with_acs |> mutate(min=(estimate-moe), max=(estimate+moe))
 ```
 
-**Task** Arrange md_zips_with_acs by estimate showing the highest median household income first. What questions do you have about these top zip codes? **Answer**
+**Task** Arrange md_zips_with_acs by estimate showing the highest median household income first. What questions do you have about these top zip codes? **Answer** I am wondering where these zip codes are located and what similarities they have. I also have questions about the margin of error and how this impacts our ability to draw any real conclusions. I also wonder about patterns with high median incomes and high total amounts of contributions. 
