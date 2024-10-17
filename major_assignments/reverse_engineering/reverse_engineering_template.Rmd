@@ -76,8 +76,9 @@ current_congress_by_generation <- congress_age_data |> filter(start_date == "202
 
 ```{r}
 current_congress_age <- congress_age_data |> filter(start_date == "2023-01-03")  |>
+  filter(start_date == "2023-01-03")  |>
   summarise(
-    median(age_years)
+    median=median(age_years)
   )
 
 print(current_congress_age)
@@ -91,13 +92,13 @@ print(current_congress_age)
 ```{r}
 boomer_plurality  <- congress_age_data |> filter(start_date == "2001-01-03", generation=="Boomers") |>
 summarise(
-    median(age_years))
+    boomer_median=median(age_years))
 
 print(boomer_plurality)
 
 silent_plurality <- congress_age_data |> filter(start_date == "1979-01-03", generation=="Silent") |>
 summarise(
-    median(age_years))
+    silent_median=median(age_years))
 
 print(silent_plurality)
 ```
