@@ -105,24 +105,32 @@ print(silent_plurality)
 
 ### Sentence 4
 
-* **Sentence text**: Members of Congress have always been older than the public at large, as well as the population constitutionally eligible to serve on Capitol Hill
-* **Analysis summary**: []
+* **Sentence text**: From 1919 to 1999, the median senator never eclipsed 60 years old and the median representative never surpassed 55.2.
+* **Analysis summary**: We were able to confirm this by looking at the average age of every iteration of the senate and the house of representatives from 1919 to 1999. 
 testing
 ```{r}
-
-
-```
+median_ages_yearly <- congress_age_data |>
+  filter(start_date >= "1919-01-01" & start_date <= "1999-12-31") |>
+  group_by(start_date, chamber) |>
+  summarise(median_age = median(age_years)) |>
+  arrange(desc(median_age), chamber) 
 
 ### Sentence 5
 
 * **Sentence text**: Coming up behind the boomers is Gen X, which makes up 36 percent of Congress, and beyond them are millennials (10 percent), who now constitute a larger segment of the overall population than boomers.
-* **Analysis summary**: [
+* **Analysis summary**: The analysis creates a new dataframe that sorts each member of congress into their generation and counts the total number of members of congress in each generation. Then using a simple percantage formula diving by 535 and multiplying by 100 in a new data we confrimed the findings. 
 
 ```{r}
-# Put code to reverse engineer sentence here
+current_congress_generation <- congress_age_data |> filter(start_date == "2023-01-03") |>
+  group_by(generation) |>
+  summarise(
+    number_of_members = n(),
+  ) |>
 
-# Display results of code below this codeblock
+  mutate(percentage = (number_of_members / 535) * 100) |>
+  arrange(desc(number_of_members))
 
-```
+print(current_congress_generation)
+
 
 -30-
