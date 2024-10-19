@@ -109,12 +109,19 @@ print(silent_plurality)
 * **Analysis summary**: We were able to confirm this by looking at the average age of every iteration of the senate and the house of representatives from 1919 to 1999. 
 
 ```{r}
-median_ages_yearly <- congress_age_data |>
-  filter(start_date >= "1919-01-01" & start_date <= "1999-12-31") |>
-  group_by(start_date, chamber) |>
-  summarise(median_age = median(age_years)) |>
-  arrange(desc(median_age), chamber) 
+#senate
+senate_median_ages <- congress_age_data |>
+  filter(start_date >= "1919-01-01" & start_date <= "1999-12-31", chamber == "Senate") |>
+  group_by(start_date) |>
+  summarise(median_age_senate = median(age_years)) |>
+  arrange(desc(median_age_senate))
 
+#Houseofreps
+house_median_ages <- congress_age_data |>
+  filter(start_date >= "1919-01-01" & start_date <= "1999-12-31", chamber == "House") |>
+  group_by(start_date) |>
+  summarise(median_age_house = median(age_years)) |>
+  arrange(desc(median_age_house))
 ```
 
 ### Sentence 5
