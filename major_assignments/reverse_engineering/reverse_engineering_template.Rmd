@@ -35,7 +35,8 @@ library(lubridate)
 
 In this section, describe the source of the data, write a basic data dictionary for data you are working with, and discuss any caveats or issues you discovered working with this data. 
 
-Our data comes from a GitHub from the article we are working with. Sources include voteview.com, the U.S. House of Representatives, the biographical directory of the U.S. Congress, and Pew Research Center.
+Our data comes from a GitHub repository linked to (https://github.com/fivethirtyeight/data/tree/master/congress-demographics) by the author of the article we're working with. Sources include voteview.com, the U.S. House of Representatives, the biographical directory of the U.S. Congress, and Pew Research Center.
+
 ```{r}
 # Load required data
 
@@ -53,9 +54,10 @@ In this notebook, we are reverse engineering five sentences from the story.
 
 ### Sentence 1
 
-**Sentence text**: Forty-eight percent of the current Congress is made up of boomers, even though they only represented about 21 percent of the population in the most recent census.
-**Analysis summary**: Our analysis filtered the data by current members of Congress and then grouped by generation. We found that 259 members of congress are Boomers. We know that there are 535 members of Congress so using simple math (259/535) we were able to find that 48% of the current Congress is made up of boomers, which confirms the findings from the article.
+**Sentence text**: "Forty-eight percent of the current Congress is made up of boomers, even though they only represented about 21 percent of the population in the most recent census."
+**Analysis summary**: Our analysis filtered the data by current members of Congress and then grouped by generation. We found that 259 members of congress are boomers. We know that there are 535 members of Congress so using simple math (259/535) we were able to find that 48% of the current Congress is made up of boomers, which confirms the findings from the article.
 
+Code:
 ```{r}
 
 current_congress_by_generation <- congress_age_data |> filter(start_date == "2023-01-03") |>
@@ -71,9 +73,10 @@ current_congress_by_generation <- congress_age_data |> filter(start_date == "202
 
 ### Sentence 2
 
-**Sentence text**: Across all senators and representatives, the median age of the 118th Congress is 59 years old.
-**Analysis summary**: The analysis found the median age of current members of Congress. We found that the median age was about 59 years old. This confirms the findings of the article because we calculated the same median as the reporters in the article. 
+**Sentence text**: "Across all senators and representatives, the median age of the 118th Congress is 59 years old."
+**Analysis summary**: The analysis found the median age of current members of Congress. We found that the median age was about 59 years old. This confirms the findings of the article because we calculated the same median as the reporters of the story. 
 
+Code:
 ```{r}
 current_congress_age <- congress_age_data |> filter(start_date == "2023-01-03")  |>
   filter(start_date == "2023-01-03")  |>
@@ -86,9 +89,10 @@ print(current_congress_age)
 
 ### Sentence 3
 
-**Sentence text**: When boomers became a plurality of Congress in 2001, their median age was nearly 49, six years older than the Silent Generation was when it became the largest generational cohort in 1979. 
-**Analysis summary**: The analysis found that the median age when Boomers became the plurality of Congress was almost 49 and that the median age when the Silent Generation became the plurality of Congress was 43. This confirms the findings of the article because it demonstrates that six year age difference that the article describes. 
+**Sentence text**: "When boomers became a plurality of Congress in 2001, their median age was nearly 49, six years older than the Silent Generation was when it became the largest generational cohort in 1979." 
+**Analysis summary**: The analysis found that the median age when boomers became the plurality of Congress was almost 49 and that the median age when the Silent Generation became the plurality of Congress was 43. This confirms the findings of the article because it demonstrates that six year age difference that the article describes. 
 
+Code:
 ```{r}
 boomer_plurality  <- congress_age_data |> filter(start_date == "2001-01-03", generation=="Boomers") |>
 summarise(
@@ -105,9 +109,10 @@ print(silent_plurality)
 
 ### Sentence 4
 
-* **Sentence text**: From 1919 to 1999, the median senator never eclipsed 60 years old and the median representative never surpassed 55.2.
-* **Analysis summary**: We were able to confirm this by looking at the average age of every iteration of the senate and the house of representatives from 1919 to 1999. 
+* **Sentence text**: "From 1919 to 1999, the median senator never eclipsed 60 years old and the median representative never surpassed 55."
+* **Analysis summary**: We were able to confirm this by looking at the average age of every iteration of the Senate and the House of Representatives from 1919 to 1999. 
 
+Code:
 ```{r}
 #senate
 senate_median_ages <- congress_age_data |>
@@ -126,9 +131,10 @@ house_median_ages <- congress_age_data |>
 
 ### Sentence 5
 
-* **Sentence text**: Coming up behind the boomers is Gen X, which makes up 36 percent of Congress, and beyond them are millennials (10 percent), who now constitute a larger segment of the overall population than boomers.
-* **Analysis summary**: The analysis creates a new dataframe that sorts each member of congress into their generation and counts the total number of members of congress in each generation. Then using a simple percentage formula dividing by 535 and multiplying by 100 in a new data we confirmed the findings. 
+* **Sentence text**: "Coming up behind the boomers is Gen X, which makes up 36 percent of Congress, and beyond them are millennials (10 percent), who now constitute a larger segment of the overall population than boomers."
+* **Analysis summary**: The analysis creates a new dataframe that sorts each member of Congress into their generation and counts the total number of Congress members in each generation. Then, using a simple percentage formula dividing by 535 and multiplying by 100, we confirmed the findings. 
 
+Code:
 ```{r}
 current_congress_generation <- congress_age_data |> filter(start_date == "2023-01-03") |>
   group_by(generation) |>
