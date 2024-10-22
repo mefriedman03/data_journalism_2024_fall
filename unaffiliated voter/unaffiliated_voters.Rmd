@@ -13,14 +13,123 @@ library(janitor)
 ```
 
 ```{r}
-# Current registrations
-current_registrations_2024 <- read_csv("data/24_reg_current_copy.csv") |>
-  select(-c(2,3,4,5,6,7,8,9,10,11)) |> 
-  clean_names()
-
-current_registrations_2024 <- current_registrations_2024 |> 
-  rename(county = x1) |> 
-  rename(dem24 = dem_12, rep24 = rep_13, nlm23 = nlm_14, lib24 = lib_15, grn24 = grn_16, unaf24 = unaf_17, oth24 = oth_18, total24 = total_19)
+# 2024 current registrations
+current_registrations_2024 <- read_csv("24_reg_current_copy.csv")
+current_registrations_2024 <-current_registrations_2024[,-c(1,3,4,5,6,7,8,9,10,11,12,13,14,15,24,25,26,27)] |>
+  filter(!is.na(...2)) |>
+  rename(COUNTY=...2, DEM24=DEM...16, REP24=REP...17, NLM24=NLM...18, LIB24=LIB...19, GRN24=GRN...20, UNAF24=UNAF...21, OTH24=OTH...22, TOTAL24=TOTAL...23)
 ```
 
+```{r}
+# 2022 current registrations
+current_registrations_2022 <- read_csv("22_reg_current_copy.csv")
+current_registrations_2022 <-current_registrations_2022[,-c(2,3,4,5,6,7,8,9,10,11)]  |>
+ rename(COUNTY=...1, DEM22=DEM...12, REP22=REP...13, GRN22=GRN...14, LIB22=LIB...15, WCP22=WCP...16, UNAF22=UNAF...17, OTH22=OTH...18, TOTAL22=TOTAL...19)
+```
+
+```{r}
+# 2020 current registrations
+current_registrations_2020 <- read_csv("20_reg_current.csv")
+```
+
+```{r}
+# 2018 current registrations
+current_registrations_2018 <- read_csv("18_reg_current.csv")
+```
+
+```{r}
+# 2016 current registrations
+current_registrations_2016 <- read_csv("16_reg_current.csv")
+```
+
+```{r}
+# 2014 current registrations
+current_registrations_2014 <- read_csv("14_reg_current.csv")
+```
+
+### This shows was a -1.4% change in Democratic voters, a 1% increase in Republican voters and a 9.8% increase in unaffiliated voters between September 2022 and September 2024. I also see that more than 21% of Maryland's voters are registered as unaffiliated. 
+
+```{r}
+current_registrations_2024 <- current_registrations_2024 |> 
+  mutate(pct_DEM24 = (DEM24/TOTAL24)*100, pct_REP24 = (REP24/TOTAL24)*100, pct_UNAF24 = (UNAF24/TOTAL24)*100)
+
+current_registrations_2022 <- current_registrations_2022 |> 
+  mutate(pct_DEM22 = (DEM22/TOTAL22)*100, pct_REP22 = (REP22/TOTAL22)*100, pct_UNAF22 = (UNAF22/TOTAL22)*100)
+
+compare_22_24 <- current_registrations_2024 |> 
+  left_join(current_registrations_2022, by='COUNTY') |> 
+  mutate(DEM_pct_change = (DEM24-DEM22)/DEM22*100, REP_pct_change = (REP24-REP22)/REP22*100, UNAF_pct_change = (UNAF24-UNAF22)/UNAF22*100) |> 
+  arrange(desc(UNAF_pct_change))
+```
+
+### This shows there was an 8.6% increase in registered Democrats, a 5.7% increase in registered Republicans and a nearly 40% increase in registered unaffiliated voters.
+
+```{r}
+current_registrations_2024 <- current_registrations_2024 |> 
+  mutate(pct_DEM24 = (DEM24/TOTAL24)*100, pct_REP24 = (REP24/TOTAL24)*100, pct_UNAF24 = (UNAF24/TOTAL24)*100)
+
+current_registrations_2014 <- current_registrations_2014 |> 
+  mutate(pct_DEM14 = (DEM14/TOTAL14)*100, pct_REP14 = (REP14/TOTAL14)*100, pct_UNAF14 = (UNAF14/TOTAL14)*100)
+
+compare_14_24 <- current_registrations_2024 |> 
+  left_join(current_registrations_2014, by='COUNTY') |> 
+  mutate(DEM_pct_change = (DEM24-DEM14)/DEM14*100, REP_pct_change = (REP24-REP14)/REP14*100, UNAF_pct_change = (UNAF24-UNAF14)/UNAF14*100) |> 
+  arrange(desc(UNAF_pct_change))
+```
+
+### Getting percentages for the other dataframes!
+
+```{r}
+current_registrations_2016 <- current_registrations_2016 |> 
+  mutate(pct_DEM16 = (DEM16/TOTAL16)*100, pct_REP16 = (REP16/TOTAL16)*100, pct_UNAF16 = (UNAF16/TOTAL16)*100)
+
+current_registrations_2018 <- current_registrations_2018 |> 
+  mutate(pct_DEM18 = (DEM18/TOTAL18)*100, pct_REP18 = (REP18/TOTAL18)*100, pct_UNAF18 = (UNAF18/TOTAL18)*100)
+
+current_registrations_2020 <- current_registrations_2020 |> 
+  mutate(pct_DEM20 = (DEM20/TOTAL20)*100, pct_REP20 = (REP20/TOTAL20)*100, pct_UNAF20 = (UNAF20/TOTAL20)*100)
+```
+
+### Trying to do one big merge for comparison!
+
+### Unaffiliated percent change starts being the largest (in the limited years I am looking at) starting at 2016-2018 percent change.
+
+```{r}
+compare_all <- current_registrations_2024 |> 
+  left_join(current_registrations_2014, by='COUNTY') |> 
+  left_join(current_registrations_2016, by='COUNTY') |> 
+  left_join(current_registrations_2018, by='COUNTY') |> 
+  left_join(current_registrations_2020, by='COUNTY') |> 
+  left_join(current_registrations_2022, by='COUNTY') |> 
+  mutate(
+    #2014-2016 pct_change
+    DEM1416_pct_change = (DEM16-DEM14)/DEM14*100, REP1416_pct_change = (REP16-REP14)/REP14*100, UNAF1416_pct_change = (UNAF16-UNAF14)/UNAF14*100,
+    #2016-2018 pct_change
+    DEM1618_pct_change = (DEM18-DEM16)/DEM16*100, REP1618_pct_change = (REP18-REP16)/REP16*100, UNAF1618_pct_change = (UNAF18-UNAF16)/UNAF16*100,
+    #2018-2020 pct_change
+    DEM1820_pct_change = (DEM20-DEM18)/DEM18*100, REP1820_pct_change = (REP20-REP18)/REP18*100, UNAF1820_pct_change = (UNAF20-UNAF18)/UNAF18*100,
+    #2020-2022 pct_change
+    DEM2022_pct_change = (DEM22-DEM20)/DEM20*100, REP2022_pct_change = (REP22-REP20)/REP20*100, UNAF2022_pct_change = (UNAF22-UNAF20)/UNAF20*100,
+    #2022-2024 pct_change
+    DEM2224_pct_change = (DEM24-DEM22)/DEM22*100, REP2224_pct_change = (REP24-REP22)/REP22*100, UNAF2224_pct_change = (UNAF24-UNAF22)/UNAF22*100,
+    #2014-2024 pct_change
+    DEM1424_pct_change = (DEM24-DEM14)/DEM14*100, REP1424_pct_change = (REP24-REP14)/REP14*100, UNAF1424_pct_change = (UNAF24-UNAF14)/UNAF14*100)
+  
+cleaner_compare_all <- compare_all |> 
+  select(COUNTY, DEM1416_pct_change, REP1416_pct_change, UNAF1416_pct_change, DEM1618_pct_change, REP1618_pct_change, UNAF1618_pct_change, DEM1820_pct_change, REP1820_pct_change, UNAF1820_pct_change,  DEM2022_pct_change, REP2022_pct_change, UNAF2022_pct_change, DEM2224_pct_change, REP2224_pct_change, UNAF2224_pct_change, DEM1424_pct_change, REP1424_pct_change, UNAF1424_pct_change, TOTAL24)
+```
+
+### Looking by county!
+
+### Prince George's County had a 73% increase in unaffiliated registered voters, compared to only an about 6.5% increase in registered Democrats and a 4.2% decrease in registered Republicans. 
+
+### Frederick, which had increases all around, had a substantially higher increase in registered unaffiliated voters also. 
+
+```{r}
+cleaner_compare_all |> 
+  arrange(desc(UNAF1424_pct_change))|> 
+  select(COUNTY, UNAF1424_pct_change, DEM1424_pct_change, REP1424_pct_change, TOTAL24)|> 
+  filter(TOTAL24 > 100000)
+```
+```
 

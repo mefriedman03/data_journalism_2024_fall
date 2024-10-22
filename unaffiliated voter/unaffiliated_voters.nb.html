@@ -1756,20 +1756,185 @@ display: none;
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBDdXJyZW50IHJlZ2lzdHJhdGlvbnNcbmN1cnJlbnRfcmVnaXN0cmF0aW9uc18yMDI0IDwtIHJlYWRfY3N2KFwiZGF0YS8yNF9yZWdfY3VycmVudF9jb3B5LmNzdlwiKSB8PlxuICBzZWxlY3QoLWMoMiwzLDQsNSw2LDcsOCw5LDEwLDExKSkgfD4gXG4gIGNsZWFuX25hbWVzKClcbmBgYCJ9 -->
-<pre class="r"><code># Current registrations
-current_registrations_2024 &lt;- read_csv(&quot;data/24_reg_current_copy.csv&quot;) |&gt;
-  select(-c(2,3,4,5,6,7,8,9,10,11)) |&gt; 
-  clean_names()</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyAyMDI0IGN1cnJlbnQgcmVnaXN0cmF0aW9uc1xuY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMjQgPC0gcmVhZF9jc3YoXCIyNF9yZWdfY3VycmVudF9jb3B5LmNzdlwiKVxuY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMjQgPC1jdXJyZW50X3JlZ2lzdHJhdGlvbnNfMjAyNFssLWMoMSwzLDQsNSw2LDcsOCw5LDEwLDExLDEyLDEzLDE0LDE1LDI0LDI1LDI2LDI3KV0gfD5cbiAgZmlsdGVyKCFpcy5uYSguLi4yKSkgfD5cbiAgcmVuYW1lKENPVU5UWT0uLi4yLCBERU0yND1ERU0uLi4xNiwgUkVQMjQ9UkVQLi4uMTcsIE5MTTI0PU5MTS4uLjE4LCBMSUIyND1MSUIuLi4xOSwgR1JOMjQ9R1JOLi4uMjAsIFVOQUYyND1VTkFGLi4uMjEsIE9USDI0PU9USC4uLjIyLCBUT1RBTDI0PVRPVEFMLi4uMjMpXG5gYGAifQ== -->
+<pre class="r"><code># 2024 current registrations
+current_registrations_2024 &lt;- read_csv(&quot;24_reg_current_copy.csv&quot;)
+current_registrations_2024 &lt;-current_registrations_2024[,-c(1,3,4,5,6,7,8,9,10,11,12,13,14,15,24,25,26,27)] |&gt;
+  filter(!is.na(...2)) |&gt;
+  rename(COUNTY=...2, DEM24=DEM...16, REP24=REP...17, NLM24=NLM...18, LIB24=LIB...19, GRN24=GRN...20, UNAF24=UNAF...21, OTH24=OTH...22, TOTAL24=TOTAL...23)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3I6ICdkYXRhLzI0X3JlZ19jdXJyZW50X2NvcHkuY3N2JyBkb2VzIG5vdCBleGlzdCBpbiBjdXJyZW50IHdvcmtpbmcgZGlyZWN0b3J5ICgnL1VzZXJzL21hcmlqa2VmcmllZG1hbi9Eb2N1bWVudHMvR2l0SHViL2RhdGFfam91cm5hbGlzbV8yMDI0X2ZhbGwvdW5hZmZpbGlhdGVkIHZvdGVyJykuXG4ifQ== -->
-<pre><code>Error: &#39;data/24_reg_current_copy.csv&#39; does not exist in current working directory (&#39;/Users/marijkefriedman/Documents/GitHub/data_journalism_2024_fall/unaffiliated voter&#39;).</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyAyMDIyIGN1cnJlbnQgcmVnaXN0cmF0aW9uc1xuY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMjIgPC0gcmVhZF9jc3YoXCIyMl9yZWdfY3VycmVudF9jb3B5LmNzdlwiKVxuY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMjIgPC1jdXJyZW50X3JlZ2lzdHJhdGlvbnNfMjAyMlssLWMoMiwzLDQsNSw2LDcsOCw5LDEwLDExKV0gIHw+XG4gcmVuYW1lKENPVU5UWT0uLi4xLCBERU0yMj1ERU0uLi4xMiwgUkVQMjI9UkVQLi4uMTMsIEdSTjIyPUdSTi4uLjE0LCBMSUIyMj1MSUIuLi4xNSwgV0NQMjI9V0NQLi4uMTYsIFVOQUYyMj1VTkFGLi4uMTcsIE9USDIyPU9USC4uLjE4LCBUT1RBTDIyPVRPVEFMLi4uMTkpXG5gYGAifQ== -->
+<pre class="r"><code># 2022 current registrations
+current_registrations_2022 &lt;- read_csv(&quot;22_reg_current_copy.csv&quot;)
+current_registrations_2022 &lt;-current_registrations_2022[,-c(2,3,4,5,6,7,8,9,10,11)]  |&gt;
+ rename(COUNTY=...1, DEM22=DEM...12, REP22=REP...13, GRN22=GRN...14, LIB22=LIB...15, WCP22=WCP...16, UNAF22=UNAF...17, OTH22=OTH...18, TOTAL22=TOTAL...19)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyAyMDIwIGN1cnJlbnQgcmVnaXN0cmF0aW9uc1xuY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMjAgPC0gcmVhZF9jc3YoXCIyMF9yZWdfY3VycmVudC5jc3ZcIilcbmBgYCJ9 -->
+<pre class="r"><code># 2020 current registrations
+current_registrations_2020 &lt;- read_csv(&quot;20_reg_current.csv&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyAyMDE4IGN1cnJlbnQgcmVnaXN0cmF0aW9uc1xuY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMTggPC0gcmVhZF9jc3YoXCIxOF9yZWdfY3VycmVudC5jc3ZcIilcbmBgYCJ9 -->
+<pre class="r"><code># 2018 current registrations
+current_registrations_2018 &lt;- read_csv(&quot;18_reg_current.csv&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyAyMDE2IGN1cnJlbnQgcmVnaXN0cmF0aW9uc1xuY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMTYgPC0gcmVhZF9jc3YoXCIxNl9yZWdfY3VycmVudC5jc3ZcIilcbmBgYCJ9 -->
+<pre class="r"><code># 2016 current registrations
+current_registrations_2016 &lt;- read_csv(&quot;16_reg_current.csv&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyAyMDE0IGN1cnJlbnQgcmVnaXN0cmF0aW9uc1xuY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMTQgPC0gcmVhZF9jc3YoXCIxNF9yZWdfY3VycmVudC5jc3ZcIilcbmBgYCJ9 -->
+<pre class="r"><code># 2014 current registrations
+current_registrations_2014 &lt;- read_csv(&quot;14_reg_current.csv&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<div id="this-shows-was-a--1.4-change-in-democratic-voters-a-1-increase-in-republican-voters-and-a-9.8-increase-in-unaffiliated-voters-between-september-2022-and-september-2024.-i-also-see-that-more-than-21-of-marylands-voters-are-registered-as-unaffiliated." class="section level3">
+<h3>This shows was a -1.4% change in Democratic voters, a 1% increase in
+Republican voters and a 9.8% increase in unaffiliated voters between
+September 2022 and September 2024. I also see that more than 21% of
+Maryland’s voters are registered as unaffiliated.</h3>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMjQgPC0gY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMjQgfD4gXG4gIG11dGF0ZShwY3RfREVNMjQgPSAoREVNMjQvVE9UQUwyNCkqMTAwLCBwY3RfUkVQMjQgPSAoUkVQMjQvVE9UQUwyNCkqMTAwLCBwY3RfVU5BRjI0ID0gKFVOQUYyNC9UT1RBTDI0KSoxMDApXG5cbmN1cnJlbnRfcmVnaXN0cmF0aW9uc18yMDIyIDwtIGN1cnJlbnRfcmVnaXN0cmF0aW9uc18yMDIyIHw+IFxuICBtdXRhdGUocGN0X0RFTTIyID0gKERFTTIyL1RPVEFMMjIpKjEwMCwgcGN0X1JFUDIyID0gKFJFUDIyL1RPVEFMMjIpKjEwMCwgcGN0X1VOQUYyMiA9IChVTkFGMjIvVE9UQUwyMikqMTAwKVxuXG5jb21wYXJlXzIyXzI0IDwtIGN1cnJlbnRfcmVnaXN0cmF0aW9uc18yMDI0IHw+IFxuICBsZWZ0X2pvaW4oY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMjIsIGJ5PSdDT1VOVFknKSB8PiBcbiAgbXV0YXRlKERFTV9wY3RfY2hhbmdlID0gKERFTTI0LURFTTIyKS9ERU0yMioxMDAsIFJFUF9wY3RfY2hhbmdlID0gKFJFUDI0LVJFUDIyKS9SRVAyMioxMDAsIFVOQUZfcGN0X2NoYW5nZSA9IChVTkFGMjQtVU5BRjIyKS9VTkFGMjIqMTAwKSB8PiBcbiAgYXJyYW5nZShkZXNjKFVOQUZfcGN0X2NoYW5nZSkpXG5gYGAifQ== -->
+<pre class="r"><code>current_registrations_2024 &lt;- current_registrations_2024 |&gt; 
+  mutate(pct_DEM24 = (DEM24/TOTAL24)*100, pct_REP24 = (REP24/TOTAL24)*100, pct_UNAF24 = (UNAF24/TOTAL24)*100)
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiVW5hZmZpbGlhdGVkIFZvdGVycyIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKYGBge3Igc2V0dXAsIGluY2x1ZGU9RkFMU0V9CmtuaXRyOjpvcHRzX2NodW5rJHNldChlY2hvID0gVFJVRSkKCm9wdGlvbnMoc2NpcGVuPTk5OSkKCmxpYnJhcnkodGlkeXZlcnNlKQpsaWJyYXJ5KGphbml0b3IpCmBgYAoKYGBge3J9CiMgQ3VycmVudCByZWdpc3RyYXRpb25zCmN1cnJlbnRfcmVnaXN0cmF0aW9uc18yMDI0IDwtIHJlYWRfY3N2KCJkYXRhLzI0X3JlZ19jdXJyZW50X2NvcHkuY3N2IikgfD4KICBzZWxlY3QoLWMoMiwzLDQsNSw2LDcsOCw5LDEwLDExKSkgfD4gCiAgY2xlYW5fbmFtZXMoKQoKY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMjQgPC0gY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMjQgfD4gCiAgcmVuYW1lKGNvdW50eSA9IHgxKSB8PiAKICByZW5hbWUoZGVtMjQgPSBkZW1fMTIsIHJlcDI0ID0gcmVwXzEzLCBubG0yMyA9IG5sbV8xNCwgbGliMjQgPSBsaWJfMTUsIGdybjI0ID0gZ3JuXzE2LCB1bmFmMjQgPSB1bmFmXzE3LCBvdGgyNCA9IG90aF8xOCwgdG90YWwyNCA9IHRvdGFsXzE5KQpgYGAKCgo=</div>
+current_registrations_2022 &lt;- current_registrations_2022 |&gt; 
+  mutate(pct_DEM22 = (DEM22/TOTAL22)*100, pct_REP22 = (REP22/TOTAL22)*100, pct_UNAF22 = (UNAF22/TOTAL22)*100)
+
+compare_22_24 &lt;- current_registrations_2024 |&gt; 
+  left_join(current_registrations_2022, by=&#39;COUNTY&#39;) |&gt; 
+  mutate(DEM_pct_change = (DEM24-DEM22)/DEM22*100, REP_pct_change = (REP24-REP22)/REP22*100, UNAF_pct_change = (UNAF24-UNAF22)/UNAF22*100) |&gt; 
+  arrange(desc(UNAF_pct_change))</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="this-shows-there-was-an-8.6-increase-in-registered-democrats-a-5.7-increase-in-registered-republicans-and-a-nearly-40-increase-in-registered-unaffiliated-voters." class="section level3">
+<h3>This shows there was an 8.6% increase in registered Democrats, a
+5.7% increase in registered Republicans and a nearly 40% increase in
+registered unaffiliated voters.</h3>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMjQgPC0gY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMjQgfD4gXG4gIG11dGF0ZShwY3RfREVNMjQgPSAoREVNMjQvVE9UQUwyNCkqMTAwLCBwY3RfUkVQMjQgPSAoUkVQMjQvVE9UQUwyNCkqMTAwLCBwY3RfVU5BRjI0ID0gKFVOQUYyNC9UT1RBTDI0KSoxMDApXG5cbmN1cnJlbnRfcmVnaXN0cmF0aW9uc18yMDE0IDwtIGN1cnJlbnRfcmVnaXN0cmF0aW9uc18yMDE0IHw+IFxuICBtdXRhdGUocGN0X0RFTTE0ID0gKERFTTE0L1RPVEFMMTQpKjEwMCwgcGN0X1JFUDE0ID0gKFJFUDE0L1RPVEFMMTQpKjEwMCwgcGN0X1VOQUYxNCA9IChVTkFGMTQvVE9UQUwxNCkqMTAwKVxuXG5jb21wYXJlXzE0XzI0IDwtIGN1cnJlbnRfcmVnaXN0cmF0aW9uc18yMDI0IHw+IFxuICBsZWZ0X2pvaW4oY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMTQsIGJ5PSdDT1VOVFknKSB8PiBcbiAgbXV0YXRlKERFTV9wY3RfY2hhbmdlID0gKERFTTI0LURFTTE0KS9ERU0xNCoxMDAsIFJFUF9wY3RfY2hhbmdlID0gKFJFUDI0LVJFUDE0KS9SRVAxNCoxMDAsIFVOQUZfcGN0X2NoYW5nZSA9IChVTkFGMjQtVU5BRjE0KS9VTkFGMTQqMTAwKSB8PiBcbiAgYXJyYW5nZShkZXNjKFVOQUZfcGN0X2NoYW5nZSkpXG5gYGAifQ== -->
+<pre class="r"><code>current_registrations_2024 &lt;- current_registrations_2024 |&gt; 
+  mutate(pct_DEM24 = (DEM24/TOTAL24)*100, pct_REP24 = (REP24/TOTAL24)*100, pct_UNAF24 = (UNAF24/TOTAL24)*100)
+
+current_registrations_2014 &lt;- current_registrations_2014 |&gt; 
+  mutate(pct_DEM14 = (DEM14/TOTAL14)*100, pct_REP14 = (REP14/TOTAL14)*100, pct_UNAF14 = (UNAF14/TOTAL14)*100)
+
+compare_14_24 &lt;- current_registrations_2024 |&gt; 
+  left_join(current_registrations_2014, by=&#39;COUNTY&#39;) |&gt; 
+  mutate(DEM_pct_change = (DEM24-DEM14)/DEM14*100, REP_pct_change = (REP24-REP14)/REP14*100, UNAF_pct_change = (UNAF24-UNAF14)/UNAF14*100) |&gt; 
+  arrange(desc(UNAF_pct_change))</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="getting-percentages-for-the-other-dataframes" class="section level3">
+<h3>Getting percentages for the other dataframes!</h3>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMTYgPC0gY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMTYgfD4gXG4gIG11dGF0ZShwY3RfREVNMTYgPSAoREVNMTYvVE9UQUwxNikqMTAwLCBwY3RfUkVQMTYgPSAoUkVQMTYvVE9UQUwxNikqMTAwLCBwY3RfVU5BRjE2ID0gKFVOQUYxNi9UT1RBTDE2KSoxMDApXG5cbmN1cnJlbnRfcmVnaXN0cmF0aW9uc18yMDE4IDwtIGN1cnJlbnRfcmVnaXN0cmF0aW9uc18yMDE4IHw+IFxuICBtdXRhdGUocGN0X0RFTTE4ID0gKERFTTE4L1RPVEFMMTgpKjEwMCwgcGN0X1JFUDE4ID0gKFJFUDE4L1RPVEFMMTgpKjEwMCwgcGN0X1VOQUYxOCA9IChVTkFGMTgvVE9UQUwxOCkqMTAwKVxuXG5jdXJyZW50X3JlZ2lzdHJhdGlvbnNfMjAyMCA8LSBjdXJyZW50X3JlZ2lzdHJhdGlvbnNfMjAyMCB8PiBcbiAgbXV0YXRlKHBjdF9ERU0yMCA9IChERU0yMC9UT1RBTDIwKSoxMDAsIHBjdF9SRVAyMCA9IChSRVAyMC9UT1RBTDIwKSoxMDAsIHBjdF9VTkFGMjAgPSAoVU5BRjIwL1RPVEFMMjApKjEwMClcbmBgYCJ9 -->
+<pre class="r"><code>current_registrations_2016 &lt;- current_registrations_2016 |&gt; 
+  mutate(pct_DEM16 = (DEM16/TOTAL16)*100, pct_REP16 = (REP16/TOTAL16)*100, pct_UNAF16 = (UNAF16/TOTAL16)*100)
+
+current_registrations_2018 &lt;- current_registrations_2018 |&gt; 
+  mutate(pct_DEM18 = (DEM18/TOTAL18)*100, pct_REP18 = (REP18/TOTAL18)*100, pct_UNAF18 = (UNAF18/TOTAL18)*100)
+
+current_registrations_2020 &lt;- current_registrations_2020 |&gt; 
+  mutate(pct_DEM20 = (DEM20/TOTAL20)*100, pct_REP20 = (REP20/TOTAL20)*100, pct_UNAF20 = (UNAF20/TOTAL20)*100)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="trying-to-do-one-big-merge-for-comparison" class="section level3">
+<h3>Trying to do one big merge for comparison!</h3>
+</div>
+<div id="unaffiliated-percent-change-starts-being-the-largest-in-the-limited-years-i-am-looking-at-starting-at-2016-2018-percent-change." class="section level3">
+<h3>Unaffiliated percent change starts being the largest (in the limited
+years I am looking at) starting at 2016-2018 percent change.</h3>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29tcGFyZV9hbGwgPC0gY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMjQgfD4gXG4gIGxlZnRfam9pbihjdXJyZW50X3JlZ2lzdHJhdGlvbnNfMjAxNCwgYnk9J0NPVU5UWScpIHw+IFxuICBsZWZ0X2pvaW4oY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMTYsIGJ5PSdDT1VOVFknKSB8PiBcbiAgbGVmdF9qb2luKGN1cnJlbnRfcmVnaXN0cmF0aW9uc18yMDE4LCBieT0nQ09VTlRZJykgfD4gXG4gIGxlZnRfam9pbihjdXJyZW50X3JlZ2lzdHJhdGlvbnNfMjAyMCwgYnk9J0NPVU5UWScpIHw+IFxuICBsZWZ0X2pvaW4oY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMjIsIGJ5PSdDT1VOVFknKSB8PiBcbiAgbXV0YXRlKFxuICAgICMyMDE0LTIwMTYgcGN0X2NoYW5nZVxuICAgIERFTTE0MTZfcGN0X2NoYW5nZSA9IChERU0xNi1ERU0xNCkvREVNMTQqMTAwLCBSRVAxNDE2X3BjdF9jaGFuZ2UgPSAoUkVQMTYtUkVQMTQpL1JFUDE0KjEwMCwgVU5BRjE0MTZfcGN0X2NoYW5nZSA9IChVTkFGMTYtVU5BRjE0KS9VTkFGMTQqMTAwLFxuICAgICMyMDE2LTIwMTggcGN0X2NoYW5nZVxuICAgIERFTTE2MThfcGN0X2NoYW5nZSA9IChERU0xOC1ERU0xNikvREVNMTYqMTAwLCBSRVAxNjE4X3BjdF9jaGFuZ2UgPSAoUkVQMTgtUkVQMTYpL1JFUDE2KjEwMCwgVU5BRjE2MThfcGN0X2NoYW5nZSA9IChVTkFGMTgtVU5BRjE2KS9VTkFGMTYqMTAwLFxuICAgICMyMDE4LTIwMjAgcGN0X2NoYW5nZVxuICAgIERFTTE4MjBfcGN0X2NoYW5nZSA9IChERU0yMC1ERU0xOCkvREVNMTgqMTAwLCBSRVAxODIwX3BjdF9jaGFuZ2UgPSAoUkVQMjAtUkVQMTgpL1JFUDE4KjEwMCwgVU5BRjE4MjBfcGN0X2NoYW5nZSA9IChVTkFGMjAtVU5BRjE4KS9VTkFGMTgqMTAwLFxuICAgICMyMDIwLTIwMjIgcGN0X2NoYW5nZVxuICAgIERFTTIwMjJfcGN0X2NoYW5nZSA9IChERU0yMi1ERU0yMCkvREVNMjAqMTAwLCBSRVAyMDIyX3BjdF9jaGFuZ2UgPSAoUkVQMjItUkVQMjApL1JFUDIwKjEwMCwgVU5BRjIwMjJfcGN0X2NoYW5nZSA9IChVTkFGMjItVU5BRjIwKS9VTkFGMjAqMTAwLFxuICAgICMyMDIyLTIwMjQgcGN0X2NoYW5nZVxuICAgIERFTTIyMjRfcGN0X2NoYW5nZSA9IChERU0yNC1ERU0yMikvREVNMjIqMTAwLCBSRVAyMjI0X3BjdF9jaGFuZ2UgPSAoUkVQMjQtUkVQMjIpL1JFUDIyKjEwMCwgVU5BRjIyMjRfcGN0X2NoYW5nZSA9IChVTkFGMjQtVU5BRjIyKS9VTkFGMjIqMTAwLFxuICAgICMyMDE0LTIwMjQgcGN0X2NoYW5nZVxuICAgIERFTTE0MjRfcGN0X2NoYW5nZSA9IChERU0yNC1ERU0xNCkvREVNMTQqMTAwLCBSRVAxNDI0X3BjdF9jaGFuZ2UgPSAoUkVQMjQtUkVQMTQpL1JFUDE0KjEwMCwgVU5BRjE0MjRfcGN0X2NoYW5nZSA9IChVTkFGMjQtVU5BRjE0KS9VTkFGMTQqMTAwKVxuICBcbmNsZWFuZXJfY29tcGFyZV9hbGwgPC0gY29tcGFyZV9hbGwgfD4gXG4gIHNlbGVjdChDT1VOVFksIERFTTE0MTZfcGN0X2NoYW5nZSwgUkVQMTQxNl9wY3RfY2hhbmdlLCBVTkFGMTQxNl9wY3RfY2hhbmdlLCBERU0xNjE4X3BjdF9jaGFuZ2UsIFJFUDE2MThfcGN0X2NoYW5nZSwgVU5BRjE2MThfcGN0X2NoYW5nZSwgREVNMTgyMF9wY3RfY2hhbmdlLCBSRVAxODIwX3BjdF9jaGFuZ2UsIFVOQUYxODIwX3BjdF9jaGFuZ2UsICBERU0yMDIyX3BjdF9jaGFuZ2UsIFJFUDIwMjJfcGN0X2NoYW5nZSwgVU5BRjIwMjJfcGN0X2NoYW5nZSwgREVNMjIyNF9wY3RfY2hhbmdlLCBSRVAyMjI0X3BjdF9jaGFuZ2UsIFVOQUYyMjI0X3BjdF9jaGFuZ2UsIERFTTE0MjRfcGN0X2NoYW5nZSwgUkVQMTQyNF9wY3RfY2hhbmdlLCBVTkFGMTQyNF9wY3RfY2hhbmdlLCBUT1RBTDI0KVxuYGBgIn0= -->
+<pre class="r"><code>compare_all &lt;- current_registrations_2024 |&gt; 
+  left_join(current_registrations_2014, by=&#39;COUNTY&#39;) |&gt; 
+  left_join(current_registrations_2016, by=&#39;COUNTY&#39;) |&gt; 
+  left_join(current_registrations_2018, by=&#39;COUNTY&#39;) |&gt; 
+  left_join(current_registrations_2020, by=&#39;COUNTY&#39;) |&gt; 
+  left_join(current_registrations_2022, by=&#39;COUNTY&#39;) |&gt; 
+  mutate(
+    #2014-2016 pct_change
+    DEM1416_pct_change = (DEM16-DEM14)/DEM14*100, REP1416_pct_change = (REP16-REP14)/REP14*100, UNAF1416_pct_change = (UNAF16-UNAF14)/UNAF14*100,
+    #2016-2018 pct_change
+    DEM1618_pct_change = (DEM18-DEM16)/DEM16*100, REP1618_pct_change = (REP18-REP16)/REP16*100, UNAF1618_pct_change = (UNAF18-UNAF16)/UNAF16*100,
+    #2018-2020 pct_change
+    DEM1820_pct_change = (DEM20-DEM18)/DEM18*100, REP1820_pct_change = (REP20-REP18)/REP18*100, UNAF1820_pct_change = (UNAF20-UNAF18)/UNAF18*100,
+    #2020-2022 pct_change
+    DEM2022_pct_change = (DEM22-DEM20)/DEM20*100, REP2022_pct_change = (REP22-REP20)/REP20*100, UNAF2022_pct_change = (UNAF22-UNAF20)/UNAF20*100,
+    #2022-2024 pct_change
+    DEM2224_pct_change = (DEM24-DEM22)/DEM22*100, REP2224_pct_change = (REP24-REP22)/REP22*100, UNAF2224_pct_change = (UNAF24-UNAF22)/UNAF22*100,
+    #2014-2024 pct_change
+    DEM1424_pct_change = (DEM24-DEM14)/DEM14*100, REP1424_pct_change = (REP24-REP14)/REP14*100, UNAF1424_pct_change = (UNAF24-UNAF14)/UNAF14*100)
+  
+cleaner_compare_all &lt;- compare_all |&gt; 
+  select(COUNTY, DEM1416_pct_change, REP1416_pct_change, UNAF1416_pct_change, DEM1618_pct_change, REP1618_pct_change, UNAF1618_pct_change, DEM1820_pct_change, REP1820_pct_change, UNAF1820_pct_change,  DEM2022_pct_change, REP2022_pct_change, UNAF2022_pct_change, DEM2224_pct_change, REP2224_pct_change, UNAF2224_pct_change, DEM1424_pct_change, REP1424_pct_change, UNAF1424_pct_change, TOTAL24)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="looking-by-county" class="section level3">
+<h3>Looking by county!</h3>
+</div>
+<div id="prince-georges-county-had-a-73-increase-in-unaffiliated-registered-voters-compared-to-only-an-about-6.5-increase-in-registered-democrats-and-a-4.2-decrease-in-registered-republicans." class="section level3">
+<h3>Prince George’s County had a 73% increase in unaffiliated registered
+voters, compared to only an about 6.5% increase in registered Democrats
+and a 4.2% decrease in registered Republicans.</h3>
+</div>
+<div id="frederick-which-had-increases-all-around-had-a-substantially-higher-increase-in-registered-unaffiliated-voters-also." class="section level3">
+<h3>Frederick, which had increases all around, had a substantially
+higher increase in registered unaffiliated voters also.</h3>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY2xlYW5lcl9jb21wYXJlX2FsbCB8PiBcbiAgYXJyYW5nZShkZXNjKFVOQUYxNDI0X3BjdF9jaGFuZ2UpKXw+IFxuICBzZWxlY3QoQ09VTlRZLCBVTkFGMTQyNF9wY3RfY2hhbmdlLCBERU0xNDI0X3BjdF9jaGFuZ2UsIFJFUDE0MjRfcGN0X2NoYW5nZSwgVE9UQUwyNCl8PiBcbiAgZmlsdGVyKFRPVEFMMjQgPiAxMDAwMDApXG5gYGAifQ== -->
+<pre class="r"><code>cleaner_compare_all |&gt; 
+  arrange(desc(UNAF1424_pct_change))|&gt; 
+  select(COUNTY, UNAF1424_pct_change, DEM1424_pct_change, REP1424_pct_change, TOTAL24)|&gt; 
+  filter(TOTAL24 &gt; 100000)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibnJvdyI6MTIsIm5jb2wiOjUsInN1bW1hcnkiOnsiQSB0aWJibGUiOlsiMTIgw5cgNSJdfX0sInJkZiI6Ikg0c0lBQUFBQUFBQUF3dHlpVERtaXVCaVlHQmdabUJoWW1SZ1pnVXlHVmhEUTl4MExSaUFJa0FPSXdNTEF5ZUlyZ0FxRWdiSkFyRUFFUE5BSlhnQ2d2UVUzRjM5Zzl4ZDFZT2hZcHh1UWE0dXJrR2V6dDVRQVhabkQ4Y2dIMWVZUER1UTUrWWY1QUxsc25uNGh6dkNlZXpPamtGQi9qNCtVQzZ2azZOUGlLZXZmNUNyZ3JPL0hsU1FOY1EveEJHbWdnOUpoV2RJSk14ZGpuNStyZ3FPUWFGK0xxNHdsVnpoanNFZW5uN3VJZjUrTUJGZmY3OFFkMzlmMTZCSWtFa2dmUTVCTmpaUFhlMmFISHlGZEN4MWVrMGRQSysvYzFwNlJjN0I3VlhRdXJPZTV4M2M1aVdjTkY3UzZlRHl6cWE5TTZqSndlWGgrZm0vOUl3Y25OZFZhcnk2YzlMQnVlWko5UCtPVUFmbktoNk5iT2xWRGc2SjB6N29sWDkyTVBCODQvZThXUUZ1aitUcGh4TnF6UU1jWEwvbHpaM0lYdXhnL2U3ZnJnYlgvUTRNMy9XMmNUeis1R0J2MmxKZm5yVE1RWkw1b2FOdDRCd0h6bFovalpWYXJ4d1VMZlRpcCtwcjJQODdkR3ptUXFsNkIwUExmVEpQdVowT0NCeFo4MlhHakUwT1dwMEtaOFI2MVdIMkhCRDQzQjExVmV5TWcvcmhsZFhWMHJFSGhIM2NlYWRtTDNBd3RPWHJzNHE2ZmtBcmxjVXJWWnpkUWQ3aVJaSEdhMk1Ic1NOekU0L1dpanFJSFo5dTFwR2NkSUJydWZPekZhZjNPL0Q5ZlhTaHBuU0pnOWFuZ2o5OTlXY1BHS3VaeFM4UU9RMnp4MUZwTXlnbE1UaHk4cjRBMFE3Lzlod0E4OWt2SllCcFhnMHczK0gveFFBd1gzRlpINWdPVUxFQ1NUaEtwUE9BK1pMeFQ4RHFmdXlCNkZObE9jVUFCaWdKa2pVdk1UZTFHSm9ZV1dFcHlkay8xQStlQklSRC9SemRERTJNVE9JTGtrdmlrek1TODlKVG9WSkNMcTYrT0dTQ1hBT3d5N0NERTUyUkNacERPSXZ5eS9WZ2p1RUZZcVlHSVBILy8vOHY2QzVPemtrc2hya1lKc2lWa2xpU3FKZFdCTlFQNVAxRDA4S2VYMUNTbVo4SDFNUUV5bnRzYUpvWmk5QUVCRXJ6UUM1SjBVM09LTTNMMWpVMFFwTm5Mc2hMQjFrS0ZvSUFYaWliQjRuTkNuRUcwMytvZGpaWThLYm1wV2Ztd2NLRE5TY3hLVFVIWm5KS2Foa3NQd0lEQkJ3ZWVnVkZtWGtsTUk4Q1JZdjFTdkpMRW1GYXVKTHpjMkFpWUs4ei9BTUEzVkIySXBFRUFBQT0ifQ== -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["COUNTY"],"name":[1],"type":["chr"],"align":["left"]},{"label":["UNAF1424_pct_change"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["DEM1424_pct_change"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["REP1424_pct_change"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["TOTAL24"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"PR. GEORGE'S","2":"72.94122","3":"6.449103","4":"-4.237836","5":"612741"},{"1":"FREDERICK","2":"58.14197","3":"43.925251","4":"11.882152","5":"205245"},{"1":"CHARLES","2":"51.68696","3":"27.933574","4":"-4.824490","5":"125900"},{"1":"HARFORD","2":"45.83065","3":"2.120695","4":"17.238503","5":"195148"},{"1":"HOWARD","2":"45.23733","3":"31.209053","4":"-13.197298","5":"238872"},{"1":"CARROLL","2":"41.86122","3":"6.253789","4":"7.805574","5":"130325"},{"1":"BALTIMORE CO.","2":"41.76415","3":"3.190092","4":"5.692007","5":"578375"},{"1":"TOTAL","2":"39.36307","3":"8.609729","4":"5.694913","5":"4231403"},{"1":"BALTIMORE CITY","2":"38.97572","3":"1.922553","4":"-3.331672","5":"399811"},{"1":"ANNE ARUNDEL","2":"38.95350","3":"17.225557","4":"3.873968","5":"415737"},{"1":"WASHINGTON","2":"32.76242","3":"-4.192066","4":"13.473518","5":"101318"},{"1":"MONTGOMERY","2":"16.28876","3":"13.267828","4":"-19.149267","5":"688741"}],"options":{"columns":{"min":{},"max":[10],"total":[5]},"rows":{"min":[10],"max":[10],"total":[12]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>```</p>
+<!-- rnb-text-end -->
+</div>
+
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiVW5hZmZpbGlhdGVkIFZvdGVycyIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKYGBge3Igc2V0dXAsIGluY2x1ZGU9RkFMU0V9CmtuaXRyOjpvcHRzX2NodW5rJHNldChlY2hvID0gVFJVRSkKCm9wdGlvbnMoc2NpcGVuPTk5OSkKCmxpYnJhcnkodGlkeXZlcnNlKQpsaWJyYXJ5KGphbml0b3IpCmBgYAoKYGBge3J9CiMgMjAyNCBjdXJyZW50IHJlZ2lzdHJhdGlvbnMKY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMjQgPC0gcmVhZF9jc3YoIjI0X3JlZ19jdXJyZW50X2NvcHkuY3N2IikKY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMjQgPC1jdXJyZW50X3JlZ2lzdHJhdGlvbnNfMjAyNFssLWMoMSwzLDQsNSw2LDcsOCw5LDEwLDExLDEyLDEzLDE0LDE1LDI0LDI1LDI2LDI3KV0gfD4KICBmaWx0ZXIoIWlzLm5hKC4uLjIpKSB8PgogIHJlbmFtZShDT1VOVFk9Li4uMiwgREVNMjQ9REVNLi4uMTYsIFJFUDI0PVJFUC4uLjE3LCBOTE0yND1OTE0uLi4xOCwgTElCMjQ9TElCLi4uMTksIEdSTjI0PUdSTi4uLjIwLCBVTkFGMjQ9VU5BRi4uLjIxLCBPVEgyND1PVEguLi4yMiwgVE9UQUwyND1UT1RBTC4uLjIzKQpgYGAKCmBgYHtyfQojIDIwMjIgY3VycmVudCByZWdpc3RyYXRpb25zCmN1cnJlbnRfcmVnaXN0cmF0aW9uc18yMDIyIDwtIHJlYWRfY3N2KCIyMl9yZWdfY3VycmVudF9jb3B5LmNzdiIpCmN1cnJlbnRfcmVnaXN0cmF0aW9uc18yMDIyIDwtY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMjJbLC1jKDIsMyw0LDUsNiw3LDgsOSwxMCwxMSldICB8PgogcmVuYW1lKENPVU5UWT0uLi4xLCBERU0yMj1ERU0uLi4xMiwgUkVQMjI9UkVQLi4uMTMsIEdSTjIyPUdSTi4uLjE0LCBMSUIyMj1MSUIuLi4xNSwgV0NQMjI9V0NQLi4uMTYsIFVOQUYyMj1VTkFGLi4uMTcsIE9USDIyPU9USC4uLjE4LCBUT1RBTDIyPVRPVEFMLi4uMTkpCmBgYAoKYGBge3J9CiMgMjAyMCBjdXJyZW50IHJlZ2lzdHJhdGlvbnMKY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMjAgPC0gcmVhZF9jc3YoIjIwX3JlZ19jdXJyZW50LmNzdiIpCmBgYAoKYGBge3J9CiMgMjAxOCBjdXJyZW50IHJlZ2lzdHJhdGlvbnMKY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMTggPC0gcmVhZF9jc3YoIjE4X3JlZ19jdXJyZW50LmNzdiIpCmBgYAoKYGBge3J9CiMgMjAxNiBjdXJyZW50IHJlZ2lzdHJhdGlvbnMKY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMTYgPC0gcmVhZF9jc3YoIjE2X3JlZ19jdXJyZW50LmNzdiIpCmBgYAoKYGBge3J9CiMgMjAxNCBjdXJyZW50IHJlZ2lzdHJhdGlvbnMKY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMTQgPC0gcmVhZF9jc3YoIjE0X3JlZ19jdXJyZW50LmNzdiIpCmBgYAoKIyMjIFRoaXMgc2hvd3Mgd2FzIGEgLTEuNCUgY2hhbmdlIGluIERlbW9jcmF0aWMgdm90ZXJzLCBhIDElIGluY3JlYXNlIGluIFJlcHVibGljYW4gdm90ZXJzIGFuZCBhIDkuOCUgaW5jcmVhc2UgaW4gdW5hZmZpbGlhdGVkIHZvdGVycyBiZXR3ZWVuIFNlcHRlbWJlciAyMDIyIGFuZCBTZXB0ZW1iZXIgMjAyNC4gSSBhbHNvIHNlZSB0aGF0IG1vcmUgdGhhbiAyMSUgb2YgTWFyeWxhbmQncyB2b3RlcnMgYXJlIHJlZ2lzdGVyZWQgYXMgdW5hZmZpbGlhdGVkLiAKCmBgYHtyfQpjdXJyZW50X3JlZ2lzdHJhdGlvbnNfMjAyNCA8LSBjdXJyZW50X3JlZ2lzdHJhdGlvbnNfMjAyNCB8PiAKICBtdXRhdGUocGN0X0RFTTI0ID0gKERFTTI0L1RPVEFMMjQpKjEwMCwgcGN0X1JFUDI0ID0gKFJFUDI0L1RPVEFMMjQpKjEwMCwgcGN0X1VOQUYyNCA9IChVTkFGMjQvVE9UQUwyNCkqMTAwKQoKY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMjIgPC0gY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMjIgfD4gCiAgbXV0YXRlKHBjdF9ERU0yMiA9IChERU0yMi9UT1RBTDIyKSoxMDAsIHBjdF9SRVAyMiA9IChSRVAyMi9UT1RBTDIyKSoxMDAsIHBjdF9VTkFGMjIgPSAoVU5BRjIyL1RPVEFMMjIpKjEwMCkKCmNvbXBhcmVfMjJfMjQgPC0gY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMjQgfD4gCiAgbGVmdF9qb2luKGN1cnJlbnRfcmVnaXN0cmF0aW9uc18yMDIyLCBieT0nQ09VTlRZJykgfD4gCiAgbXV0YXRlKERFTV9wY3RfY2hhbmdlID0gKERFTTI0LURFTTIyKS9ERU0yMioxMDAsIFJFUF9wY3RfY2hhbmdlID0gKFJFUDI0LVJFUDIyKS9SRVAyMioxMDAsIFVOQUZfcGN0X2NoYW5nZSA9IChVTkFGMjQtVU5BRjIyKS9VTkFGMjIqMTAwKSB8PiAKICBhcnJhbmdlKGRlc2MoVU5BRl9wY3RfY2hhbmdlKSkKYGBgCgojIyMgVGhpcyBzaG93cyB0aGVyZSB3YXMgYW4gOC42JSBpbmNyZWFzZSBpbiByZWdpc3RlcmVkIERlbW9jcmF0cywgYSA1LjclIGluY3JlYXNlIGluIHJlZ2lzdGVyZWQgUmVwdWJsaWNhbnMgYW5kIGEgbmVhcmx5IDQwJSBpbmNyZWFzZSBpbiByZWdpc3RlcmVkIHVuYWZmaWxpYXRlZCB2b3RlcnMuCgpgYGB7cn0KY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMjQgPC0gY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMjQgfD4gCiAgbXV0YXRlKHBjdF9ERU0yNCA9IChERU0yNC9UT1RBTDI0KSoxMDAsIHBjdF9SRVAyNCA9IChSRVAyNC9UT1RBTDI0KSoxMDAsIHBjdF9VTkFGMjQgPSAoVU5BRjI0L1RPVEFMMjQpKjEwMCkKCmN1cnJlbnRfcmVnaXN0cmF0aW9uc18yMDE0IDwtIGN1cnJlbnRfcmVnaXN0cmF0aW9uc18yMDE0IHw+IAogIG11dGF0ZShwY3RfREVNMTQgPSAoREVNMTQvVE9UQUwxNCkqMTAwLCBwY3RfUkVQMTQgPSAoUkVQMTQvVE9UQUwxNCkqMTAwLCBwY3RfVU5BRjE0ID0gKFVOQUYxNC9UT1RBTDE0KSoxMDApCgpjb21wYXJlXzE0XzI0IDwtIGN1cnJlbnRfcmVnaXN0cmF0aW9uc18yMDI0IHw+IAogIGxlZnRfam9pbihjdXJyZW50X3JlZ2lzdHJhdGlvbnNfMjAxNCwgYnk9J0NPVU5UWScpIHw+IAogIG11dGF0ZShERU1fcGN0X2NoYW5nZSA9IChERU0yNC1ERU0xNCkvREVNMTQqMTAwLCBSRVBfcGN0X2NoYW5nZSA9IChSRVAyNC1SRVAxNCkvUkVQMTQqMTAwLCBVTkFGX3BjdF9jaGFuZ2UgPSAoVU5BRjI0LVVOQUYxNCkvVU5BRjE0KjEwMCkgfD4gCiAgYXJyYW5nZShkZXNjKFVOQUZfcGN0X2NoYW5nZSkpCmBgYAoKIyMjIEdldHRpbmcgcGVyY2VudGFnZXMgZm9yIHRoZSBvdGhlciBkYXRhZnJhbWVzIQoKYGBge3J9CmN1cnJlbnRfcmVnaXN0cmF0aW9uc18yMDE2IDwtIGN1cnJlbnRfcmVnaXN0cmF0aW9uc18yMDE2IHw+IAogIG11dGF0ZShwY3RfREVNMTYgPSAoREVNMTYvVE9UQUwxNikqMTAwLCBwY3RfUkVQMTYgPSAoUkVQMTYvVE9UQUwxNikqMTAwLCBwY3RfVU5BRjE2ID0gKFVOQUYxNi9UT1RBTDE2KSoxMDApCgpjdXJyZW50X3JlZ2lzdHJhdGlvbnNfMjAxOCA8LSBjdXJyZW50X3JlZ2lzdHJhdGlvbnNfMjAxOCB8PiAKICBtdXRhdGUocGN0X0RFTTE4ID0gKERFTTE4L1RPVEFMMTgpKjEwMCwgcGN0X1JFUDE4ID0gKFJFUDE4L1RPVEFMMTgpKjEwMCwgcGN0X1VOQUYxOCA9IChVTkFGMTgvVE9UQUwxOCkqMTAwKQoKY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMjAgPC0gY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMjAgfD4gCiAgbXV0YXRlKHBjdF9ERU0yMCA9IChERU0yMC9UT1RBTDIwKSoxMDAsIHBjdF9SRVAyMCA9IChSRVAyMC9UT1RBTDIwKSoxMDAsIHBjdF9VTkFGMjAgPSAoVU5BRjIwL1RPVEFMMjApKjEwMCkKYGBgCgojIyMgVHJ5aW5nIHRvIGRvIG9uZSBiaWcgbWVyZ2UgZm9yIGNvbXBhcmlzb24hCgojIyMgVW5hZmZpbGlhdGVkIHBlcmNlbnQgY2hhbmdlIHN0YXJ0cyBiZWluZyB0aGUgbGFyZ2VzdCAoaW4gdGhlIGxpbWl0ZWQgeWVhcnMgSSBhbSBsb29raW5nIGF0KSBzdGFydGluZyBhdCAyMDE2LTIwMTggcGVyY2VudCBjaGFuZ2UuCgpgYGB7cn0KY29tcGFyZV9hbGwgPC0gY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMjQgfD4gCiAgbGVmdF9qb2luKGN1cnJlbnRfcmVnaXN0cmF0aW9uc18yMDE0LCBieT0nQ09VTlRZJykgfD4gCiAgbGVmdF9qb2luKGN1cnJlbnRfcmVnaXN0cmF0aW9uc18yMDE2LCBieT0nQ09VTlRZJykgfD4gCiAgbGVmdF9qb2luKGN1cnJlbnRfcmVnaXN0cmF0aW9uc18yMDE4LCBieT0nQ09VTlRZJykgfD4gCiAgbGVmdF9qb2luKGN1cnJlbnRfcmVnaXN0cmF0aW9uc18yMDIwLCBieT0nQ09VTlRZJykgfD4gCiAgbGVmdF9qb2luKGN1cnJlbnRfcmVnaXN0cmF0aW9uc18yMDIyLCBieT0nQ09VTlRZJykgfD4gCiAgbXV0YXRlKAogICAgIzIwMTQtMjAxNiBwY3RfY2hhbmdlCiAgICBERU0xNDE2X3BjdF9jaGFuZ2UgPSAoREVNMTYtREVNMTQpL0RFTTE0KjEwMCwgUkVQMTQxNl9wY3RfY2hhbmdlID0gKFJFUDE2LVJFUDE0KS9SRVAxNCoxMDAsIFVOQUYxNDE2X3BjdF9jaGFuZ2UgPSAoVU5BRjE2LVVOQUYxNCkvVU5BRjE0KjEwMCwKICAgICMyMDE2LTIwMTggcGN0X2NoYW5nZQogICAgREVNMTYxOF9wY3RfY2hhbmdlID0gKERFTTE4LURFTTE2KS9ERU0xNioxMDAsIFJFUDE2MThfcGN0X2NoYW5nZSA9IChSRVAxOC1SRVAxNikvUkVQMTYqMTAwLCBVTkFGMTYxOF9wY3RfY2hhbmdlID0gKFVOQUYxOC1VTkFGMTYpL1VOQUYxNioxMDAsCiAgICAjMjAxOC0yMDIwIHBjdF9jaGFuZ2UKICAgIERFTTE4MjBfcGN0X2NoYW5nZSA9IChERU0yMC1ERU0xOCkvREVNMTgqMTAwLCBSRVAxODIwX3BjdF9jaGFuZ2UgPSAoUkVQMjAtUkVQMTgpL1JFUDE4KjEwMCwgVU5BRjE4MjBfcGN0X2NoYW5nZSA9IChVTkFGMjAtVU5BRjE4KS9VTkFGMTgqMTAwLAogICAgIzIwMjAtMjAyMiBwY3RfY2hhbmdlCiAgICBERU0yMDIyX3BjdF9jaGFuZ2UgPSAoREVNMjItREVNMjApL0RFTTIwKjEwMCwgUkVQMjAyMl9wY3RfY2hhbmdlID0gKFJFUDIyLVJFUDIwKS9SRVAyMCoxMDAsIFVOQUYyMDIyX3BjdF9jaGFuZ2UgPSAoVU5BRjIyLVVOQUYyMCkvVU5BRjIwKjEwMCwKICAgICMyMDIyLTIwMjQgcGN0X2NoYW5nZQogICAgREVNMjIyNF9wY3RfY2hhbmdlID0gKERFTTI0LURFTTIyKS9ERU0yMioxMDAsIFJFUDIyMjRfcGN0X2NoYW5nZSA9IChSRVAyNC1SRVAyMikvUkVQMjIqMTAwLCBVTkFGMjIyNF9wY3RfY2hhbmdlID0gKFVOQUYyNC1VTkFGMjIpL1VOQUYyMioxMDAsCiAgICAjMjAxNC0yMDI0IHBjdF9jaGFuZ2UKICAgIERFTTE0MjRfcGN0X2NoYW5nZSA9IChERU0yNC1ERU0xNCkvREVNMTQqMTAwLCBSRVAxNDI0X3BjdF9jaGFuZ2UgPSAoUkVQMjQtUkVQMTQpL1JFUDE0KjEwMCwgVU5BRjE0MjRfcGN0X2NoYW5nZSA9IChVTkFGMjQtVU5BRjE0KS9VTkFGMTQqMTAwKQogIApjbGVhbmVyX2NvbXBhcmVfYWxsIDwtIGNvbXBhcmVfYWxsIHw+IAogIHNlbGVjdChDT1VOVFksIERFTTE0MTZfcGN0X2NoYW5nZSwgUkVQMTQxNl9wY3RfY2hhbmdlLCBVTkFGMTQxNl9wY3RfY2hhbmdlLCBERU0xNjE4X3BjdF9jaGFuZ2UsIFJFUDE2MThfcGN0X2NoYW5nZSwgVU5BRjE2MThfcGN0X2NoYW5nZSwgREVNMTgyMF9wY3RfY2hhbmdlLCBSRVAxODIwX3BjdF9jaGFuZ2UsIFVOQUYxODIwX3BjdF9jaGFuZ2UsICBERU0yMDIyX3BjdF9jaGFuZ2UsIFJFUDIwMjJfcGN0X2NoYW5nZSwgVU5BRjIwMjJfcGN0X2NoYW5nZSwgREVNMjIyNF9wY3RfY2hhbmdlLCBSRVAyMjI0X3BjdF9jaGFuZ2UsIFVOQUYyMjI0X3BjdF9jaGFuZ2UsIERFTTE0MjRfcGN0X2NoYW5nZSwgUkVQMTQyNF9wY3RfY2hhbmdlLCBVTkFGMTQyNF9wY3RfY2hhbmdlLCBUT1RBTDI0KQpgYGAKCiMjIyBMb29raW5nIGJ5IGNvdW50eSEKCiMjIyBQcmluY2UgR2VvcmdlJ3MgQ291bnR5IGhhZCBhIDczJSBpbmNyZWFzZSBpbiB1bmFmZmlsaWF0ZWQgcmVnaXN0ZXJlZCB2b3RlcnMsIGNvbXBhcmVkIHRvIG9ubHkgYW4gYWJvdXQgNi41JSBpbmNyZWFzZSBpbiByZWdpc3RlcmVkIERlbW9jcmF0cyBhbmQgYSA0LjIlIGRlY3JlYXNlIGluIHJlZ2lzdGVyZWQgUmVwdWJsaWNhbnMuIAoKIyMjIEZyZWRlcmljaywgd2hpY2ggaGFkIGluY3JlYXNlcyBhbGwgYXJvdW5kLCBoYWQgYSBzdWJzdGFudGlhbGx5IGhpZ2hlciBpbmNyZWFzZSBpbiByZWdpc3RlcmVkIHVuYWZmaWxpYXRlZCB2b3RlcnMgYWxzby4gCgpgYGB7cn0KY2xlYW5lcl9jb21wYXJlX2FsbCB8PiAKICBhcnJhbmdlKGRlc2MoVU5BRjE0MjRfcGN0X2NoYW5nZSkpfD4gCiAgc2VsZWN0KENPVU5UWSwgVU5BRjE0MjRfcGN0X2NoYW5nZSwgREVNMTQyNF9wY3RfY2hhbmdlLCBSRVAxNDI0X3BjdF9jaGFuZ2UsIFRPVEFMMjQpfD4gCiAgZmlsdGVyKFRPVEFMMjQgPiAxMDAwMDApCmBgYApgYGAKCg==</div>
 
 
 
