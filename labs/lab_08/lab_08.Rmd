@@ -76,7 +76,7 @@ md_absenetee_ballots_pct_top_10 |>
   geom_bar(aes(x=reorder(county_name, PCT), weight=PCT))+
   coord_flip()+
   labs(
-    title="Worcester highest % absentee ballots returned of total sent 10/23/2023",
+    title="Worcester had highest % of absenetee ballots returned of ballots sent",
     y = "Percentage",
     x = "County",
     caption = "Source: Maryland State Board of Elections")
@@ -111,7 +111,7 @@ pct_bottom_10_dem_rep |>
   geom_bar(aes(x=reorder(county_name, -DEM_PCT), weight=DEM_PCT))+
   coord_flip()+
   labs(
-    title="Balt City has lowest % absentee ballots returned by Dems 10/23/2023",
+    title="Baltimore City had lowest % of ballots returned by Democrats",
     y = "Percentage",
     x = "County",
     caption = "Source: Maryland State Board of Elections")
@@ -156,9 +156,20 @@ Follow these steps:
 4. Add a line of fit to the plot using geom_smooth (https://ggplot2.tidyverse.org/reference/geom_smooth.html#ref-examples). Specify the method as lm.
 5. In the answer space below, describe what you see. In a general sense, how would you report out the main point(s) of this chart? Are there counties that seem to be over or under-performing in relation to the overall trend?
 
-**A4.** 
+**A4.** The main points are that the number of ballots received generally increases with the number of ballots sent. I also think it is notable how clustered together some counties are. Baltimore City was lower than I thought it would be on both axes. Anne Arundel is overperforming the overall trend slightly and Montgomery and Baltimore City are underperforming slightly. 
 
 ```{r}
+library(plotly)
 
+p <- md_absenetee_ballots_pct |>
+  ggplot(aes(x = total_sent, y = total_received, label = county_name)) +
+  geom_point() +
+  labs(title = "Most ballots sent and returned in Montgomery County",
+       x = "Number of Ballots Sent",
+       y = "Number of Ballots Returned")+
+    geom_smooth(method=lm)
+
+
+ggplotly(p, tooltip = "label")
   
 ```
