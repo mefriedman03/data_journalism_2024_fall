@@ -619,3 +619,10 @@ glimpse(maryland_zcta)
 ```
 
 ### Look in Lab 5 for more helps with joins. 
+
+### Lab 6 is Tabula 
+
+### Lab 7 is Census/API
+
+### Lab 8 is starting out with data visualizations.
+
