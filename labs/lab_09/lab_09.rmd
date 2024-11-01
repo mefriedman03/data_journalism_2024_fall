@@ -112,6 +112,9 @@ Compare the two maps. What do you think are the most interesting story ideas in 
 
 ### Win Red Chart URL: https://datawrapper.dwcdn.net/mDM0M/2/
 
+### The story idea that most jumps out is that the highest number of donations for both come from the same area. This is despite the Act Blue donation rate being much higher in that area. I would also be interested in learning about the bluer zip codes in the Win Red chart that are further out from Montgomery County. One story idea that could be interesting is looking to Act Blue donators in the Potomac, Bethesda, and Chevy Chase zip codes that could be neighbors with Win Red donators. It could also be cool to do stories on the areas with high donation rates that do not have high total donation amounts.
+
+
 ```{r}
 
 md_winred_zip_totals <- read_csv("data/md_winred_zip_totals.csv")
@@ -132,11 +135,11 @@ md_zip_data_new$zip <- as.character(md_zip_data_new$zip)
 md_winred_zip_totals$zip <- as.character(md_winred_zip_totals$zip)
 
 zip_dem <- inner_join(md_actblue_zip_totals, md_zip_data_new, by = "zip") |>
-  mutate(donation_rate_per_1000 = (donations / populationtotal) * 1000)
+  mutate(donation_rate_per_1000 = (donations / populationtotal)*1000)
 
 
 zip_rep <- inner_join(md_winred_zip_totals, md_zip_data_new, by = "zip") |>
-    mutate(donation_rate_per_1000 = (donations / populationtotal) * 1000)
+    mutate(donation_rate_per_1000 = (donations / populationtotal)*1000)
 
 write_csv(zip_dem, "data/zip_dem.csv")
 
