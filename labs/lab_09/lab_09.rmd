@@ -108,20 +108,38 @@ Compare the two maps. What do you think are the most interesting story ideas in 
 
 **A3.** 
 
+### Act Blue Chart URL: https://datawrapper.dwcdn.net/Uy7OD/3/
+
+### Win Red Chart URL: https://datawrapper.dwcdn.net/mDM0M/2/
+
 ```{r}
 
 md_winred_zip_totals <- read_csv("data/md_winred_zip_totals.csv")
+  
 md_actblue_zip_totals <- read_csv("data/md_actblue_zip_totals.csv")
 
 md_zip_data <- get_acs(geography="zcta", 
                               variables = c(totalpopulation="B01003_001"),
                               state='MD',
                               year=2019)
+
 md_zip_data_new <- md_zip_data |>
-    select(zip = GEOID, total=estimate)
+    rename(zip = GEOID, populationtotal=estimate) 
 
 
+md_actblue_zip_totals$zip <- as.character(md_actblue_zip_totals$zip)
+md_zip_data_new$zip <- as.character(md_zip_data_new$zip)
+md_winred_zip_totals$zip <- as.character(md_winred_zip_totals$zip)
+
+zip_dem <- inner_join(md_actblue_zip_totals, md_zip_data_new, by = "zip") |>
+  mutate(donation_rate_per_1000 = (donations / populationtotal) * 1000)
 
 
+zip_rep <- inner_join(md_winred_zip_totals, md_zip_data_new, by = "zip") |>
+    mutate(donation_rate_per_1000 = (donations / populationtotal) * 1000)
 
+write_csv(zip_dem, "data/zip_dem.csv")
+
+
+write.csv(zip_rep, "data/zip_rep.csv")
 ```
