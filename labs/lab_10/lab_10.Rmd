@@ -36,7 +36,7 @@ Let's explore the election results from last night and make some maps!
 
 **Q1.** Make a county-level map of Maryland's results for U.S. Senate using `md_senate_county_24.csv` in the data folder, calculating the difference between Angela Alsobrooks's percentage of the total votes and Larry Hogan's percentage of the total votes and displaying that percentage difference on the map. What is the story here, and what is the county with the most interesting results?
 
-**A1.** I think the most interesting thing about this map is that there were a few counties Alsobrooks performed very well in. Looking at the map, it appears Hogan performed better in most counties. She had a larger percentage difference in Prince George's and Baltimore City while Hogan had a larger percentage difference in many other areas. I think the story could be how Hogan lost despite performing well in most counties. The story is that Alsobrooks won by dominating heavily populated counties. 
+**A1.** I think the most interesting thing about this map is that there were a few counties Alsobrooks performed very well in. Looking at the map, it appears Hogan performed better in most counties. She had a larger percentage difference in Prince George's and Baltimore City while Hogan had a larger percentage difference in many other areas. I think the story could be how Hogan lost despite performing well in most counties and that Alsobrooks won by dominating heavily populated counties. 
 
 ```{r}
 counties <- counties()
@@ -47,11 +47,12 @@ md_counties <- counties |>
 
 
 md_senate_county_24 <- read_csv("data/md_senate_county_24.csv") |> clean_names() |>
-  mutate(total=alsobrooks+hogan+scott) |>
-  mutate(alsobrooks_pct=(alsobrooks/total)*100, hogan_pct=(hogan/total)*100) |>
+  mutate(total24=alsobrooks+hogan+scott) |>
+  mutate(alsobrooks_pct=(alsobrooks/total24)*100, hogan_pct=(hogan/total24)*100) |>
   mutate(senate_pct_diff=alsobrooks_pct-hogan_pct)|>
   rename(GEOID=geoid) |>
- mutate(GEOID = as.character(GEOID))
+  mutate(GEOID = as.character(GEOID))|>
+  rename(hogan24=hogan)
 
 md_counties_senate_join <- md_counties |> 
   left_join(md_senate_county_24, by=c("GEOID"))
@@ -66,7 +67,7 @@ theme_minimal() +
     high = "blue",
     midpoint = 0,
     name = "Percentage Difference")+
-  labs(title = "Alsobrooks performs better in Washington, D.C. suburbs", fill="Percent Difference")
+  labs(title = "Hogan performs better Alsobrooks in most counties", fill="Percent Difference")
 
 ```
 
@@ -106,6 +107,31 @@ theme_minimal() +
 **A3**
 
 ```{r}
+md_gov_county_18 <- read_csv("data/md_gov_county_18.csv") |> clean_names() |>
+  mutate(across(c(hogan, jealous, quinn, schlakman, `write_ins`), as.numeric))|>
+  mutate(GEOID=geoid) |>
+  mutate(GEOID = as.character(GEOID))|>
+  mutate(total18=hogan+jealous+quinn+schlakman+`write_ins`)|>
+  rename(hogan18=hogan)
+
+md_gov_senate_join <- md_counties_senate_join |> 
+  left_join(md_gov_county_18, by=c("GEOID"))
+
+md_gov_senate_join <- md_gov_senate_join |>
+  mutate(hoganpct18 = (hogan18/total18) *100,hoganpct24 = (hogan24/total24)*100)|>
+  mutate(hogan_pct_diff=hoganpct24-hoganpct18)
+
+ggplot() +
+  geom_sf(data=md_gov_senate_join, aes(fill = hogan_pct_diff)) +
+theme_minimal() +
+ scale_fill_gradient2(
+    low = "red",
+    mid = "white",
+    high = "blue",
+    midpoint = 0,
+    name = "Difference in Percent from 2018 to 2024")+
+  labs(title = "", fill="Difference in Percent from 2018 to 2024")
+
 ```
 
 **Q4.** Choose your own map adventure! In the data folder I've included Maryland county-level results for the abortion rights amendment vote this year, plus the 2020 presidential results by county and 2022 governor's results by county. Using one of those and at least one other contest for comparison, make a county-level map showing what you think is the most interesting aspect of that data, and describe the results in terms of a possible story. You can bring in other data, such as Census information, if you like.
