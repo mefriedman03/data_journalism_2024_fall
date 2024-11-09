@@ -80,13 +80,13 @@ Also answer this: is a map the best way to present this data? What else could yo
 ```{r}
 md_pres_county_24 <- read_csv("data/md_pres_county_24.csv") |> clean_names()|>
   mutate(total=trump+harris+stein+oliver+kennedy) |>
-  mutate(trump_pct=(trump/total)*100)|>
+  mutate(trump_pct24=(trump/total)*100)|>
   rename(GEOID=geoid) |>
   mutate(GEOID = as.character(GEOID))
 
 md_counties_trump_senate_join <- md_counties_senate_join |> 
   left_join(md_pres_county_24, by=c("GEOID"))|>
-  mutate(trump_hogan_pct_diff=trump_pct-hogan_pct)
+  mutate(trump_hogan_pct_diff=trump_pct24-hogan_pct)
 
 ggplot() +
   geom_sf(data=md_counties_trump_senate_join, aes(fill = trump_hogan_pct_diff)) +
@@ -104,7 +104,7 @@ theme_minimal() +
 
 **Q3** Make another map showing the difference between Larry Hogan's county-level performance this year and from his governor race in 2018, using percentages to compare the two as you did in Q2. You can use the dataframe you initially loaded for Q1, and you'll need to load the 2018 governor results in the data folder and join them to it before proceeding. Are there any counties where Hogan did better this year? How would you describe the map showing the difference?
 
-**A3**
+**A3** Hogan did worse in every county in 2024 than he did in 2018. I would say that he performed especially worse in central Maryland areas. The percentage of the vote Hogan won went down in every county between the elections. 
 
 ```{r}
 md_gov_county_18 <- read_csv("data/md_gov_county_18.csv") |> clean_names() |>
@@ -130,15 +130,39 @@ theme_minimal() +
     high = "blue",
     midpoint = 0,
     name = "Difference in Percent from 2018 to 2024")+
-  labs(title = "", fill="Difference in Percent from 2018 to 2024")
+  labs(title = "Hogan performed better in every county in 2018", fill="Difference in Percent from 2018 to 2024")
 
 ```
 
 **Q4.** Choose your own map adventure! In the data folder I've included Maryland county-level results for the abortion rights amendment vote this year, plus the 2020 presidential results by county and 2022 governor's results by county. Using one of those and at least one other contest for comparison, make a county-level map showing what you think is the most interesting aspect of that data, and describe the results in terms of a possible story. You can bring in other data, such as Census information, if you like.
 
-**A4.**
+**A4.** I chose to look at the difference in Trump's performance from 2020 and 2024. Trump earned a higher percentage of the vote in every Maryland county in 2024 than he did in 2020. I did this by looking at MD president by county in 2020 and 2024. I think Trump performing better in every county in 2024 is newsworthy and a story in itself. I would want to look at factors contributing to his better performance. 
 
 ```{r}
+md_pres_county_20 <- read_csv("data/md_pres_county_20.csv") |> clean_names()|>
+  mutate(total=trump+biden+jorgensen+hawkins+segal) |>
+  mutate(trump_pct20=(trump/total)*100)|>
+  rename(GEOID=geoid) |>
+  mutate(GEOID = as.character(GEOID))
+
+md_counties_trump_join <- md_pres_county_24 |> 
+  left_join(md_pres_county_20, by=c("GEOID"))|>
+  mutate(trump_pct_diff=trump_pct24-trump_pct20)
+
+md_counties_trump_join <-md_counties_trump_join |>
+  left_join(md_counties, by=c("GEOID"))
+
+ggplot() +
+  geom_sf(data=md_counties_trump_join, aes(geometry=geometry, fill = trump_pct_diff)) +
+theme_minimal() +
+ scale_fill_gradient2(
+    low = "red",
+    mid = "white",
+    high = "blue",
+    midpoint = 0,
+    name = "Difference in Percent from 2020 to 2024")+
+  labs(title = "Trump performed better in every county in 2024", fill="Difference in Percent from 2020 to 2024")
+
 
 ```
 
