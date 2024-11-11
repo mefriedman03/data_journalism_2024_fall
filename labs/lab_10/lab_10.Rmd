@@ -77,6 +77,8 @@ Also answer this: is a map the best way to present this data? What else could yo
 
 **A2.** Trump only got a higher percentage than Hogan in one county. I would say that Hogan outperformed Trump across Maryland, particularly near Washington, D.C. No, I don't think the map is the best way to present the data. I think it would work better to show it in a side by side comparison and explicitly say the percent of the vote each candidate won in each county. 
 
+### install ggalt. can use dumbell chart that would show it better. geomdumbell() and done basically the same way. ### see his key for lab 10 for more on how to do this
+
 ```{r}
 md_pres_county_24 <- read_csv("data/md_pres_county_24.csv") |> clean_names()|>
   mutate(total=trump+harris+stein+oliver+kennedy) |>
