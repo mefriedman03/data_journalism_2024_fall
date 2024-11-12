@@ -182,3 +182,12 @@ cleaner_compare_all <- compare_all |>
   select(COUNTY, DEM0406_pct_change, REP0406_pct_change, UNAF0406_pct_change, DEM0608_pct_change, REP0608_pct_change, UNAF0608_pct_change, DEM0810_pct_change, REP0810_pct_change, UNAF0810_pct_change, DEM1012_pct_change, REP1012_pct_change, UNAF1012_pct_change, DEM1214_pct_change, REP1214_pct_change, UNAF1214_pct_change, DEM1416_pct_change, REP1416_pct_change, UNAF1416_pct_change, DEM1618_pct_change, REP1618_pct_change, UNAF1618_pct_change, DEM1820_pct_change, REP1820_pct_change, UNAF1820_pct_change,  DEM2022_pct_change, REP2022_pct_change, UNAF2022_pct_change, DEM2224_pct_change, REP2224_pct_change, UNAF2224_pct_change, DEM0424_pct_change, REP0424_pct_change, UNAF0424_pct_change)
 ```
 
+```{r}
+compare_all_pcts <-compare_all |>
+  select(COUNTY,pct_DEM24,pct_REP24,pct_UNAF24,pct_DEM22,pct_REP22,pct_UNAF22,pct_DEM20,pct_REP20,pct_UNAF20, pct_DEM18,pct_REP18,pct_UNAF18,pct_DEM16,pct_REP16,pct_UNAF16,pct_DEM14,pct_REP14,pct_UNAF14,pct_DEM12,pct_REP12,pct_UNAF12,pct_DEM10,pct_REP10,pct_UNAF10,pct_DEM08,pct_REP08,pct_UNAF08,pct_DEM06,pct_REP06,pct_UNAF06,pct_DEM04,pct_REP04,pct_UNAF04)|>
+  slice(25)
+
+write_csv(compare_all_pcts, "october_data/compare_all_pcts.csv")
+
+```
+
