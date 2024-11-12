@@ -1756,144 +1756,96 @@ display: none;
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyAyMDI0IHJlZ2lzdHJhdGlvbnNcbnJlZ2lzdHJhdGlvbnNfMjAyNCA8LSByZWFkX2NzdihcIm9jdG9iZXJfZGF0YS9vY3RfMjQuY3N2XCIpIHw+XG4gIHJlbmFtZShERU0yND1ERU0sIFJFUDI0PVJFUCwgTkxNMjQ9TkxNLCBHUk4yND1HUk4sIExJQjI0PUxJQiwgVU5BRjI0PVVOQUYsIE9USDI0PU9USCwgVE9UQUwyND1UT1RBTClcbiAgXG5gYGAifQ== -->
-<pre class="r"><code># 2024 registrations
-registrations_2024 &lt;- read_csv(&quot;october_data/oct_24.csv&quot;) |&gt;
-  rename(DEM24=DEM, REP24=REP, NLM24=NLM, GRN24=GRN, LIB24=LIB, UNAF24=UNAF, OTH24=OTH, TOTAL24=TOTAL)
-  </code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyAyMDI0IGN1cnJlbnQgcmVnaXN0cmF0aW9uc1xuY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMjQgPC0gcmVhZF9jc3YoXCIyNF9yZWdfY3VycmVudF9jb3B5LmNzdlwiKVxuY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMjQgPC1jdXJyZW50X3JlZ2lzdHJhdGlvbnNfMjAyNFssLWMoMSwzLDQsNSw2LDcsOCw5LDEwLDExLDEyLDEzLDE0LDE1LDI0LDI1LDI2LDI3KV0gfD5cbiAgZmlsdGVyKCFpcy5uYSguLi4yKSkgfD5cbiAgcmVuYW1lKENPVU5UWT0uLi4yLCBERU0yND1ERU0uLi4xNiwgUkVQMjQ9UkVQLi4uMTcsIE5MTTI0PU5MTS4uLjE4LCBMSUIyND1MSUIuLi4xOSwgR1JOMjQ9R1JOLi4uMjAsIFVOQUYyND1VTkFGLi4uMjEsIE9USDI0PU9USC4uLjIyLCBUT1RBTDI0PVRPVEFMLi4uMjMpXG5gYGAifQ== -->
+<pre class="r"><code># 2024 current registrations
+current_registrations_2024 &lt;- read_csv(&quot;24_reg_current_copy.csv&quot;)
+current_registrations_2024 &lt;-current_registrations_2024[,-c(1,3,4,5,6,7,8,9,10,11,12,13,14,15,24,25,26,27)] |&gt;
+  filter(!is.na(...2)) |&gt;
+  rename(COUNTY=...2, DEM24=DEM...16, REP24=REP...17, NLM24=NLM...18, LIB24=LIB...19, GRN24=GRN...20, UNAF24=UNAF...21, OTH24=OTH...22, TOTAL24=TOTAL...23)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyAyMDIyIHJlZ2lzdHJhdGlvbnNcbnJlZ2lzdHJhdGlvbnNfMjAyMiA8LSByZWFkX2NzdihcIm9jdG9iZXJfZGF0YS9vY3RfMjIuY3N2XCIpfD5cbiByZW5hbWUoREVNMjI9REVNLCBSRVAyMj1SRVAsIEdSTjIyPUdSTiwgTElCMjI9TElCLCBXQ1AyMj1XQ1AsIFVOQUYyMj1VTkFGLCBPVEgyMj1PVEgsIFRPVEFMMjI9VE9UQUwpXG5cbmBgYCJ9 -->
-<pre class="r"><code># 2022 registrations
-registrations_2022 &lt;- read_csv(&quot;october_data/oct_22.csv&quot;)|&gt;
- rename(DEM22=DEM, REP22=REP, GRN22=GRN, LIB22=LIB, WCP22=WCP, UNAF22=UNAF, OTH22=OTH, TOTAL22=TOTAL)
-</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyAyMDIyIGN1cnJlbnQgcmVnaXN0cmF0aW9uc1xuY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMjIgPC0gcmVhZF9jc3YoXCIyMl9yZWdfY3VycmVudF9jb3B5LmNzdlwiKVxuY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMjIgPC1jdXJyZW50X3JlZ2lzdHJhdGlvbnNfMjAyMlssLWMoMiwzLDQsNSw2LDcsOCw5LDEwLDExKV0gIHw+XG4gcmVuYW1lKENPVU5UWT0uLi4xLCBERU0yMj1ERU0uLi4xMiwgUkVQMjI9UkVQLi4uMTMsIEdSTjIyPUdSTi4uLjE0LCBMSUIyMj1MSUIuLi4xNSwgV0NQMjI9V0NQLi4uMTYsIFVOQUYyMj1VTkFGLi4uMTcsIE9USDIyPU9USC4uLjE4LCBUT1RBTDIyPVRPVEFMLi4uMTkpXG5gYGAifQ== -->
+<pre class="r"><code># 2022 current registrations
+current_registrations_2022 &lt;- read_csv(&quot;22_reg_current_copy.csv&quot;)
+current_registrations_2022 &lt;-current_registrations_2022[,-c(2,3,4,5,6,7,8,9,10,11)]  |&gt;
+ rename(COUNTY=...1, DEM22=DEM...12, REP22=REP...13, GRN22=GRN...14, LIB22=LIB...15, WCP22=WCP...16, UNAF22=UNAF...17, OTH22=OTH...18, TOTAL22=TOTAL...19)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyAyMDIwIHJlZ2lzdHJhdGlvbnNcbnJlZ2lzdHJhdGlvbnNfMjAyMCA8LSByZWFkX2NzdihcIm9jdG9iZXJfZGF0YS9vY3RfMjAuY3N2XCIpfD5cbiByZW5hbWUoREVNMjA9REVNLCBSRVAyMD1SRVAsIEdSTjIwPUdSTiwgTElCMjA9TElCLCBXQ1AyMD1XQ1AsIFVOQUYyMD1VTkFGLCBPVEgyMD1PVEgsIFRPVEFMMjA9VE9UQUwsIEJBUjIwPUJBUilcbmBgYCJ9 -->
-<pre class="r"><code># 2020 registrations
-registrations_2020 &lt;- read_csv(&quot;october_data/oct_20.csv&quot;)|&gt;
- rename(DEM20=DEM, REP20=REP, GRN20=GRN, LIB20=LIB, WCP20=WCP, UNAF20=UNAF, OTH20=OTH, TOTAL20=TOTAL, BAR20=BAR)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyAyMDIwIGN1cnJlbnQgcmVnaXN0cmF0aW9uc1xuY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMjAgPC0gcmVhZF9jc3YoXCIyMF9yZWdfY3VycmVudC5jc3ZcIilcbmBgYCJ9 -->
+<pre class="r"><code># 2020 current registrations
+current_registrations_2020 &lt;- read_csv(&quot;20_reg_current.csv&quot;)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyAyMDE4IHJlZ2lzdHJhdGlvbnNcbnJlZ2lzdHJhdGlvbnNfMjAxOCA8LSByZWFkX2NzdihcIm9jdG9iZXJfZGF0YS9vY3RfMTguY3N2XCIpfD5cbiAgcmVuYW1lKERFTTE4PURFTSwgUkVQMTg9UkVQLCBHUk4xOD1HUk4sIExJQjE4PUxJQiwgVU5BRjE4PVVOQUYsIE9USDE4PU9USCwgVE9UQUwxOD1UT1RBTClcbmBgYCJ9 -->
-<pre class="r"><code># 2018 registrations
-registrations_2018 &lt;- read_csv(&quot;october_data/oct_18.csv&quot;)|&gt;
-  rename(DEM18=DEM, REP18=REP, GRN18=GRN, LIB18=LIB, UNAF18=UNAF, OTH18=OTH, TOTAL18=TOTAL)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyAyMDE4IGN1cnJlbnQgcmVnaXN0cmF0aW9uc1xuY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMTggPC0gcmVhZF9jc3YoXCIxOF9yZWdfY3VycmVudC5jc3ZcIilcbmBgYCJ9 -->
+<pre class="r"><code># 2018 current registrations
+current_registrations_2018 &lt;- read_csv(&quot;18_reg_current.csv&quot;)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyAyMDE2IHJlZ2lzdHJhdGlvbnNcbnJlZ2lzdHJhdGlvbnNfMjAxNiA8LSByZWFkX2NzdihcIm9jdG9iZXJfZGF0YS9vY3RfMTYuY3N2XCIpfD5cbiAgcmVuYW1lKERFTTE2PURFTSwgUkVQMTY9UkVQLCBHUk4xNj1HUk4sIExJQjE2PUxJQiwgVU5BRjE2PVVOQUYsIE9USDE2PU9USCwgVE9UQUwxNj1UT1RBTClcbmBgYCJ9 -->
-<pre class="r"><code># 2016 registrations
-registrations_2016 &lt;- read_csv(&quot;october_data/oct_16.csv&quot;)|&gt;
-  rename(DEM16=DEM, REP16=REP, GRN16=GRN, LIB16=LIB, UNAF16=UNAF, OTH16=OTH, TOTAL16=TOTAL)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyAyMDE2IGN1cnJlbnQgcmVnaXN0cmF0aW9uc1xuY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMTYgPC0gcmVhZF9jc3YoXCIxNl9yZWdfY3VycmVudC5jc3ZcIilcbmBgYCJ9 -->
+<pre class="r"><code># 2016 current registrations
+current_registrations_2016 &lt;- read_csv(&quot;16_reg_current.csv&quot;)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyAyMDE0IHJlZ2lzdHJhdGlvbnNcbnJlZ2lzdHJhdGlvbnNfMjAxNCA8LSByZWFkX2NzdihcIm9jdG9iZXJfZGF0YS9vY3RfMTQuY3N2XCIpfD5cbiAgcmVuYW1lKERFTTE0PURFTSwgUkVQMTQ9UkVQLCBHUk4xND1HUk4sIExJQjE0PUxJQiwgVU5BRjE0PVVOQUYsIE9USDE0PU9USCwgVE9UQUwxND1UT1RBTClcbmBgYCJ9 -->
-<pre class="r"><code># 2014 registrations
-registrations_2014 &lt;- read_csv(&quot;october_data/oct_14.csv&quot;)|&gt;
-  rename(DEM14=DEM, REP14=REP, GRN14=GRN, LIB14=LIB, UNAF14=UNAF, OTH14=OTH, TOTAL14=TOTAL)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyAyMDE0IGN1cnJlbnQgcmVnaXN0cmF0aW9uc1xuY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMTQgPC0gcmVhZF9jc3YoXCIxNF9yZWdfY3VycmVudC5jc3ZcIilcbmBgYCJ9 -->
+<pre class="r"><code># 2014 current registrations
+current_registrations_2014 &lt;- read_csv(&quot;14_reg_current.csv&quot;)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyAyMDEyIHJlZ2lzdHJhdGlvbnNcbnJlZ2lzdHJhdGlvbnNfMjAxMiA8LSByZWFkX2NzdihcIm9jdG9iZXJfZGF0YS9vY3RfMTIuY3N2XCIpfD5cbiAgcmVuYW1lKERFTTEyPURFTSwgUkVQMTI9UkVQLCBHUk4xMj1HUk4sIExJQjEyPUxJQiwgQW1FMTI9QW1FLCBVTkFGMTI9VU5BRiwgT1RIMTI9T1RILCBUT1RBTDEyPVRPVEFMKVxuYGBgIn0= -->
-<pre class="r"><code># 2012 registrations
-registrations_2012 &lt;- read_csv(&quot;october_data/oct_12.csv&quot;)|&gt;
-  rename(DEM12=DEM, REP12=REP, GRN12=GRN, LIB12=LIB, AmE12=AmE, UNAF12=UNAF, OTH12=OTH, TOTAL12=TOTAL)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyAyMDEwIHJlZ2lzdHJhdGlvbnNcbnJlZ2lzdHJhdGlvbnNfMjAxMCA8LSByZWFkX2NzdihcIm9jdG9iZXJfZGF0YS9vY3RfMTAuY3N2XCIpfD5cbiAgcmVuYW1lKERFTTEwPURFTSwgUkVQMTA9UkVQLCBHUk4xMD1HUk4sIExJQjEwPUxJQiwgVU5BRjEwPVVOQUYsIE9USDEwPU9USCwgVE9UQUwxMD1UT1RBTClcbmBgYCJ9 -->
-<pre class="r"><code># 2010 registrations
-registrations_2010 &lt;- read_csv(&quot;october_data/oct_10.csv&quot;)|&gt;
-  rename(DEM10=DEM, REP10=REP, GRN10=GRN, LIB10=LIB, UNAF10=UNAF, OTH10=OTH, TOTAL10=TOTAL)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyAyMDA4IHJlZ2lzdHJhdGlvbnNcbnJlZ2lzdHJhdGlvbnNfMjAwOCA8LSByZWFkX2NzdihcIm9jdG9iZXJfZGF0YS9vY3RfMDguY3N2XCIpfD5cbiAgcmVuYW1lKERFTTA4PURFTSwgUkVQMDg9UkVQLCBHUk4wOD1HUk4sIExJQjA4PUxJQiwgVU5BRjA4PVVOQUYsIE9USDA4PU9USCwgVE9UQUwwOD1UT1RBTCwgQ09OMDg9Q09OLCBJTkQwOD1JTkQpXG5gYGAifQ== -->
-<pre class="r"><code># 2008 registrations
-registrations_2008 &lt;- read_csv(&quot;october_data/oct_08.csv&quot;)|&gt;
-  rename(DEM08=DEM, REP08=REP, GRN08=GRN, LIB08=LIB, UNAF08=UNAF, OTH08=OTH, TOTAL08=TOTAL, CON08=CON, IND08=IND)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyAyMDA2IHJlZ2lzdHJhdGlvbnNcbnJlZ2lzdHJhdGlvbnNfMjAwNiA8LSByZWFkX2NzdihcIm9jdG9iZXJfZGF0YS9maXhlZF9vY3RfMDYuY3N2XCIpfD5cbiAgcmVuYW1lKERFTTA2PURFTSwgUkVQMDY9UkVQLCBHUk4wNj1HUk4sIENPTlNUMDY9Q09OU1QsIExJQjA2PUxJQiwgUE9QMDY9UE9QLCBVTkFGMDY9VU5BRiwgT1RIMDY9T1RILCBUT1RBTDA2PVRPVEFMKVxuYGBgIn0= -->
-<pre class="r"><code># 2006 registrations
-registrations_2006 &lt;- read_csv(&quot;october_data/fixed_oct_06.csv&quot;)|&gt;
-  rename(DEM06=DEM, REP06=REP, GRN06=GRN, CONST06=CONST, LIB06=LIB, POP06=POP, UNAF06=UNAF, OTH06=OTH, TOTAL06=TOTAL)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyAyMDA0IHJlZ2lzdHJhdGlvbnNcbnJlZ2lzdHJhdGlvbnNfMjAwNCA8LSByZWFkX2NzdihcIm9jdG9iZXJfZGF0YS9vY3RfMDQuY3N2XCIpfD5cbiByZW5hbWUoREVNMDQ9REVNLCBSRVAwND1SRVAsIEdSTjA0PUdSTiwgTElCMDQ9TElCLCBVTkFGMDQ9VU5BRiwgT1RIMDQ9T1RILCBUT1RBTDA0PVRPVEFMLCBDT05TVDA0PUNPTlNULCBQT1AwND1QT1ApXG5gYGAifQ== -->
-<pre class="r"><code># 2004 registrations
-registrations_2004 &lt;- read_csv(&quot;october_data/oct_04.csv&quot;)|&gt;
- rename(DEM04=DEM, REP04=REP, GRN04=GRN, LIB04=LIB, UNAF04=UNAF, OTH04=OTH, TOTAL04=TOTAL, CONST04=CONST, POP04=POP)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<div id="this-shows-was-a--.94-change-in-democratic-voters-a-1.9-increase-in-republican-voters-and-a-10.2-increase-in-unaffiliated-voters-between-september-2022-and-september-2024.-i-also-see-that-more-than-20-of-marylands-voters-are-registered-as-unaffiliated." class="section level3">
-<h3>This shows was a -.94% change in Democratic voters, a 1.9% increase
-in Republican voters and a 10.2% increase in unaffiliated voters between
-September 2022 and September 2024. I also see that more than 20% of
+<div id="this-shows-was-a--1.4-change-in-democratic-voters-a-1-increase-in-republican-voters-and-a-9.8-increase-in-unaffiliated-voters-between-september-2022-and-september-2024.-i-also-see-that-more-than-21-of-marylands-voters-are-registered-as-unaffiliated." class="section level3">
+<h3>This shows was a -1.4% change in Democratic voters, a 1% increase in
+Republican voters and a 9.8% increase in unaffiliated voters between
+September 2022 and September 2024. I also see that more than 21% of
 Maryland’s voters are registered as unaffiliated.</h3>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmVnaXN0cmF0aW9uc18yMDI0IDwtIHJlZ2lzdHJhdGlvbnNfMjAyNCB8PiBcbiAgbXV0YXRlKHBjdF9ERU0yNCA9IChERU0yNC9UT1RBTDI0KSoxMDAsIHBjdF9SRVAyNCA9IChSRVAyNC9UT1RBTDI0KSoxMDAsIHBjdF9VTkFGMjQgPSAoVU5BRjI0L1RPVEFMMjQpKjEwMClcblxucmVnaXN0cmF0aW9uc18yMDIyIDwtIHJlZ2lzdHJhdGlvbnNfMjAyMiB8PiBcbiAgbXV0YXRlKHBjdF9ERU0yMiA9IChERU0yMi9UT1RBTDIyKSoxMDAsIHBjdF9SRVAyMiA9IChSRVAyMi9UT1RBTDIyKSoxMDAsIHBjdF9VTkFGMjIgPSAoVU5BRjIyL1RPVEFMMjIpKjEwMClcblxuY29tcGFyZV8yMl8yNCA8LSByZWdpc3RyYXRpb25zXzIwMjQgfD4gXG4gIGxlZnRfam9pbihyZWdpc3RyYXRpb25zXzIwMjIsIGJ5PSdDT1VOVFknKSB8PiBcbiAgbXV0YXRlKERFTV9wY3RfY2hhbmdlID0gKERFTTI0LURFTTIyKS9ERU0yMioxMDAsIFJFUF9wY3RfY2hhbmdlID0gKFJFUDI0LVJFUDIyKS9SRVAyMioxMDAsIFVOQUZfcGN0X2NoYW5nZSA9IChVTkFGMjQtVU5BRjIyKS9VTkFGMjIqMTAwKSB8PiBcbiAgYXJyYW5nZShkZXNjKFVOQUZfcGN0X2NoYW5nZSkpXG5gYGAifQ== -->
-<pre class="r"><code>registrations_2024 &lt;- registrations_2024 |&gt; 
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMjQgPC0gY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMjQgfD4gXG4gIG11dGF0ZShwY3RfREVNMjQgPSAoREVNMjQvVE9UQUwyNCkqMTAwLCBwY3RfUkVQMjQgPSAoUkVQMjQvVE9UQUwyNCkqMTAwLCBwY3RfVU5BRjI0ID0gKFVOQUYyNC9UT1RBTDI0KSoxMDApXG5cbmN1cnJlbnRfcmVnaXN0cmF0aW9uc18yMDIyIDwtIGN1cnJlbnRfcmVnaXN0cmF0aW9uc18yMDIyIHw+IFxuICBtdXRhdGUocGN0X0RFTTIyID0gKERFTTIyL1RPVEFMMjIpKjEwMCwgcGN0X1JFUDIyID0gKFJFUDIyL1RPVEFMMjIpKjEwMCwgcGN0X1VOQUYyMiA9IChVTkFGMjIvVE9UQUwyMikqMTAwKVxuXG5jb21wYXJlXzIyXzI0IDwtIGN1cnJlbnRfcmVnaXN0cmF0aW9uc18yMDI0IHw+IFxuICBsZWZ0X2pvaW4oY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMjIsIGJ5PSdDT1VOVFknKSB8PiBcbiAgbXV0YXRlKERFTV9wY3RfY2hhbmdlID0gKERFTTI0LURFTTIyKS9ERU0yMioxMDAsIFJFUF9wY3RfY2hhbmdlID0gKFJFUDI0LVJFUDIyKS9SRVAyMioxMDAsIFVOQUZfcGN0X2NoYW5nZSA9IChVTkFGMjQtVU5BRjIyKS9VTkFGMjIqMTAwKSB8PiBcbiAgYXJyYW5nZShkZXNjKFVOQUZfcGN0X2NoYW5nZSkpXG5gYGAifQ== -->
+<pre class="r"><code>current_registrations_2024 &lt;- current_registrations_2024 |&gt; 
   mutate(pct_DEM24 = (DEM24/TOTAL24)*100, pct_REP24 = (REP24/TOTAL24)*100, pct_UNAF24 = (UNAF24/TOTAL24)*100)
 
-registrations_2022 &lt;- registrations_2022 |&gt; 
+current_registrations_2022 &lt;- current_registrations_2022 |&gt; 
   mutate(pct_DEM22 = (DEM22/TOTAL22)*100, pct_REP22 = (REP22/TOTAL22)*100, pct_UNAF22 = (UNAF22/TOTAL22)*100)
 
-compare_22_24 &lt;- registrations_2024 |&gt; 
-  left_join(registrations_2022, by=&#39;COUNTY&#39;) |&gt; 
+compare_22_24 &lt;- current_registrations_2024 |&gt; 
+  left_join(current_registrations_2022, by=&#39;COUNTY&#39;) |&gt; 
   mutate(DEM_pct_change = (DEM24-DEM22)/DEM22*100, REP_pct_change = (REP24-REP22)/REP22*100, UNAF_pct_change = (UNAF24-UNAF22)/UNAF22*100) |&gt; 
   arrange(desc(UNAF_pct_change))</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
-<div id="this-shows-there-was-an-31.56-increase-in-registered-democrats-a-13.6-increaqse-in-registered-republicans-and-a-117.8-increase-in-registered-unaffiliated-voters-between-2004-and-2024." class="section level3">
-<h3>This shows there was an 31.56% increase in registered Democrats, a
-13.6% increaqse in registered Republicans and a 117.8% increase in
-registered unaffiliated voters between 2004 and 2024.</h3>
+<div id="this-shows-there-was-an-8.6-increase-in-registered-democrats-a-5.7-increase-in-registered-republicans-and-a-nearly-40-increase-in-registered-unaffiliated-voters." class="section level3">
+<h3>This shows there was an 8.6% increase in registered Democrats, a
+5.7% increase in registered Republicans and a nearly 40% increase in
+registered unaffiliated voters.</h3>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmVnaXN0cmF0aW9uc18yMDI0IDwtIHJlZ2lzdHJhdGlvbnNfMjAyNCB8PiBcbiAgbXV0YXRlKHBjdF9ERU0yNCA9IChERU0yNC9UT1RBTDI0KSoxMDAsIHBjdF9SRVAyNCA9IChSRVAyNC9UT1RBTDI0KSoxMDAsIHBjdF9VTkFGMjQgPSAoVU5BRjI0L1RPVEFMMjQpKjEwMClcblxucmVnaXN0cmF0aW9uc18yMDA0IDwtIHJlZ2lzdHJhdGlvbnNfMjAwNCB8PiBcbiAgbXV0YXRlKHBjdF9ERU0wNCA9IChERU0wNC9UT1RBTDA0KSoxMDAsIHBjdF9SRVAwNCA9IChSRVAwNC9UT1RBTDA0KSoxMDAsIHBjdF9VTkFGMDQgPSAoVU5BRjA0L1RPVEFMMDQpKjEwMClcblxuY29tcGFyZV8wNF8yNCA8LSByZWdpc3RyYXRpb25zXzIwMjQgfD4gXG4gIGxlZnRfam9pbihyZWdpc3RyYXRpb25zXzIwMDQsIGJ5PSdDT1VOVFknKSB8PiBcbiAgbXV0YXRlKERFTV9wY3RfY2hhbmdlID0gKERFTTI0LURFTTA0KS9ERU0wNCoxMDAsIFJFUF9wY3RfY2hhbmdlID0gKFJFUDI0LVJFUDA0KS9SRVAwNCoxMDAsIFVOQUZfcGN0X2NoYW5nZSA9IChVTkFGMjQtVU5BRjA0KS9VTkFGMDQqMTAwKSB8PiBcbiAgYXJyYW5nZShVTkFGX3BjdF9jaGFuZ2UpXG5gYGAifQ== -->
-<pre class="r"><code>registrations_2024 &lt;- registrations_2024 |&gt; 
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMjQgPC0gY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMjQgfD4gXG4gIG11dGF0ZShwY3RfREVNMjQgPSAoREVNMjQvVE9UQUwyNCkqMTAwLCBwY3RfUkVQMjQgPSAoUkVQMjQvVE9UQUwyNCkqMTAwLCBwY3RfVU5BRjI0ID0gKFVOQUYyNC9UT1RBTDI0KSoxMDApXG5cbmN1cnJlbnRfcmVnaXN0cmF0aW9uc18yMDE0IDwtIGN1cnJlbnRfcmVnaXN0cmF0aW9uc18yMDE0IHw+IFxuICBtdXRhdGUocGN0X0RFTTE0ID0gKERFTTE0L1RPVEFMMTQpKjEwMCwgcGN0X1JFUDE0ID0gKFJFUDE0L1RPVEFMMTQpKjEwMCwgcGN0X1VOQUYxNCA9IChVTkFGMTQvVE9UQUwxNCkqMTAwKVxuXG5jb21wYXJlXzE0XzI0IDwtIGN1cnJlbnRfcmVnaXN0cmF0aW9uc18yMDI0IHw+IFxuICBsZWZ0X2pvaW4oY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMTQsIGJ5PSdDT1VOVFknKSB8PiBcbiAgbXV0YXRlKERFTV9wY3RfY2hhbmdlID0gKERFTTI0LURFTTE0KS9ERU0xNCoxMDAsIFJFUF9wY3RfY2hhbmdlID0gKFJFUDI0LVJFUDE0KS9SRVAxNCoxMDAsIFVOQUZfcGN0X2NoYW5nZSA9IChVTkFGMjQtVU5BRjE0KS9VTkFGMTQqMTAwKSB8PiBcbiAgYXJyYW5nZShkZXNjKFVOQUZfcGN0X2NoYW5nZSkpXG5gYGAifQ== -->
+<pre class="r"><code>current_registrations_2024 &lt;- current_registrations_2024 |&gt; 
   mutate(pct_DEM24 = (DEM24/TOTAL24)*100, pct_REP24 = (REP24/TOTAL24)*100, pct_UNAF24 = (UNAF24/TOTAL24)*100)
 
-registrations_2004 &lt;- registrations_2004 |&gt; 
-  mutate(pct_DEM04 = (DEM04/TOTAL04)*100, pct_REP04 = (REP04/TOTAL04)*100, pct_UNAF04 = (UNAF04/TOTAL04)*100)
+current_registrations_2014 &lt;- current_registrations_2014 |&gt; 
+  mutate(pct_DEM14 = (DEM14/TOTAL14)*100, pct_REP14 = (REP14/TOTAL14)*100, pct_UNAF14 = (UNAF14/TOTAL14)*100)
 
-compare_04_24 &lt;- registrations_2024 |&gt; 
-  left_join(registrations_2004, by=&#39;COUNTY&#39;) |&gt; 
-  mutate(DEM_pct_change = (DEM24-DEM04)/DEM04*100, REP_pct_change = (REP24-REP04)/REP04*100, UNAF_pct_change = (UNAF24-UNAF04)/UNAF04*100) |&gt; 
-  arrange(UNAF_pct_change)</code></pre>
+compare_14_24 &lt;- current_registrations_2024 |&gt; 
+  left_join(current_registrations_2014, by=&#39;COUNTY&#39;) |&gt; 
+  mutate(DEM_pct_change = (DEM24-DEM14)/DEM14*100, REP_pct_change = (REP24-REP14)/REP14*100, UNAF_pct_change = (UNAF24-UNAF14)/UNAF14*100) |&gt; 
+  arrange(desc(UNAF_pct_change))</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
@@ -1902,30 +1854,15 @@ compare_04_24 &lt;- registrations_2024 |&gt;
 <h3>Getting percentages for the other dataframes!</h3>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmVnaXN0cmF0aW9uc18yMDE2IDwtIHJlZ2lzdHJhdGlvbnNfMjAxNiB8PiBcbiAgbXV0YXRlKHBjdF9ERU0xNiA9IChERU0xNi9UT1RBTDE2KSoxMDAsIHBjdF9SRVAxNiA9IChSRVAxNi9UT1RBTDE2KSoxMDAsIHBjdF9VTkFGMTYgPSAoVU5BRjE2L1RPVEFMMTYpKjEwMClcblxucmVnaXN0cmF0aW9uc18yMDE4IDwtIHJlZ2lzdHJhdGlvbnNfMjAxOCB8PiBcbiAgbXV0YXRlKHBjdF9ERU0xOCA9IChERU0xOC9UT1RBTDE4KSoxMDAsIHBjdF9SRVAxOCA9IChSRVAxOC9UT1RBTDE4KSoxMDAsIHBjdF9VTkFGMTggPSAoVU5BRjE4L1RPVEFMMTgpKjEwMClcblxucmVnaXN0cmF0aW9uc18yMDIwIDwtIHJlZ2lzdHJhdGlvbnNfMjAyMCB8PiBcbiAgbXV0YXRlKHBjdF9ERU0yMCA9IChERU0yMC9UT1RBTDIwKSoxMDAsIHBjdF9SRVAyMCA9IChSRVAyMC9UT1RBTDIwKSoxMDAsIHBjdF9VTkFGMjAgPSAoVU5BRjIwL1RPVEFMMjApKjEwMClcblxucmVnaXN0cmF0aW9uc18yMDE0IDwtIHJlZ2lzdHJhdGlvbnNfMjAxNCB8PiBcbiAgbXV0YXRlKHBjdF9ERU0xNCA9IChERU0xNC9UT1RBTDE0KSoxMDAsIHBjdF9SRVAxNCA9IChSRVAxNC9UT1RBTDE0KSoxMDAsIHBjdF9VTkFGMTQgPSAoVU5BRjE0L1RPVEFMMTQpKjEwMClcblxucmVnaXN0cmF0aW9uc18yMDEyIDwtIHJlZ2lzdHJhdGlvbnNfMjAxMiB8PiBcbiAgbXV0YXRlKHBjdF9ERU0xMiA9IChERU0xMi9UT1RBTDEyKSoxMDAsIHBjdF9SRVAxMiA9IChSRVAxMi9UT1RBTDEyKSoxMDAsIHBjdF9VTkFGMTIgPSAoVU5BRjEyL1RPVEFMMTIpKjEwMClcblxucmVnaXN0cmF0aW9uc18yMDEwIDwtIHJlZ2lzdHJhdGlvbnNfMjAxMCB8PiBcbiAgbXV0YXRlKHBjdF9ERU0xMCA9IChERU0xMC9UT1RBTDEwKSoxMDAsIHBjdF9SRVAxMCA9IChSRVAxMC9UT1RBTDEwKSoxMDAsIHBjdF9VTkFGMTAgPSAoVU5BRjEwL1RPVEFMMTApKjEwMClcblxucmVnaXN0cmF0aW9uc18yMDA4IDwtIHJlZ2lzdHJhdGlvbnNfMjAwOCB8PiBcbiAgbXV0YXRlKHBjdF9ERU0wOCA9IChERU0wOC9UT1RBTDA4KSoxMDAsIHBjdF9SRVAwOCA9IChSRVAwOC9UT1RBTDA4KSoxMDAsIHBjdF9VTkFGMDggPSAoVU5BRjA4L1RPVEFMMDgpKjEwMClcblxucmVnaXN0cmF0aW9uc18yMDA2IDwtIHJlZ2lzdHJhdGlvbnNfMjAwNiB8PiBcbiAgbXV0YXRlKHBjdF9ERU0wNiA9IChERU0wNi9UT1RBTDA2KSoxMDAsIHBjdF9SRVAwNiA9IChSRVAwNi9UT1RBTDA2KSoxMDAsIHBjdF9VTkFGMDY9IChVTkFGMDYvVE9UQUwwNikqMTAwKVxuYGBgIn0= -->
-<pre class="r"><code>registrations_2016 &lt;- registrations_2016 |&gt; 
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMTYgPC0gY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMTYgfD4gXG4gIG11dGF0ZShwY3RfREVNMTYgPSAoREVNMTYvVE9UQUwxNikqMTAwLCBwY3RfUkVQMTYgPSAoUkVQMTYvVE9UQUwxNikqMTAwLCBwY3RfVU5BRjE2ID0gKFVOQUYxNi9UT1RBTDE2KSoxMDApXG5cbmN1cnJlbnRfcmVnaXN0cmF0aW9uc18yMDE4IDwtIGN1cnJlbnRfcmVnaXN0cmF0aW9uc18yMDE4IHw+IFxuICBtdXRhdGUocGN0X0RFTTE4ID0gKERFTTE4L1RPVEFMMTgpKjEwMCwgcGN0X1JFUDE4ID0gKFJFUDE4L1RPVEFMMTgpKjEwMCwgcGN0X1VOQUYxOCA9IChVTkFGMTgvVE9UQUwxOCkqMTAwKVxuXG5jdXJyZW50X3JlZ2lzdHJhdGlvbnNfMjAyMCA8LSBjdXJyZW50X3JlZ2lzdHJhdGlvbnNfMjAyMCB8PiBcbiAgbXV0YXRlKHBjdF9ERU0yMCA9IChERU0yMC9UT1RBTDIwKSoxMDAsIHBjdF9SRVAyMCA9IChSRVAyMC9UT1RBTDIwKSoxMDAsIHBjdF9VTkFGMjAgPSAoVU5BRjIwL1RPVEFMMjApKjEwMClcbmBgYCJ9 -->
+<pre class="r"><code>current_registrations_2016 &lt;- current_registrations_2016 |&gt; 
   mutate(pct_DEM16 = (DEM16/TOTAL16)*100, pct_REP16 = (REP16/TOTAL16)*100, pct_UNAF16 = (UNAF16/TOTAL16)*100)
 
-registrations_2018 &lt;- registrations_2018 |&gt; 
+current_registrations_2018 &lt;- current_registrations_2018 |&gt; 
   mutate(pct_DEM18 = (DEM18/TOTAL18)*100, pct_REP18 = (REP18/TOTAL18)*100, pct_UNAF18 = (UNAF18/TOTAL18)*100)
 
-registrations_2020 &lt;- registrations_2020 |&gt; 
-  mutate(pct_DEM20 = (DEM20/TOTAL20)*100, pct_REP20 = (REP20/TOTAL20)*100, pct_UNAF20 = (UNAF20/TOTAL20)*100)
-
-registrations_2014 &lt;- registrations_2014 |&gt; 
-  mutate(pct_DEM14 = (DEM14/TOTAL14)*100, pct_REP14 = (REP14/TOTAL14)*100, pct_UNAF14 = (UNAF14/TOTAL14)*100)
-
-registrations_2012 &lt;- registrations_2012 |&gt; 
-  mutate(pct_DEM12 = (DEM12/TOTAL12)*100, pct_REP12 = (REP12/TOTAL12)*100, pct_UNAF12 = (UNAF12/TOTAL12)*100)
-
-registrations_2010 &lt;- registrations_2010 |&gt; 
-  mutate(pct_DEM10 = (DEM10/TOTAL10)*100, pct_REP10 = (REP10/TOTAL10)*100, pct_UNAF10 = (UNAF10/TOTAL10)*100)
-
-registrations_2008 &lt;- registrations_2008 |&gt; 
-  mutate(pct_DEM08 = (DEM08/TOTAL08)*100, pct_REP08 = (REP08/TOTAL08)*100, pct_UNAF08 = (UNAF08/TOTAL08)*100)
-
-registrations_2006 &lt;- registrations_2006 |&gt; 
-  mutate(pct_DEM06 = (DEM06/TOTAL06)*100, pct_REP06 = (REP06/TOTAL06)*100, pct_UNAF06= (UNAF06/TOTAL06)*100)</code></pre>
+current_registrations_2020 &lt;- current_registrations_2020 |&gt; 
+  mutate(pct_DEM20 = (DEM20/TOTAL20)*100, pct_REP20 = (REP20/TOTAL20)*100, pct_UNAF20 = (UNAF20/TOTAL20)*100)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
@@ -1938,29 +1875,14 @@ registrations_2006 &lt;- registrations_2006 |&gt;
 years I am looking at) starting at 2016-2018 percent change.</h3>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29tcGFyZV9hbGwgPC0gcmVnaXN0cmF0aW9uc18yMDI0IHw+IFxuICBsZWZ0X2pvaW4ocmVnaXN0cmF0aW9uc18yMDA0LCBieT0nQ09VTlRZJykgfD4gXG4gIGxlZnRfam9pbihyZWdpc3RyYXRpb25zXzIwMDYsIGJ5PSdDT1VOVFknKSB8PiBcbiAgbGVmdF9qb2luKHJlZ2lzdHJhdGlvbnNfMjAwOCwgYnk9J0NPVU5UWScpIHw+IFxuICBsZWZ0X2pvaW4ocmVnaXN0cmF0aW9uc18yMDEwLCBieT0nQ09VTlRZJykgfD4gXG4gIGxlZnRfam9pbihyZWdpc3RyYXRpb25zXzIwMTIsIGJ5PSdDT1VOVFknKSB8PiBcbiAgbGVmdF9qb2luKHJlZ2lzdHJhdGlvbnNfMjAxNCwgYnk9J0NPVU5UWScpIHw+IFxuICBsZWZ0X2pvaW4ocmVnaXN0cmF0aW9uc18yMDE2LCBieT0nQ09VTlRZJykgfD4gXG4gIGxlZnRfam9pbihyZWdpc3RyYXRpb25zXzIwMTgsIGJ5PSdDT1VOVFknKSB8PiBcbiAgbGVmdF9qb2luKHJlZ2lzdHJhdGlvbnNfMjAyMCwgYnk9J0NPVU5UWScpIHw+IFxuICBsZWZ0X2pvaW4ocmVnaXN0cmF0aW9uc18yMDIyLCBieT0nQ09VTlRZJykgfD4gXG4gIG11dGF0ZShcbiAgICAjMjAwNC0yMDA2IHBjdF9jaGFuZ2VcbiAgICBERU0wNDA2X3BjdF9jaGFuZ2UgPSAoREVNMDYtREVNMDQpL0RFTTA2KjEwMCwgUkVQMDQwNl9wY3RfY2hhbmdlID0gKFJFUDA2LVJFUDA0KS9SRVAwNioxMDAsIFVOQUYwNDA2X3BjdF9jaGFuZ2UgPSAoVU5BRjA2LVVOQUYwNCkvVU5BRjA0KjEwMCxcbiAgICAjMjAwNi0yMDA4IHBjdF9jaGFuZ2VcbiAgICBERU0wNjA4X3BjdF9jaGFuZ2UgPSAoREVNMDgtREVNMDYpL0RFTTA2KjEwMCwgUkVQMDYwOF9wY3RfY2hhbmdlID0gKFJFUDA4LVJFUDA2KS9SRVAwNioxMDAsIFVOQUYwNjA4X3BjdF9jaGFuZ2UgPSAoVU5BRjA4LVVOQUYwNikvVU5BRjA2KjEwMCxcbiAgICAgIzIwMDgtMjAxMCBwY3RfY2hhbmdlXG4gICAgREVNMDgxMF9wY3RfY2hhbmdlID0gKERFTTEwLURFTTA4KS9ERU0wOCoxMDAsIFJFUDA4MTBfcGN0X2NoYW5nZSA9IChSRVAxMC1SRVAwOCkvUkVQMDgqMTAwLCBVTkFGMDgxMF9wY3RfY2hhbmdlID0gKFVOQUYxMC1VTkFGMDgpL1VOQUYwOCoxMDAsXG4gICAgIzIwMTAtMjAxMiBwY3RfY2hhbmdlXG4gICAgREVNMTAxMl9wY3RfY2hhbmdlID0gKERFTTEyLURFTTEwKS9ERU0xMCoxMDAsIFJFUDEwMTJfcGN0X2NoYW5nZSA9IChSRVAxMi1SRVAxMCkvUkVQMTAqMTAwLCBVTkFGMTAxMl9wY3RfY2hhbmdlID0gKFVOQUYxMi1VTkFGMTApL1VOQUYxMCoxMDAsXG4gICAgIzIwMTItMjAxNCBwY3RfY2hhbmdlXG4gICAgREVNMTIxNF9wY3RfY2hhbmdlID0gKERFTTE0LURFTTEyKS9ERU0xMioxMDAsIFJFUDEyMTRfcGN0X2NoYW5nZSA9IChSRVAxNC1SRVAxMikvUkVQMTIqMTAwLCBVTkFGMTIxNF9wY3RfY2hhbmdlID0gKFVOQUYxNC1VTkFGMTIpL1VOQUYxMioxMDAsXG4gICAgIzIwMTQtMjAxNiBwY3RfY2hhbmdlXG4gICAgREVNMTQxNl9wY3RfY2hhbmdlID0gKERFTTE2LURFTTE0KS9ERU0xNCoxMDAsIFJFUDE0MTZfcGN0X2NoYW5nZSA9IChSRVAxNi1SRVAxNCkvUkVQMTQqMTAwLCBVTkFGMTQxNl9wY3RfY2hhbmdlID0gKFVOQUYxNi1VTkFGMTQpL1VOQUYxNCoxMDAsXG4gICAgIzIwMTYtMjAxOCBwY3RfY2hhbmdlXG4gICAgREVNMTYxOF9wY3RfY2hhbmdlID0gKERFTTE4LURFTTE2KS9ERU0xNioxMDAsIFJFUDE2MThfcGN0X2NoYW5nZSA9IChSRVAxOC1SRVAxNikvUkVQMTYqMTAwLCBVTkFGMTYxOF9wY3RfY2hhbmdlID0gKFVOQUYxOC1VTkFGMTYpL1VOQUYxNioxMDAsXG4gICAgIzIwMTgtMjAyMCBwY3RfY2hhbmdlXG4gICAgREVNMTgyMF9wY3RfY2hhbmdlID0gKERFTTIwLURFTTE4KS9ERU0xOCoxMDAsIFJFUDE4MjBfcGN0X2NoYW5nZSA9IChSRVAyMC1SRVAxOCkvUkVQMTgqMTAwLCBVTkFGMTgyMF9wY3RfY2hhbmdlID0gKFVOQUYyMC1VTkFGMTgpL1VOQUYxOCoxMDAsXG4gICAgIzIwMjAtMjAyMiBwY3RfY2hhbmdlXG4gICAgREVNMjAyMl9wY3RfY2hhbmdlID0gKERFTTIyLURFTTIwKS9ERU0yMCoxMDAsIFJFUDIwMjJfcGN0X2NoYW5nZSA9IChSRVAyMi1SRVAyMCkvUkVQMjAqMTAwLCBVTkFGMjAyMl9wY3RfY2hhbmdlID0gKFVOQUYyMi1VTkFGMjApL1VOQUYyMCoxMDAsXG4gICAgIzIwMjItMjAyNCBwY3RfY2hhbmdlXG4gICAgREVNMjIyNF9wY3RfY2hhbmdlID0gKERFTTI0LURFTTIyKS9ERU0yMioxMDAsIFJFUDIyMjRfcGN0X2NoYW5nZSA9IChSRVAyNC1SRVAyMikvUkVQMjIqMTAwLCBVTkFGMjIyNF9wY3RfY2hhbmdlID0gKFVOQUYyNC1VTkFGMjIpL1VOQUYyMioxMDAsXG4gICAgIzIwMDQtMjAyNCBwY3RfY2hhbmdlXG4gICAgREVNMDQyNF9wY3RfY2hhbmdlID0gKERFTTI0LURFTTA0KS9ERU0wNCoxMDAsIFJFUDA0MjRfcGN0X2NoYW5nZSA9IChSRVAyNC1SRVAwNCkvUkVQMDQqMTAwLCBVTkFGMDQyNF9wY3RfY2hhbmdlID0gKFVOQUYyNC1VTkFGMDQpL1VOQUYwNCoxMDApXG4gIFxuY2xlYW5lcl9jb21wYXJlX2FsbCA8LSBjb21wYXJlX2FsbCB8PiBcbiAgc2VsZWN0KENPVU5UWSwgREVNMDQwNl9wY3RfY2hhbmdlLCBSRVAwNDA2X3BjdF9jaGFuZ2UsIFVOQUYwNDA2X3BjdF9jaGFuZ2UsIERFTTA2MDhfcGN0X2NoYW5nZSwgUkVQMDYwOF9wY3RfY2hhbmdlLCBVTkFGMDYwOF9wY3RfY2hhbmdlLCBERU0wODEwX3BjdF9jaGFuZ2UsIFJFUDA4MTBfcGN0X2NoYW5nZSwgVU5BRjA4MTBfcGN0X2NoYW5nZSwgREVNMTAxMl9wY3RfY2hhbmdlLCBSRVAxMDEyX3BjdF9jaGFuZ2UsIFVOQUYxMDEyX3BjdF9jaGFuZ2UsIERFTTEyMTRfcGN0X2NoYW5nZSwgUkVQMTIxNF9wY3RfY2hhbmdlLCBVTkFGMTIxNF9wY3RfY2hhbmdlLCBERU0xNDE2X3BjdF9jaGFuZ2UsIFJFUDE0MTZfcGN0X2NoYW5nZSwgVU5BRjE0MTZfcGN0X2NoYW5nZSwgREVNMTYxOF9wY3RfY2hhbmdlLCBSRVAxNjE4X3BjdF9jaGFuZ2UsIFVOQUYxNjE4X3BjdF9jaGFuZ2UsIERFTTE4MjBfcGN0X2NoYW5nZSwgUkVQMTgyMF9wY3RfY2hhbmdlLCBVTkFGMTgyMF9wY3RfY2hhbmdlLCAgREVNMjAyMl9wY3RfY2hhbmdlLCBSRVAyMDIyX3BjdF9jaGFuZ2UsIFVOQUYyMDIyX3BjdF9jaGFuZ2UsIERFTTIyMjRfcGN0X2NoYW5nZSwgUkVQMjIyNF9wY3RfY2hhbmdlLCBVTkFGMjIyNF9wY3RfY2hhbmdlLCBERU0wNDI0X3BjdF9jaGFuZ2UsIFJFUDA0MjRfcGN0X2NoYW5nZSwgVU5BRjA0MjRfcGN0X2NoYW5nZSlcbmBgYCJ9 -->
-<pre class="r"><code>compare_all &lt;- registrations_2024 |&gt; 
-  left_join(registrations_2004, by=&#39;COUNTY&#39;) |&gt; 
-  left_join(registrations_2006, by=&#39;COUNTY&#39;) |&gt; 
-  left_join(registrations_2008, by=&#39;COUNTY&#39;) |&gt; 
-  left_join(registrations_2010, by=&#39;COUNTY&#39;) |&gt; 
-  left_join(registrations_2012, by=&#39;COUNTY&#39;) |&gt; 
-  left_join(registrations_2014, by=&#39;COUNTY&#39;) |&gt; 
-  left_join(registrations_2016, by=&#39;COUNTY&#39;) |&gt; 
-  left_join(registrations_2018, by=&#39;COUNTY&#39;) |&gt; 
-  left_join(registrations_2020, by=&#39;COUNTY&#39;) |&gt; 
-  left_join(registrations_2022, by=&#39;COUNTY&#39;) |&gt; 
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29tcGFyZV9hbGwgPC0gY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMjQgfD4gXG4gIGxlZnRfam9pbihjdXJyZW50X3JlZ2lzdHJhdGlvbnNfMjAxNCwgYnk9J0NPVU5UWScpIHw+IFxuICBsZWZ0X2pvaW4oY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMTYsIGJ5PSdDT1VOVFknKSB8PiBcbiAgbGVmdF9qb2luKGN1cnJlbnRfcmVnaXN0cmF0aW9uc18yMDE4LCBieT0nQ09VTlRZJykgfD4gXG4gIGxlZnRfam9pbihjdXJyZW50X3JlZ2lzdHJhdGlvbnNfMjAyMCwgYnk9J0NPVU5UWScpIHw+IFxuICBsZWZ0X2pvaW4oY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMjIsIGJ5PSdDT1VOVFknKSB8PiBcbiAgbXV0YXRlKFxuICAgICMyMDE0LTIwMTYgcGN0X2NoYW5nZVxuICAgIERFTTE0MTZfcGN0X2NoYW5nZSA9IChERU0xNi1ERU0xNCkvREVNMTQqMTAwLCBSRVAxNDE2X3BjdF9jaGFuZ2UgPSAoUkVQMTYtUkVQMTQpL1JFUDE0KjEwMCwgVU5BRjE0MTZfcGN0X2NoYW5nZSA9IChVTkFGMTYtVU5BRjE0KS9VTkFGMTQqMTAwLFxuICAgICMyMDE2LTIwMTggcGN0X2NoYW5nZVxuICAgIERFTTE2MThfcGN0X2NoYW5nZSA9IChERU0xOC1ERU0xNikvREVNMTYqMTAwLCBSRVAxNjE4X3BjdF9jaGFuZ2UgPSAoUkVQMTgtUkVQMTYpL1JFUDE2KjEwMCwgVU5BRjE2MThfcGN0X2NoYW5nZSA9IChVTkFGMTgtVU5BRjE2KS9VTkFGMTYqMTAwLFxuICAgICMyMDE4LTIwMjAgcGN0X2NoYW5nZVxuICAgIERFTTE4MjBfcGN0X2NoYW5nZSA9IChERU0yMC1ERU0xOCkvREVNMTgqMTAwLCBSRVAxODIwX3BjdF9jaGFuZ2UgPSAoUkVQMjAtUkVQMTgpL1JFUDE4KjEwMCwgVU5BRjE4MjBfcGN0X2NoYW5nZSA9IChVTkFGMjAtVU5BRjE4KS9VTkFGMTgqMTAwLFxuICAgICMyMDIwLTIwMjIgcGN0X2NoYW5nZVxuICAgIERFTTIwMjJfcGN0X2NoYW5nZSA9IChERU0yMi1ERU0yMCkvREVNMjAqMTAwLCBSRVAyMDIyX3BjdF9jaGFuZ2UgPSAoUkVQMjItUkVQMjApL1JFUDIwKjEwMCwgVU5BRjIwMjJfcGN0X2NoYW5nZSA9IChVTkFGMjItVU5BRjIwKS9VTkFGMjAqMTAwLFxuICAgICMyMDIyLTIwMjQgcGN0X2NoYW5nZVxuICAgIERFTTIyMjRfcGN0X2NoYW5nZSA9IChERU0yNC1ERU0yMikvREVNMjIqMTAwLCBSRVAyMjI0X3BjdF9jaGFuZ2UgPSAoUkVQMjQtUkVQMjIpL1JFUDIyKjEwMCwgVU5BRjIyMjRfcGN0X2NoYW5nZSA9IChVTkFGMjQtVU5BRjIyKS9VTkFGMjIqMTAwLFxuICAgICMyMDE0LTIwMjQgcGN0X2NoYW5nZVxuICAgIERFTTE0MjRfcGN0X2NoYW5nZSA9IChERU0yNC1ERU0xNCkvREVNMTQqMTAwLCBSRVAxNDI0X3BjdF9jaGFuZ2UgPSAoUkVQMjQtUkVQMTQpL1JFUDE0KjEwMCwgVU5BRjE0MjRfcGN0X2NoYW5nZSA9IChVTkFGMjQtVU5BRjE0KS9VTkFGMTQqMTAwKVxuICBcbmNsZWFuZXJfY29tcGFyZV9hbGwgPC0gY29tcGFyZV9hbGwgfD4gXG4gIHNlbGVjdChDT1VOVFksIERFTTE0MTZfcGN0X2NoYW5nZSwgUkVQMTQxNl9wY3RfY2hhbmdlLCBVTkFGMTQxNl9wY3RfY2hhbmdlLCBERU0xNjE4X3BjdF9jaGFuZ2UsIFJFUDE2MThfcGN0X2NoYW5nZSwgVU5BRjE2MThfcGN0X2NoYW5nZSwgREVNMTgyMF9wY3RfY2hhbmdlLCBSRVAxODIwX3BjdF9jaGFuZ2UsIFVOQUYxODIwX3BjdF9jaGFuZ2UsICBERU0yMDIyX3BjdF9jaGFuZ2UsIFJFUDIwMjJfcGN0X2NoYW5nZSwgVU5BRjIwMjJfcGN0X2NoYW5nZSwgREVNMjIyNF9wY3RfY2hhbmdlLCBSRVAyMjI0X3BjdF9jaGFuZ2UsIFVOQUYyMjI0X3BjdF9jaGFuZ2UsIERFTTE0MjRfcGN0X2NoYW5nZSwgUkVQMTQyNF9wY3RfY2hhbmdlLCBVTkFGMTQyNF9wY3RfY2hhbmdlLCBUT1RBTDI0KVxuYGBgIn0= -->
+<pre class="r"><code>compare_all &lt;- current_registrations_2024 |&gt; 
+  left_join(current_registrations_2014, by=&#39;COUNTY&#39;) |&gt; 
+  left_join(current_registrations_2016, by=&#39;COUNTY&#39;) |&gt; 
+  left_join(current_registrations_2018, by=&#39;COUNTY&#39;) |&gt; 
+  left_join(current_registrations_2020, by=&#39;COUNTY&#39;) |&gt; 
+  left_join(current_registrations_2022, by=&#39;COUNTY&#39;) |&gt; 
   mutate(
-    #2004-2006 pct_change
-    DEM0406_pct_change = (DEM06-DEM04)/DEM06*100, REP0406_pct_change = (REP06-REP04)/REP06*100, UNAF0406_pct_change = (UNAF06-UNAF04)/UNAF04*100,
-    #2006-2008 pct_change
-    DEM0608_pct_change = (DEM08-DEM06)/DEM06*100, REP0608_pct_change = (REP08-REP06)/REP06*100, UNAF0608_pct_change = (UNAF08-UNAF06)/UNAF06*100,
-     #2008-2010 pct_change
-    DEM0810_pct_change = (DEM10-DEM08)/DEM08*100, REP0810_pct_change = (REP10-REP08)/REP08*100, UNAF0810_pct_change = (UNAF10-UNAF08)/UNAF08*100,
-    #2010-2012 pct_change
-    DEM1012_pct_change = (DEM12-DEM10)/DEM10*100, REP1012_pct_change = (REP12-REP10)/REP10*100, UNAF1012_pct_change = (UNAF12-UNAF10)/UNAF10*100,
-    #2012-2014 pct_change
-    DEM1214_pct_change = (DEM14-DEM12)/DEM12*100, REP1214_pct_change = (REP14-REP12)/REP12*100, UNAF1214_pct_change = (UNAF14-UNAF12)/UNAF12*100,
     #2014-2016 pct_change
     DEM1416_pct_change = (DEM16-DEM14)/DEM14*100, REP1416_pct_change = (REP16-REP14)/REP14*100, UNAF1416_pct_change = (UNAF16-UNAF14)/UNAF14*100,
     #2016-2018 pct_change
@@ -1971,18 +1893,48 @@ years I am looking at) starting at 2016-2018 percent change.</h3>
     DEM2022_pct_change = (DEM22-DEM20)/DEM20*100, REP2022_pct_change = (REP22-REP20)/REP20*100, UNAF2022_pct_change = (UNAF22-UNAF20)/UNAF20*100,
     #2022-2024 pct_change
     DEM2224_pct_change = (DEM24-DEM22)/DEM22*100, REP2224_pct_change = (REP24-REP22)/REP22*100, UNAF2224_pct_change = (UNAF24-UNAF22)/UNAF22*100,
-    #2004-2024 pct_change
-    DEM0424_pct_change = (DEM24-DEM04)/DEM04*100, REP0424_pct_change = (REP24-REP04)/REP04*100, UNAF0424_pct_change = (UNAF24-UNAF04)/UNAF04*100)
+    #2014-2024 pct_change
+    DEM1424_pct_change = (DEM24-DEM14)/DEM14*100, REP1424_pct_change = (REP24-REP14)/REP14*100, UNAF1424_pct_change = (UNAF24-UNAF14)/UNAF14*100)
   
 cleaner_compare_all &lt;- compare_all |&gt; 
-  select(COUNTY, DEM0406_pct_change, REP0406_pct_change, UNAF0406_pct_change, DEM0608_pct_change, REP0608_pct_change, UNAF0608_pct_change, DEM0810_pct_change, REP0810_pct_change, UNAF0810_pct_change, DEM1012_pct_change, REP1012_pct_change, UNAF1012_pct_change, DEM1214_pct_change, REP1214_pct_change, UNAF1214_pct_change, DEM1416_pct_change, REP1416_pct_change, UNAF1416_pct_change, DEM1618_pct_change, REP1618_pct_change, UNAF1618_pct_change, DEM1820_pct_change, REP1820_pct_change, UNAF1820_pct_change,  DEM2022_pct_change, REP2022_pct_change, UNAF2022_pct_change, DEM2224_pct_change, REP2224_pct_change, UNAF2224_pct_change, DEM0424_pct_change, REP0424_pct_change, UNAF0424_pct_change)</code></pre>
+  select(COUNTY, DEM1416_pct_change, REP1416_pct_change, UNAF1416_pct_change, DEM1618_pct_change, REP1618_pct_change, UNAF1618_pct_change, DEM1820_pct_change, REP1820_pct_change, UNAF1820_pct_change,  DEM2022_pct_change, REP2022_pct_change, UNAF2022_pct_change, DEM2224_pct_change, REP2224_pct_change, UNAF2224_pct_change, DEM1424_pct_change, REP1424_pct_change, UNAF1424_pct_change, TOTAL24)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+</div>
+<div id="looking-by-county" class="section level3">
+<h3>Looking by county!</h3>
+</div>
+<div id="prince-georges-county-had-a-73-increase-in-unaffiliated-registered-voters-compared-to-only-an-about-6.5-increase-in-registered-democrats-and-a-4.2-decrease-in-registered-republicans." class="section level3">
+<h3>Prince George’s County had a 73% increase in unaffiliated registered
+voters, compared to only an about 6.5% increase in registered Democrats
+and a 4.2% decrease in registered Republicans.</h3>
+</div>
+<div id="frederick-which-had-increases-all-around-had-a-substantially-higher-increase-in-registered-unaffiliated-voters-also." class="section level3">
+<h3>Frederick, which had increases all around, had a substantially
+higher increase in registered unaffiliated voters also.</h3>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY2xlYW5lcl9jb21wYXJlX2FsbCB8PiBcbiAgYXJyYW5nZShkZXNjKFVOQUYxNDI0X3BjdF9jaGFuZ2UpKXw+IFxuICBzZWxlY3QoQ09VTlRZLCBVTkFGMTQyNF9wY3RfY2hhbmdlLCBERU0xNDI0X3BjdF9jaGFuZ2UsIFJFUDE0MjRfcGN0X2NoYW5nZSwgVE9UQUwyNCl8PiBcbiAgZmlsdGVyKFRPVEFMMjQgPiAxMDAwMDApXG5gYGAifQ== -->
+<pre class="r"><code>cleaner_compare_all |&gt; 
+  arrange(desc(UNAF1424_pct_change))|&gt; 
+  select(COUNTY, UNAF1424_pct_change, DEM1424_pct_change, REP1424_pct_change, TOTAL24)|&gt; 
+  filter(TOTAL24 &gt; 100000)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibnJvdyI6MTIsIm5jb2wiOjUsInN1bW1hcnkiOnsiQSB0aWJibGUiOlsiMTIgw5cgNSJdfX0sInJkZiI6Ikg0c0lBQUFBQUFBQUF3dHlpVERtaXVCaVlHQmdabUJoWW1SZ1pnVXlHVmhEUTl4MExSaUFJa0FPSXdNTEF5ZUlyZ0FxRWdiSkFyRUFFUE5BSlhnQ2d2UVUzRjM5Zzl4ZDFZT2hZcHh1UWE0dXJrR2V6dDVRQVhabkQ4Y2dIMWVZUER1UTUrWWY1QUxsc25uNGh6dkNlZXpPamtGQi9qNCtVQzZ2azZOUGlLZXZmNUNyZ3JPL0hsU1FOY1EveEJHbWdnOUpoV2RJSk14ZGpuNStyZ3FPUWFGK0xxNHdsVnpoanNFZW5uN3VJZjUrTUJGZmY3OFFkMzlmMTZCSWtFa2dmUTVCTmpaUFhlMmFISHlGZEN4MWVrMGRQSysvYzFwNlJjN0I3VlhRdXJPZTV4M2M1aVdjTkY3UzZlRHl6cWE5TTZqSndlWGgrZm0vOUl3Y25OZFZhcnk2YzlMQnVlWko5UCtPVUFmbktoNk5iT2xWRGc2SjB6N29sWDkyTVBCODQvZThXUUZ1aitUcGh4TnF6UU1jWEwvbHpaM0lYdXhnL2U3ZnJnYlgvUTRNMy9XMmNUeis1R0J2MmxKZm5yVE1RWkw1b2FOdDRCd0h6bFovalpWYXJ4d1VMZlRpcCtwcjJQODdkR3ptUXFsNkIwUExmVEpQdVowT0NCeFo4MlhHakUwT1dwMEtaOFI2MVdIMkhCRDQzQjExVmV5TWcvcmhsZFhWMHJFSGhIM2NlYWRtTDNBd3RPWHJzNHE2ZmtBcmxjVXJWWnpkUWQ3aVJaSEdhMk1Ic1NOekU0L1dpanFJSFo5dTFwR2NkSUJydWZPekZhZjNPL0Q5ZlhTaHBuU0pnOWFuZ2o5OTlXY1BHS3VaeFM4UU9RMnp4MUZwTXlnbE1UaHk4cjRBMFE3Lzlod0E4OWt2SllCcFhnMHczK0gveFFBd1gzRlpINWdPVUxFQ1NUaEtwUE9BK1pMeFQ4RHFmdXlCNkZObE9jVUFCaWdKa2pVdk1UZTFHSm9ZV1dFcHlkay8xQStlQklSRC9SemRERTJNVE9JTGtrdmlrek1TODlKVG9WSkNMcTYrT0dTQ1hBT3d5N0NERTUyUkNacERPSXZ5eS9WZ2p1RUZZcVlHSVBILy8vOHY2QzVPemtrc2hya1lKc2lWa2xpU3FKZFdCTlFQNVAxRDA4S2VYMUNTbVo4SDFNUUV5bnRzYUpvWmk5QUVCRXJ6UUM1SjBVM09LTTNMMWpVMFFwTm5Mc2hMQjFrS0ZvSUFYaWliQjRuTkNuRUcwMytvZGpaWThLYm1wV2Ztd2NLRE5TY3hLVFVIWm5KS2Foa3NQd0lEQkJ3ZWVnVkZtWGtsTUk4Q1JZdjFTdkpMRW1GYXVKTHpjMkFpWUs4ei9BTUEzVkIySXBFRUFBQT0ifQ== -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["COUNTY"],"name":[1],"type":["chr"],"align":["left"]},{"label":["UNAF1424_pct_change"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["DEM1424_pct_change"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["REP1424_pct_change"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["TOTAL24"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"PR. GEORGE'S","2":"72.94122","3":"6.449103","4":"-4.237836","5":"612741"},{"1":"FREDERICK","2":"58.14197","3":"43.925251","4":"11.882152","5":"205245"},{"1":"CHARLES","2":"51.68696","3":"27.933574","4":"-4.824490","5":"125900"},{"1":"HARFORD","2":"45.83065","3":"2.120695","4":"17.238503","5":"195148"},{"1":"HOWARD","2":"45.23733","3":"31.209053","4":"-13.197298","5":"238872"},{"1":"CARROLL","2":"41.86122","3":"6.253789","4":"7.805574","5":"130325"},{"1":"BALTIMORE CO.","2":"41.76415","3":"3.190092","4":"5.692007","5":"578375"},{"1":"TOTAL","2":"39.36307","3":"8.609729","4":"5.694913","5":"4231403"},{"1":"BALTIMORE CITY","2":"38.97572","3":"1.922553","4":"-3.331672","5":"399811"},{"1":"ANNE ARUNDEL","2":"38.95350","3":"17.225557","4":"3.873968","5":"415737"},{"1":"WASHINGTON","2":"32.76242","3":"-4.192066","4":"13.473518","5":"101318"},{"1":"MONTGOMERY","2":"16.28876","3":"13.267828","4":"-19.149267","5":"688741"}],"options":{"columns":{"min":{},"max":[10],"total":[5]},"rows":{"min":[10],"max":[10],"total":[12]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>```</p>
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiVW5hZmZpbGlhdGVkIFZvdGVycyIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKYGBge3Igc2V0dXAsIGluY2x1ZGU9RkFMU0V9CmtuaXRyOjpvcHRzX2NodW5rJHNldChlY2hvID0gVFJVRSkKCm9wdGlvbnMoc2NpcGVuPTk5OSkKCmxpYnJhcnkodGlkeXZlcnNlKQpsaWJyYXJ5KGphbml0b3IpCmBgYAoKYGBge3J9CiMgMjAyNCByZWdpc3RyYXRpb25zCnJlZ2lzdHJhdGlvbnNfMjAyNCA8LSByZWFkX2Nzdigib2N0b2Jlcl9kYXRhL29jdF8yNC5jc3YiKSB8PgogIHJlbmFtZShERU0yND1ERU0sIFJFUDI0PVJFUCwgTkxNMjQ9TkxNLCBHUk4yND1HUk4sIExJQjI0PUxJQiwgVU5BRjI0PVVOQUYsIE9USDI0PU9USCwgVE9UQUwyND1UT1RBTCkKICAKYGBgCgpgYGB7cn0KIyAyMDIyIHJlZ2lzdHJhdGlvbnMKcmVnaXN0cmF0aW9uc18yMDIyIDwtIHJlYWRfY3N2KCJvY3RvYmVyX2RhdGEvb2N0XzIyLmNzdiIpfD4KIHJlbmFtZShERU0yMj1ERU0sIFJFUDIyPVJFUCwgR1JOMjI9R1JOLCBMSUIyMj1MSUIsIFdDUDIyPVdDUCwgVU5BRjIyPVVOQUYsIE9USDIyPU9USCwgVE9UQUwyMj1UT1RBTCkKCmBgYAoKYGBge3J9CiMgMjAyMCByZWdpc3RyYXRpb25zCnJlZ2lzdHJhdGlvbnNfMjAyMCA8LSByZWFkX2Nzdigib2N0b2Jlcl9kYXRhL29jdF8yMC5jc3YiKXw+CiByZW5hbWUoREVNMjA9REVNLCBSRVAyMD1SRVAsIEdSTjIwPUdSTiwgTElCMjA9TElCLCBXQ1AyMD1XQ1AsIFVOQUYyMD1VTkFGLCBPVEgyMD1PVEgsIFRPVEFMMjA9VE9UQUwsIEJBUjIwPUJBUikKYGBgCgpgYGB7cn0KIyAyMDE4IHJlZ2lzdHJhdGlvbnMKcmVnaXN0cmF0aW9uc18yMDE4IDwtIHJlYWRfY3N2KCJvY3RvYmVyX2RhdGEvb2N0XzE4LmNzdiIpfD4KICByZW5hbWUoREVNMTg9REVNLCBSRVAxOD1SRVAsIEdSTjE4PUdSTiwgTElCMTg9TElCLCBVTkFGMTg9VU5BRiwgT1RIMTg9T1RILCBUT1RBTDE4PVRPVEFMKQpgYGAKCmBgYHtyfQojIDIwMTYgcmVnaXN0cmF0aW9ucwpyZWdpc3RyYXRpb25zXzIwMTYgPC0gcmVhZF9jc3YoIm9jdG9iZXJfZGF0YS9vY3RfMTYuY3N2Iil8PgogIHJlbmFtZShERU0xNj1ERU0sIFJFUDE2PVJFUCwgR1JOMTY9R1JOLCBMSUIxNj1MSUIsIFVOQUYxNj1VTkFGLCBPVEgxNj1PVEgsIFRPVEFMMTY9VE9UQUwpCmBgYAoKYGBge3J9CiMgMjAxNCByZWdpc3RyYXRpb25zCnJlZ2lzdHJhdGlvbnNfMjAxNCA8LSByZWFkX2Nzdigib2N0b2Jlcl9kYXRhL29jdF8xNC5jc3YiKXw+CiAgcmVuYW1lKERFTTE0PURFTSwgUkVQMTQ9UkVQLCBHUk4xND1HUk4sIExJQjE0PUxJQiwgVU5BRjE0PVVOQUYsIE9USDE0PU9USCwgVE9UQUwxND1UT1RBTCkKYGBgCgpgYGB7cn0KIyAyMDEyIHJlZ2lzdHJhdGlvbnMKcmVnaXN0cmF0aW9uc18yMDEyIDwtIHJlYWRfY3N2KCJvY3RvYmVyX2RhdGEvb2N0XzEyLmNzdiIpfD4KICByZW5hbWUoREVNMTI9REVNLCBSRVAxMj1SRVAsIEdSTjEyPUdSTiwgTElCMTI9TElCLCBBbUUxMj1BbUUsIFVOQUYxMj1VTkFGLCBPVEgxMj1PVEgsIFRPVEFMMTI9VE9UQUwpCmBgYAoKYGBge3J9CiMgMjAxMCByZWdpc3RyYXRpb25zCnJlZ2lzdHJhdGlvbnNfMjAxMCA8LSByZWFkX2Nzdigib2N0b2Jlcl9kYXRhL29jdF8xMC5jc3YiKXw+CiAgcmVuYW1lKERFTTEwPURFTSwgUkVQMTA9UkVQLCBHUk4xMD1HUk4sIExJQjEwPUxJQiwgVU5BRjEwPVVOQUYsIE9USDEwPU9USCwgVE9UQUwxMD1UT1RBTCkKYGBgCgpgYGB7cn0KIyAyMDA4IHJlZ2lzdHJhdGlvbnMKcmVnaXN0cmF0aW9uc18yMDA4IDwtIHJlYWRfY3N2KCJvY3RvYmVyX2RhdGEvb2N0XzA4LmNzdiIpfD4KICByZW5hbWUoREVNMDg9REVNLCBSRVAwOD1SRVAsIEdSTjA4PUdSTiwgTElCMDg9TElCLCBVTkFGMDg9VU5BRiwgT1RIMDg9T1RILCBUT1RBTDA4PVRPVEFMLCBDT04wOD1DT04sIElORDA4PUlORCkKYGBgCgpgYGB7cn0KIyAyMDA2IHJlZ2lzdHJhdGlvbnMKcmVnaXN0cmF0aW9uc18yMDA2IDwtIHJlYWRfY3N2KCJvY3RvYmVyX2RhdGEvZml4ZWRfb2N0XzA2LmNzdiIpfD4KICByZW5hbWUoREVNMDY9REVNLCBSRVAwNj1SRVAsIEdSTjA2PUdSTiwgQ09OU1QwNj1DT05TVCwgTElCMDY9TElCLCBQT1AwNj1QT1AsIFVOQUYwNj1VTkFGLCBPVEgwNj1PVEgsIFRPVEFMMDY9VE9UQUwpCmBgYAoKYGBge3J9CiMgMjAwNCByZWdpc3RyYXRpb25zCnJlZ2lzdHJhdGlvbnNfMjAwNCA8LSByZWFkX2Nzdigib2N0b2Jlcl9kYXRhL29jdF8wNC5jc3YiKXw+CiByZW5hbWUoREVNMDQ9REVNLCBSRVAwND1SRVAsIEdSTjA0PUdSTiwgTElCMDQ9TElCLCBVTkFGMDQ9VU5BRiwgT1RIMDQ9T1RILCBUT1RBTDA0PVRPVEFMLCBDT05TVDA0PUNPTlNULCBQT1AwND1QT1ApCmBgYAoKIyMjIFRoaXMgc2hvd3Mgd2FzIGEgLS45NCUgY2hhbmdlIGluIERlbW9jcmF0aWMgdm90ZXJzLCBhIDEuOSUgaW5jcmVhc2UgaW4gUmVwdWJsaWNhbiB2b3RlcnMgYW5kIGEgMTAuMiUgaW5jcmVhc2UgaW4gdW5hZmZpbGlhdGVkIHZvdGVycyBiZXR3ZWVuIFNlcHRlbWJlciAyMDIyIGFuZCBTZXB0ZW1iZXIgMjAyNC4gSSBhbHNvIHNlZSB0aGF0IG1vcmUgdGhhbiAyMCUgb2YgTWFyeWxhbmQncyB2b3RlcnMgYXJlIHJlZ2lzdGVyZWQgYXMgdW5hZmZpbGlhdGVkLiAKCmBgYHtyfQpyZWdpc3RyYXRpb25zXzIwMjQgPC0gcmVnaXN0cmF0aW9uc18yMDI0IHw+IAogIG11dGF0ZShwY3RfREVNMjQgPSAoREVNMjQvVE9UQUwyNCkqMTAwLCBwY3RfUkVQMjQgPSAoUkVQMjQvVE9UQUwyNCkqMTAwLCBwY3RfVU5BRjI0ID0gKFVOQUYyNC9UT1RBTDI0KSoxMDApCgpyZWdpc3RyYXRpb25zXzIwMjIgPC0gcmVnaXN0cmF0aW9uc18yMDIyIHw+IAogIG11dGF0ZShwY3RfREVNMjIgPSAoREVNMjIvVE9UQUwyMikqMTAwLCBwY3RfUkVQMjIgPSAoUkVQMjIvVE9UQUwyMikqMTAwLCBwY3RfVU5BRjIyID0gKFVOQUYyMi9UT1RBTDIyKSoxMDApCgpjb21wYXJlXzIyXzI0IDwtIHJlZ2lzdHJhdGlvbnNfMjAyNCB8PiAKICBsZWZ0X2pvaW4ocmVnaXN0cmF0aW9uc18yMDIyLCBieT0nQ09VTlRZJykgfD4gCiAgbXV0YXRlKERFTV9wY3RfY2hhbmdlID0gKERFTTI0LURFTTIyKS9ERU0yMioxMDAsIFJFUF9wY3RfY2hhbmdlID0gKFJFUDI0LVJFUDIyKS9SRVAyMioxMDAsIFVOQUZfcGN0X2NoYW5nZSA9IChVTkFGMjQtVU5BRjIyKS9VTkFGMjIqMTAwKSB8PiAKICBhcnJhbmdlKGRlc2MoVU5BRl9wY3RfY2hhbmdlKSkKYGBgCgojIyMgVGhpcyBzaG93cyB0aGVyZSB3YXMgYW4gMzEuNTYlIGluY3JlYXNlIGluIHJlZ2lzdGVyZWQgRGVtb2NyYXRzLCBhIDEzLjYlIGluY3JlYXFzZSBpbiByZWdpc3RlcmVkIFJlcHVibGljYW5zIGFuZCBhIDExNy44JSBpbmNyZWFzZSBpbiByZWdpc3RlcmVkIHVuYWZmaWxpYXRlZCB2b3RlcnMgYmV0d2VlbiAyMDA0IGFuZCAyMDI0LgoKYGBge3J9CnJlZ2lzdHJhdGlvbnNfMjAyNCA8LSByZWdpc3RyYXRpb25zXzIwMjQgfD4gCiAgbXV0YXRlKHBjdF9ERU0yNCA9IChERU0yNC9UT1RBTDI0KSoxMDAsIHBjdF9SRVAyNCA9IChSRVAyNC9UT1RBTDI0KSoxMDAsIHBjdF9VTkFGMjQgPSAoVU5BRjI0L1RPVEFMMjQpKjEwMCkKCnJlZ2lzdHJhdGlvbnNfMjAwNCA8LSByZWdpc3RyYXRpb25zXzIwMDQgfD4gCiAgbXV0YXRlKHBjdF9ERU0wNCA9IChERU0wNC9UT1RBTDA0KSoxMDAsIHBjdF9SRVAwNCA9IChSRVAwNC9UT1RBTDA0KSoxMDAsIHBjdF9VTkFGMDQgPSAoVU5BRjA0L1RPVEFMMDQpKjEwMCkKCmNvbXBhcmVfMDRfMjQgPC0gcmVnaXN0cmF0aW9uc18yMDI0IHw+IAogIGxlZnRfam9pbihyZWdpc3RyYXRpb25zXzIwMDQsIGJ5PSdDT1VOVFknKSB8PiAKICBtdXRhdGUoREVNX3BjdF9jaGFuZ2UgPSAoREVNMjQtREVNMDQpL0RFTTA0KjEwMCwgUkVQX3BjdF9jaGFuZ2UgPSAoUkVQMjQtUkVQMDQpL1JFUDA0KjEwMCwgVU5BRl9wY3RfY2hhbmdlID0gKFVOQUYyNC1VTkFGMDQpL1VOQUYwNCoxMDApIHw+IAogIGFycmFuZ2UoVU5BRl9wY3RfY2hhbmdlKQpgYGAKCiMjIyBHZXR0aW5nIHBlcmNlbnRhZ2VzIGZvciB0aGUgb3RoZXIgZGF0YWZyYW1lcyEKCmBgYHtyfQpyZWdpc3RyYXRpb25zXzIwMTYgPC0gcmVnaXN0cmF0aW9uc18yMDE2IHw+IAogIG11dGF0ZShwY3RfREVNMTYgPSAoREVNMTYvVE9UQUwxNikqMTAwLCBwY3RfUkVQMTYgPSAoUkVQMTYvVE9UQUwxNikqMTAwLCBwY3RfVU5BRjE2ID0gKFVOQUYxNi9UT1RBTDE2KSoxMDApCgpyZWdpc3RyYXRpb25zXzIwMTggPC0gcmVnaXN0cmF0aW9uc18yMDE4IHw+IAogIG11dGF0ZShwY3RfREVNMTggPSAoREVNMTgvVE9UQUwxOCkqMTAwLCBwY3RfUkVQMTggPSAoUkVQMTgvVE9UQUwxOCkqMTAwLCBwY3RfVU5BRjE4ID0gKFVOQUYxOC9UT1RBTDE4KSoxMDApCgpyZWdpc3RyYXRpb25zXzIwMjAgPC0gcmVnaXN0cmF0aW9uc18yMDIwIHw+IAogIG11dGF0ZShwY3RfREVNMjAgPSAoREVNMjAvVE9UQUwyMCkqMTAwLCBwY3RfUkVQMjAgPSAoUkVQMjAvVE9UQUwyMCkqMTAwLCBwY3RfVU5BRjIwID0gKFVOQUYyMC9UT1RBTDIwKSoxMDApCgpyZWdpc3RyYXRpb25zXzIwMTQgPC0gcmVnaXN0cmF0aW9uc18yMDE0IHw+IAogIG11dGF0ZShwY3RfREVNMTQgPSAoREVNMTQvVE9UQUwxNCkqMTAwLCBwY3RfUkVQMTQgPSAoUkVQMTQvVE9UQUwxNCkqMTAwLCBwY3RfVU5BRjE0ID0gKFVOQUYxNC9UT1RBTDE0KSoxMDApCgpyZWdpc3RyYXRpb25zXzIwMTIgPC0gcmVnaXN0cmF0aW9uc18yMDEyIHw+IAogIG11dGF0ZShwY3RfREVNMTIgPSAoREVNMTIvVE9UQUwxMikqMTAwLCBwY3RfUkVQMTIgPSAoUkVQMTIvVE9UQUwxMikqMTAwLCBwY3RfVU5BRjEyID0gKFVOQUYxMi9UT1RBTDEyKSoxMDApCgpyZWdpc3RyYXRpb25zXzIwMTAgPC0gcmVnaXN0cmF0aW9uc18yMDEwIHw+IAogIG11dGF0ZShwY3RfREVNMTAgPSAoREVNMTAvVE9UQUwxMCkqMTAwLCBwY3RfUkVQMTAgPSAoUkVQMTAvVE9UQUwxMCkqMTAwLCBwY3RfVU5BRjEwID0gKFVOQUYxMC9UT1RBTDEwKSoxMDApCgpyZWdpc3RyYXRpb25zXzIwMDggPC0gcmVnaXN0cmF0aW9uc18yMDA4IHw+IAogIG11dGF0ZShwY3RfREVNMDggPSAoREVNMDgvVE9UQUwwOCkqMTAwLCBwY3RfUkVQMDggPSAoUkVQMDgvVE9UQUwwOCkqMTAwLCBwY3RfVU5BRjA4ID0gKFVOQUYwOC9UT1RBTDA4KSoxMDApCgpyZWdpc3RyYXRpb25zXzIwMDYgPC0gcmVnaXN0cmF0aW9uc18yMDA2IHw+IAogIG11dGF0ZShwY3RfREVNMDYgPSAoREVNMDYvVE9UQUwwNikqMTAwLCBwY3RfUkVQMDYgPSAoUkVQMDYvVE9UQUwwNikqMTAwLCBwY3RfVU5BRjA2PSAoVU5BRjA2L1RPVEFMMDYpKjEwMCkKYGBgCgojIyMgVHJ5aW5nIHRvIGRvIG9uZSBiaWcgbWVyZ2UgZm9yIGNvbXBhcmlzb24hCgojIyMgVW5hZmZpbGlhdGVkIHBlcmNlbnQgY2hhbmdlIHN0YXJ0cyBiZWluZyB0aGUgbGFyZ2VzdCAoaW4gdGhlIGxpbWl0ZWQgeWVhcnMgSSBhbSBsb29raW5nIGF0KSBzdGFydGluZyBhdCAyMDE2LTIwMTggcGVyY2VudCBjaGFuZ2UuCgpgYGB7cn0KY29tcGFyZV9hbGwgPC0gcmVnaXN0cmF0aW9uc18yMDI0IHw+IAogIGxlZnRfam9pbihyZWdpc3RyYXRpb25zXzIwMDQsIGJ5PSdDT1VOVFknKSB8PiAKICBsZWZ0X2pvaW4ocmVnaXN0cmF0aW9uc18yMDA2LCBieT0nQ09VTlRZJykgfD4gCiAgbGVmdF9qb2luKHJlZ2lzdHJhdGlvbnNfMjAwOCwgYnk9J0NPVU5UWScpIHw+IAogIGxlZnRfam9pbihyZWdpc3RyYXRpb25zXzIwMTAsIGJ5PSdDT1VOVFknKSB8PiAKICBsZWZ0X2pvaW4ocmVnaXN0cmF0aW9uc18yMDEyLCBieT0nQ09VTlRZJykgfD4gCiAgbGVmdF9qb2luKHJlZ2lzdHJhdGlvbnNfMjAxNCwgYnk9J0NPVU5UWScpIHw+IAogIGxlZnRfam9pbihyZWdpc3RyYXRpb25zXzIwMTYsIGJ5PSdDT1VOVFknKSB8PiAKICBsZWZ0X2pvaW4ocmVnaXN0cmF0aW9uc18yMDE4LCBieT0nQ09VTlRZJykgfD4gCiAgbGVmdF9qb2luKHJlZ2lzdHJhdGlvbnNfMjAyMCwgYnk9J0NPVU5UWScpIHw+IAogIGxlZnRfam9pbihyZWdpc3RyYXRpb25zXzIwMjIsIGJ5PSdDT1VOVFknKSB8PiAKICBtdXRhdGUoCiAgICAjMjAwNC0yMDA2IHBjdF9jaGFuZ2UKICAgIERFTTA0MDZfcGN0X2NoYW5nZSA9IChERU0wNi1ERU0wNCkvREVNMDYqMTAwLCBSRVAwNDA2X3BjdF9jaGFuZ2UgPSAoUkVQMDYtUkVQMDQpL1JFUDA2KjEwMCwgVU5BRjA0MDZfcGN0X2NoYW5nZSA9IChVTkFGMDYtVU5BRjA0KS9VTkFGMDQqMTAwLAogICAgIzIwMDYtMjAwOCBwY3RfY2hhbmdlCiAgICBERU0wNjA4X3BjdF9jaGFuZ2UgPSAoREVNMDgtREVNMDYpL0RFTTA2KjEwMCwgUkVQMDYwOF9wY3RfY2hhbmdlID0gKFJFUDA4LVJFUDA2KS9SRVAwNioxMDAsIFVOQUYwNjA4X3BjdF9jaGFuZ2UgPSAoVU5BRjA4LVVOQUYwNikvVU5BRjA2KjEwMCwKICAgICAjMjAwOC0yMDEwIHBjdF9jaGFuZ2UKICAgIERFTTA4MTBfcGN0X2NoYW5nZSA9IChERU0xMC1ERU0wOCkvREVNMDgqMTAwLCBSRVAwODEwX3BjdF9jaGFuZ2UgPSAoUkVQMTAtUkVQMDgpL1JFUDA4KjEwMCwgVU5BRjA4MTBfcGN0X2NoYW5nZSA9IChVTkFGMTAtVU5BRjA4KS9VTkFGMDgqMTAwLAogICAgIzIwMTAtMjAxMiBwY3RfY2hhbmdlCiAgICBERU0xMDEyX3BjdF9jaGFuZ2UgPSAoREVNMTItREVNMTApL0RFTTEwKjEwMCwgUkVQMTAxMl9wY3RfY2hhbmdlID0gKFJFUDEyLVJFUDEwKS9SRVAxMCoxMDAsIFVOQUYxMDEyX3BjdF9jaGFuZ2UgPSAoVU5BRjEyLVVOQUYxMCkvVU5BRjEwKjEwMCwKICAgICMyMDEyLTIwMTQgcGN0X2NoYW5nZQogICAgREVNMTIxNF9wY3RfY2hhbmdlID0gKERFTTE0LURFTTEyKS9ERU0xMioxMDAsIFJFUDEyMTRfcGN0X2NoYW5nZSA9IChSRVAxNC1SRVAxMikvUkVQMTIqMTAwLCBVTkFGMTIxNF9wY3RfY2hhbmdlID0gKFVOQUYxNC1VTkFGMTIpL1VOQUYxMioxMDAsCiAgICAjMjAxNC0yMDE2IHBjdF9jaGFuZ2UKICAgIERFTTE0MTZfcGN0X2NoYW5nZSA9IChERU0xNi1ERU0xNCkvREVNMTQqMTAwLCBSRVAxNDE2X3BjdF9jaGFuZ2UgPSAoUkVQMTYtUkVQMTQpL1JFUDE0KjEwMCwgVU5BRjE0MTZfcGN0X2NoYW5nZSA9IChVTkFGMTYtVU5BRjE0KS9VTkFGMTQqMTAwLAogICAgIzIwMTYtMjAxOCBwY3RfY2hhbmdlCiAgICBERU0xNjE4X3BjdF9jaGFuZ2UgPSAoREVNMTgtREVNMTYpL0RFTTE2KjEwMCwgUkVQMTYxOF9wY3RfY2hhbmdlID0gKFJFUDE4LVJFUDE2KS9SRVAxNioxMDAsIFVOQUYxNjE4X3BjdF9jaGFuZ2UgPSAoVU5BRjE4LVVOQUYxNikvVU5BRjE2KjEwMCwKICAgICMyMDE4LTIwMjAgcGN0X2NoYW5nZQogICAgREVNMTgyMF9wY3RfY2hhbmdlID0gKERFTTIwLURFTTE4KS9ERU0xOCoxMDAsIFJFUDE4MjBfcGN0X2NoYW5nZSA9IChSRVAyMC1SRVAxOCkvUkVQMTgqMTAwLCBVTkFGMTgyMF9wY3RfY2hhbmdlID0gKFVOQUYyMC1VTkFGMTgpL1VOQUYxOCoxMDAsCiAgICAjMjAyMC0yMDIyIHBjdF9jaGFuZ2UKICAgIERFTTIwMjJfcGN0X2NoYW5nZSA9IChERU0yMi1ERU0yMCkvREVNMjAqMTAwLCBSRVAyMDIyX3BjdF9jaGFuZ2UgPSAoUkVQMjItUkVQMjApL1JFUDIwKjEwMCwgVU5BRjIwMjJfcGN0X2NoYW5nZSA9IChVTkFGMjItVU5BRjIwKS9VTkFGMjAqMTAwLAogICAgIzIwMjItMjAyNCBwY3RfY2hhbmdlCiAgICBERU0yMjI0X3BjdF9jaGFuZ2UgPSAoREVNMjQtREVNMjIpL0RFTTIyKjEwMCwgUkVQMjIyNF9wY3RfY2hhbmdlID0gKFJFUDI0LVJFUDIyKS9SRVAyMioxMDAsIFVOQUYyMjI0X3BjdF9jaGFuZ2UgPSAoVU5BRjI0LVVOQUYyMikvVU5BRjIyKjEwMCwKICAgICMyMDA0LTIwMjQgcGN0X2NoYW5nZQogICAgREVNMDQyNF9wY3RfY2hhbmdlID0gKERFTTI0LURFTTA0KS9ERU0wNCoxMDAsIFJFUDA0MjRfcGN0X2NoYW5nZSA9IChSRVAyNC1SRVAwNCkvUkVQMDQqMTAwLCBVTkFGMDQyNF9wY3RfY2hhbmdlID0gKFVOQUYyNC1VTkFGMDQpL1VOQUYwNCoxMDApCiAgCmNsZWFuZXJfY29tcGFyZV9hbGwgPC0gY29tcGFyZV9hbGwgfD4gCiAgc2VsZWN0KENPVU5UWSwgREVNMDQwNl9wY3RfY2hhbmdlLCBSRVAwNDA2X3BjdF9jaGFuZ2UsIFVOQUYwNDA2X3BjdF9jaGFuZ2UsIERFTTA2MDhfcGN0X2NoYW5nZSwgUkVQMDYwOF9wY3RfY2hhbmdlLCBVTkFGMDYwOF9wY3RfY2hhbmdlLCBERU0wODEwX3BjdF9jaGFuZ2UsIFJFUDA4MTBfcGN0X2NoYW5nZSwgVU5BRjA4MTBfcGN0X2NoYW5nZSwgREVNMTAxMl9wY3RfY2hhbmdlLCBSRVAxMDEyX3BjdF9jaGFuZ2UsIFVOQUYxMDEyX3BjdF9jaGFuZ2UsIERFTTEyMTRfcGN0X2NoYW5nZSwgUkVQMTIxNF9wY3RfY2hhbmdlLCBVTkFGMTIxNF9wY3RfY2hhbmdlLCBERU0xNDE2X3BjdF9jaGFuZ2UsIFJFUDE0MTZfcGN0X2NoYW5nZSwgVU5BRjE0MTZfcGN0X2NoYW5nZSwgREVNMTYxOF9wY3RfY2hhbmdlLCBSRVAxNjE4X3BjdF9jaGFuZ2UsIFVOQUYxNjE4X3BjdF9jaGFuZ2UsIERFTTE4MjBfcGN0X2NoYW5nZSwgUkVQMTgyMF9wY3RfY2hhbmdlLCBVTkFGMTgyMF9wY3RfY2hhbmdlLCAgREVNMjAyMl9wY3RfY2hhbmdlLCBSRVAyMDIyX3BjdF9jaGFuZ2UsIFVOQUYyMDIyX3BjdF9jaGFuZ2UsIERFTTIyMjRfcGN0X2NoYW5nZSwgUkVQMjIyNF9wY3RfY2hhbmdlLCBVTkFGMjIyNF9wY3RfY2hhbmdlLCBERU0wNDI0X3BjdF9jaGFuZ2UsIFJFUDA0MjRfcGN0X2NoYW5nZSwgVU5BRjA0MjRfcGN0X2NoYW5nZSkKYGBgCgo=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiVW5hZmZpbGlhdGVkIFZvdGVycyIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKYGBge3Igc2V0dXAsIGluY2x1ZGU9RkFMU0V9CmtuaXRyOjpvcHRzX2NodW5rJHNldChlY2hvID0gVFJVRSkKCm9wdGlvbnMoc2NpcGVuPTk5OSkKCmxpYnJhcnkodGlkeXZlcnNlKQpsaWJyYXJ5KGphbml0b3IpCmBgYAoKYGBge3J9CiMgMjAyNCBjdXJyZW50IHJlZ2lzdHJhdGlvbnMKY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMjQgPC0gcmVhZF9jc3YoIjI0X3JlZ19jdXJyZW50X2NvcHkuY3N2IikKY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMjQgPC1jdXJyZW50X3JlZ2lzdHJhdGlvbnNfMjAyNFssLWMoMSwzLDQsNSw2LDcsOCw5LDEwLDExLDEyLDEzLDE0LDE1LDI0LDI1LDI2LDI3KV0gfD4KICBmaWx0ZXIoIWlzLm5hKC4uLjIpKSB8PgogIHJlbmFtZShDT1VOVFk9Li4uMiwgREVNMjQ9REVNLi4uMTYsIFJFUDI0PVJFUC4uLjE3LCBOTE0yND1OTE0uLi4xOCwgTElCMjQ9TElCLi4uMTksIEdSTjI0PUdSTi4uLjIwLCBVTkFGMjQ9VU5BRi4uLjIxLCBPVEgyND1PVEguLi4yMiwgVE9UQUwyND1UT1RBTC4uLjIzKQpgYGAKCmBgYHtyfQojIDIwMjIgY3VycmVudCByZWdpc3RyYXRpb25zCmN1cnJlbnRfcmVnaXN0cmF0aW9uc18yMDIyIDwtIHJlYWRfY3N2KCIyMl9yZWdfY3VycmVudF9jb3B5LmNzdiIpCmN1cnJlbnRfcmVnaXN0cmF0aW9uc18yMDIyIDwtY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMjJbLC1jKDIsMyw0LDUsNiw3LDgsOSwxMCwxMSldICB8PgogcmVuYW1lKENPVU5UWT0uLi4xLCBERU0yMj1ERU0uLi4xMiwgUkVQMjI9UkVQLi4uMTMsIEdSTjIyPUdSTi4uLjE0LCBMSUIyMj1MSUIuLi4xNSwgV0NQMjI9V0NQLi4uMTYsIFVOQUYyMj1VTkFGLi4uMTcsIE9USDIyPU9USC4uLjE4LCBUT1RBTDIyPVRPVEFMLi4uMTkpCmBgYAoKYGBge3J9CiMgMjAyMCBjdXJyZW50IHJlZ2lzdHJhdGlvbnMKY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMjAgPC0gcmVhZF9jc3YoIjIwX3JlZ19jdXJyZW50LmNzdiIpCmBgYAoKYGBge3J9CiMgMjAxOCBjdXJyZW50IHJlZ2lzdHJhdGlvbnMKY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMTggPC0gcmVhZF9jc3YoIjE4X3JlZ19jdXJyZW50LmNzdiIpCmBgYAoKYGBge3J9CiMgMjAxNiBjdXJyZW50IHJlZ2lzdHJhdGlvbnMKY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMTYgPC0gcmVhZF9jc3YoIjE2X3JlZ19jdXJyZW50LmNzdiIpCmBgYAoKYGBge3J9CiMgMjAxNCBjdXJyZW50IHJlZ2lzdHJhdGlvbnMKY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMTQgPC0gcmVhZF9jc3YoIjE0X3JlZ19jdXJyZW50LmNzdiIpCmBgYAoKIyMjIFRoaXMgc2hvd3Mgd2FzIGEgLTEuNCUgY2hhbmdlIGluIERlbW9jcmF0aWMgdm90ZXJzLCBhIDElIGluY3JlYXNlIGluIFJlcHVibGljYW4gdm90ZXJzIGFuZCBhIDkuOCUgaW5jcmVhc2UgaW4gdW5hZmZpbGlhdGVkIHZvdGVycyBiZXR3ZWVuIFNlcHRlbWJlciAyMDIyIGFuZCBTZXB0ZW1iZXIgMjAyNC4gSSBhbHNvIHNlZSB0aGF0IG1vcmUgdGhhbiAyMSUgb2YgTWFyeWxhbmQncyB2b3RlcnMgYXJlIHJlZ2lzdGVyZWQgYXMgdW5hZmZpbGlhdGVkLiAKCmBgYHtyfQpjdXJyZW50X3JlZ2lzdHJhdGlvbnNfMjAyNCA8LSBjdXJyZW50X3JlZ2lzdHJhdGlvbnNfMjAyNCB8PiAKICBtdXRhdGUocGN0X0RFTTI0ID0gKERFTTI0L1RPVEFMMjQpKjEwMCwgcGN0X1JFUDI0ID0gKFJFUDI0L1RPVEFMMjQpKjEwMCwgcGN0X1VOQUYyNCA9IChVTkFGMjQvVE9UQUwyNCkqMTAwKQoKY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMjIgPC0gY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMjIgfD4gCiAgbXV0YXRlKHBjdF9ERU0yMiA9IChERU0yMi9UT1RBTDIyKSoxMDAsIHBjdF9SRVAyMiA9IChSRVAyMi9UT1RBTDIyKSoxMDAsIHBjdF9VTkFGMjIgPSAoVU5BRjIyL1RPVEFMMjIpKjEwMCkKCmNvbXBhcmVfMjJfMjQgPC0gY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMjQgfD4gCiAgbGVmdF9qb2luKGN1cnJlbnRfcmVnaXN0cmF0aW9uc18yMDIyLCBieT0nQ09VTlRZJykgfD4gCiAgbXV0YXRlKERFTV9wY3RfY2hhbmdlID0gKERFTTI0LURFTTIyKS9ERU0yMioxMDAsIFJFUF9wY3RfY2hhbmdlID0gKFJFUDI0LVJFUDIyKS9SRVAyMioxMDAsIFVOQUZfcGN0X2NoYW5nZSA9IChVTkFGMjQtVU5BRjIyKS9VTkFGMjIqMTAwKSB8PiAKICBhcnJhbmdlKGRlc2MoVU5BRl9wY3RfY2hhbmdlKSkKYGBgCgojIyMgVGhpcyBzaG93cyB0aGVyZSB3YXMgYW4gOC42JSBpbmNyZWFzZSBpbiByZWdpc3RlcmVkIERlbW9jcmF0cywgYSA1LjclIGluY3JlYXNlIGluIHJlZ2lzdGVyZWQgUmVwdWJsaWNhbnMgYW5kIGEgbmVhcmx5IDQwJSBpbmNyZWFzZSBpbiByZWdpc3RlcmVkIHVuYWZmaWxpYXRlZCB2b3RlcnMuCgpgYGB7cn0KY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMjQgPC0gY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMjQgfD4gCiAgbXV0YXRlKHBjdF9ERU0yNCA9IChERU0yNC9UT1RBTDI0KSoxMDAsIHBjdF9SRVAyNCA9IChSRVAyNC9UT1RBTDI0KSoxMDAsIHBjdF9VTkFGMjQgPSAoVU5BRjI0L1RPVEFMMjQpKjEwMCkKCmN1cnJlbnRfcmVnaXN0cmF0aW9uc18yMDE0IDwtIGN1cnJlbnRfcmVnaXN0cmF0aW9uc18yMDE0IHw+IAogIG11dGF0ZShwY3RfREVNMTQgPSAoREVNMTQvVE9UQUwxNCkqMTAwLCBwY3RfUkVQMTQgPSAoUkVQMTQvVE9UQUwxNCkqMTAwLCBwY3RfVU5BRjE0ID0gKFVOQUYxNC9UT1RBTDE0KSoxMDApCgpjb21wYXJlXzE0XzI0IDwtIGN1cnJlbnRfcmVnaXN0cmF0aW9uc18yMDI0IHw+IAogIGxlZnRfam9pbihjdXJyZW50X3JlZ2lzdHJhdGlvbnNfMjAxNCwgYnk9J0NPVU5UWScpIHw+IAogIG11dGF0ZShERU1fcGN0X2NoYW5nZSA9IChERU0yNC1ERU0xNCkvREVNMTQqMTAwLCBSRVBfcGN0X2NoYW5nZSA9IChSRVAyNC1SRVAxNCkvUkVQMTQqMTAwLCBVTkFGX3BjdF9jaGFuZ2UgPSAoVU5BRjI0LVVOQUYxNCkvVU5BRjE0KjEwMCkgfD4gCiAgYXJyYW5nZShkZXNjKFVOQUZfcGN0X2NoYW5nZSkpCmBgYAoKIyMjIEdldHRpbmcgcGVyY2VudGFnZXMgZm9yIHRoZSBvdGhlciBkYXRhZnJhbWVzIQoKYGBge3J9CmN1cnJlbnRfcmVnaXN0cmF0aW9uc18yMDE2IDwtIGN1cnJlbnRfcmVnaXN0cmF0aW9uc18yMDE2IHw+IAogIG11dGF0ZShwY3RfREVNMTYgPSAoREVNMTYvVE9UQUwxNikqMTAwLCBwY3RfUkVQMTYgPSAoUkVQMTYvVE9UQUwxNikqMTAwLCBwY3RfVU5BRjE2ID0gKFVOQUYxNi9UT1RBTDE2KSoxMDApCgpjdXJyZW50X3JlZ2lzdHJhdGlvbnNfMjAxOCA8LSBjdXJyZW50X3JlZ2lzdHJhdGlvbnNfMjAxOCB8PiAKICBtdXRhdGUocGN0X0RFTTE4ID0gKERFTTE4L1RPVEFMMTgpKjEwMCwgcGN0X1JFUDE4ID0gKFJFUDE4L1RPVEFMMTgpKjEwMCwgcGN0X1VOQUYxOCA9IChVTkFGMTgvVE9UQUwxOCkqMTAwKQoKY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMjAgPC0gY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMjAgfD4gCiAgbXV0YXRlKHBjdF9ERU0yMCA9IChERU0yMC9UT1RBTDIwKSoxMDAsIHBjdF9SRVAyMCA9IChSRVAyMC9UT1RBTDIwKSoxMDAsIHBjdF9VTkFGMjAgPSAoVU5BRjIwL1RPVEFMMjApKjEwMCkKYGBgCgojIyMgVHJ5aW5nIHRvIGRvIG9uZSBiaWcgbWVyZ2UgZm9yIGNvbXBhcmlzb24hCgojIyMgVW5hZmZpbGlhdGVkIHBlcmNlbnQgY2hhbmdlIHN0YXJ0cyBiZWluZyB0aGUgbGFyZ2VzdCAoaW4gdGhlIGxpbWl0ZWQgeWVhcnMgSSBhbSBsb29raW5nIGF0KSBzdGFydGluZyBhdCAyMDE2LTIwMTggcGVyY2VudCBjaGFuZ2UuCgpgYGB7cn0KY29tcGFyZV9hbGwgPC0gY3VycmVudF9yZWdpc3RyYXRpb25zXzIwMjQgfD4gCiAgbGVmdF9qb2luKGN1cnJlbnRfcmVnaXN0cmF0aW9uc18yMDE0LCBieT0nQ09VTlRZJykgfD4gCiAgbGVmdF9qb2luKGN1cnJlbnRfcmVnaXN0cmF0aW9uc18yMDE2LCBieT0nQ09VTlRZJykgfD4gCiAgbGVmdF9qb2luKGN1cnJlbnRfcmVnaXN0cmF0aW9uc18yMDE4LCBieT0nQ09VTlRZJykgfD4gCiAgbGVmdF9qb2luKGN1cnJlbnRfcmVnaXN0cmF0aW9uc18yMDIwLCBieT0nQ09VTlRZJykgfD4gCiAgbGVmdF9qb2luKGN1cnJlbnRfcmVnaXN0cmF0aW9uc18yMDIyLCBieT0nQ09VTlRZJykgfD4gCiAgbXV0YXRlKAogICAgIzIwMTQtMjAxNiBwY3RfY2hhbmdlCiAgICBERU0xNDE2X3BjdF9jaGFuZ2UgPSAoREVNMTYtREVNMTQpL0RFTTE0KjEwMCwgUkVQMTQxNl9wY3RfY2hhbmdlID0gKFJFUDE2LVJFUDE0KS9SRVAxNCoxMDAsIFVOQUYxNDE2X3BjdF9jaGFuZ2UgPSAoVU5BRjE2LVVOQUYxNCkvVU5BRjE0KjEwMCwKICAgICMyMDE2LTIwMTggcGN0X2NoYW5nZQogICAgREVNMTYxOF9wY3RfY2hhbmdlID0gKERFTTE4LURFTTE2KS9ERU0xNioxMDAsIFJFUDE2MThfcGN0X2NoYW5nZSA9IChSRVAxOC1SRVAxNikvUkVQMTYqMTAwLCBVTkFGMTYxOF9wY3RfY2hhbmdlID0gKFVOQUYxOC1VTkFGMTYpL1VOQUYxNioxMDAsCiAgICAjMjAxOC0yMDIwIHBjdF9jaGFuZ2UKICAgIERFTTE4MjBfcGN0X2NoYW5nZSA9IChERU0yMC1ERU0xOCkvREVNMTgqMTAwLCBSRVAxODIwX3BjdF9jaGFuZ2UgPSAoUkVQMjAtUkVQMTgpL1JFUDE4KjEwMCwgVU5BRjE4MjBfcGN0X2NoYW5nZSA9IChVTkFGMjAtVU5BRjE4KS9VTkFGMTgqMTAwLAogICAgIzIwMjAtMjAyMiBwY3RfY2hhbmdlCiAgICBERU0yMDIyX3BjdF9jaGFuZ2UgPSAoREVNMjItREVNMjApL0RFTTIwKjEwMCwgUkVQMjAyMl9wY3RfY2hhbmdlID0gKFJFUDIyLVJFUDIwKS9SRVAyMCoxMDAsIFVOQUYyMDIyX3BjdF9jaGFuZ2UgPSAoVU5BRjIyLVVOQUYyMCkvVU5BRjIwKjEwMCwKICAgICMyMDIyLTIwMjQgcGN0X2NoYW5nZQogICAgREVNMjIyNF9wY3RfY2hhbmdlID0gKERFTTI0LURFTTIyKS9ERU0yMioxMDAsIFJFUDIyMjRfcGN0X2NoYW5nZSA9IChSRVAyNC1SRVAyMikvUkVQMjIqMTAwLCBVTkFGMjIyNF9wY3RfY2hhbmdlID0gKFVOQUYyNC1VTkFGMjIpL1VOQUYyMioxMDAsCiAgICAjMjAxNC0yMDI0IHBjdF9jaGFuZ2UKICAgIERFTTE0MjRfcGN0X2NoYW5nZSA9IChERU0yNC1ERU0xNCkvREVNMTQqMTAwLCBSRVAxNDI0X3BjdF9jaGFuZ2UgPSAoUkVQMjQtUkVQMTQpL1JFUDE0KjEwMCwgVU5BRjE0MjRfcGN0X2NoYW5nZSA9IChVTkFGMjQtVU5BRjE0KS9VTkFGMTQqMTAwKQogIApjbGVhbmVyX2NvbXBhcmVfYWxsIDwtIGNvbXBhcmVfYWxsIHw+IAogIHNlbGVjdChDT1VOVFksIERFTTE0MTZfcGN0X2NoYW5nZSwgUkVQMTQxNl9wY3RfY2hhbmdlLCBVTkFGMTQxNl9wY3RfY2hhbmdlLCBERU0xNjE4X3BjdF9jaGFuZ2UsIFJFUDE2MThfcGN0X2NoYW5nZSwgVU5BRjE2MThfcGN0X2NoYW5nZSwgREVNMTgyMF9wY3RfY2hhbmdlLCBSRVAxODIwX3BjdF9jaGFuZ2UsIFVOQUYxODIwX3BjdF9jaGFuZ2UsICBERU0yMDIyX3BjdF9jaGFuZ2UsIFJFUDIwMjJfcGN0X2NoYW5nZSwgVU5BRjIwMjJfcGN0X2NoYW5nZSwgREVNMjIyNF9wY3RfY2hhbmdlLCBSRVAyMjI0X3BjdF9jaGFuZ2UsIFVOQUYyMjI0X3BjdF9jaGFuZ2UsIERFTTE0MjRfcGN0X2NoYW5nZSwgUkVQMTQyNF9wY3RfY2hhbmdlLCBVTkFGMTQyNF9wY3RfY2hhbmdlLCBUT1RBTDI0KQpgYGAKCiMjIyBMb29raW5nIGJ5IGNvdW50eSEKCiMjIyBQcmluY2UgR2VvcmdlJ3MgQ291bnR5IGhhZCBhIDczJSBpbmNyZWFzZSBpbiB1bmFmZmlsaWF0ZWQgcmVnaXN0ZXJlZCB2b3RlcnMsIGNvbXBhcmVkIHRvIG9ubHkgYW4gYWJvdXQgNi41JSBpbmNyZWFzZSBpbiByZWdpc3RlcmVkIERlbW9jcmF0cyBhbmQgYSA0LjIlIGRlY3JlYXNlIGluIHJlZ2lzdGVyZWQgUmVwdWJsaWNhbnMuIAoKIyMjIEZyZWRlcmljaywgd2hpY2ggaGFkIGluY3JlYXNlcyBhbGwgYXJvdW5kLCBoYWQgYSBzdWJzdGFudGlhbGx5IGhpZ2hlciBpbmNyZWFzZSBpbiByZWdpc3RlcmVkIHVuYWZmaWxpYXRlZCB2b3RlcnMgYWxzby4gCgpgYGB7cn0KY2xlYW5lcl9jb21wYXJlX2FsbCB8PiAKICBhcnJhbmdlKGRlc2MoVU5BRjE0MjRfcGN0X2NoYW5nZSkpfD4gCiAgc2VsZWN0KENPVU5UWSwgVU5BRjE0MjRfcGN0X2NoYW5nZSwgREVNMTQyNF9wY3RfY2hhbmdlLCBSRVAxNDI0X3BjdF9jaGFuZ2UsIFRPVEFMMjQpfD4gCiAgZmlsdGVyKFRPVEFMMjQgPiAxMDAwMDApCmBgYApgYGAKCg==</div>
 
 
 
