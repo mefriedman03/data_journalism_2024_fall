@@ -7,6 +7,8 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+install.packages(tidyr)
+
 ```
 
 ## You will need
@@ -21,6 +23,8 @@ knitr::opts_chunk$set(echo = TRUE)
 library(rvest)
 library(tidyverse)
 library(janitor)
+library(tidyr)
+library(lubridate)
 ```
 
 
@@ -57,7 +61,7 @@ fred_edu_board_results |>
   geom_bar(aes(x=reorder(name, percentage), weight=percentage))+
   coord_flip()+
   labs(
-    title="Candidates in tight race for three open seats on FCPS Baord of Education",
+    title="Brennan, Monier and Black win FCPS Board of Education election",
     y = "Percentage",
     x = "Candidate",
     caption = "Source: Maryland State Board of Elections")
@@ -70,7 +74,7 @@ You should have 10 releases when finished, not 20.
 
 Then, write code that finds the most recent release with the word "Campaign" in the title. What election does it refer to?
 
-**A2** 
+**A2** Only one of my 10 releases has the word "campaign" in the title. It is from April and refers to John King's campaign for governor. It refers to the 2022 Democratic primary for Maryland governor.
 
 ```{r}
 prosecutor_url <- "https://osp.maryland.gov/category/press-releases/"
@@ -92,7 +96,13 @@ titles_w_url <- tibble(
 titles_w_url <- titles_w_url|>
   slice(-2,-4,-6,-8,-10,-12,-14,-16,-18,-20)
 
+titles_date_url <- separate(titles_w_url, col=title, into=c('date','title'), sep=':')  
 
+titles_date_url_fix <- titles_date_url
+
+titles_date_url_fix$date[c(1,2,3,4,5,6,7,8,9,10)] <- c("2024-11-13", "2024-11-1", "2024-09-11", "2024-08-26", "2024-07-18", "2024-06-20", "2024-06-04", "2024-04-04", "2024-04-03", "2024-01-26")
+  
+campaign_release <- titles_date_url_fix[grepl("Campaign", titles_date_url_fix$title, ignore.case = TRUE),]
 
 ```
 
@@ -106,9 +116,43 @@ When you're done, rename the columns so they make sense, then make sure the date
 
 Finally, tell me what questions you could ask of this data, and what other information about it would be useful to have. Be creative.
 
-**A3** 
+**A3** I could ask questions about 
 
 ```{r}
+cardin_url <- "https://www.cardin.senate.gov/?post_type=press-releases"
+
+cardin_all <- cardin_url|>
+  read_html()
+
+cardin_date <- cardin_all|>
+  html_elements("h5")|>
+  html_text(trim = TRUE)
+
+cardin_title <- cardin_all|>
+  html_elements("article h3 a")|>
+  html_text(trim = TRUE)
+
+cardin_url <- cardin_all|>
+  html_elements("article h3 a")|>
+  html_attr("href")
+
+
+cardin_date <- as_tibble(cardin_date)
+cardin_title <- as_tibble(cardin_title)
+cardin_url <- as_tibble(cardin_url)
+
+combined_cardin <- bind_cols(
+  date = cardin_date,
+  title = cardin_title,
+  url = cardin_url
+)
+
+combined_cardin <- combined_cardin |>
+  rename(
+    date = value...1,
+    title = value...2,
+    url= value...3)
+
+combined_cardin$date <- mdy(combined_cardin$date)
 
 ```
-
