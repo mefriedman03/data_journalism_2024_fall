@@ -116,7 +116,7 @@ When you're done, rename the columns so they make sense, then make sure the date
 
 Finally, tell me what questions you could ask of this data, and what other information about it would be useful to have. Be creative.
 
-**A3** I could ask questions about 
+**A3** I could ask questions a lot of questions of this data, including  what topics Cardin puts out the most press releases about and mentions the most, how many of his press releases have both his name and Van Hollen's name, if there are any topics in the news Cardin rarely comments on (and why), and if there are certain areas of Maryland he mentions the most. I would also ask what month the most press releases are published in and if this varies by year. I think it could be useful to have the same data for Van Hollen. They are both Democrats representing the same state but it would be neat to be compare what they mention in their press releases and what they choose to focus on. I'd be interested in seeing the differences in prevalent terms and topics between the two senators. I think I would also want the data for Cardin going further back than 2022 to see if there are noticeable differences in his releases when he is up for reelction versus now when he is retiring. 
 
 ```{r}
 cardin_url <- "https://www.cardin.senate.gov/?post_type=press-releases"
