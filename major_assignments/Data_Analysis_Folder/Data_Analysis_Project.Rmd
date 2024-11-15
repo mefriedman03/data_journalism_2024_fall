@@ -1,0 +1,4 @@
+```{r}
+ev_raw <- read.csv("EarlyVoting RAW data.csv")
+```
+
