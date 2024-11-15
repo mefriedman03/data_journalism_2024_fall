@@ -1,4 +1,38 @@
-```{r}
-ev_raw <- read.csv("EarlyVoting RAW data.csv")
+title: "Data Analysis Project"
+author: "Marijke Friedman, Brendan Weissel, Sade Ajishegiri"
+date: "2024-11-15"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+#knitr::opts_chunk$set(echo = TRUE)
 ```
 
+```{r}
+library(rvest)
+library(tidyverse)
+library(janitor)
+library(lubridate)
+library(ggthemes)
+
+```
+
+
+```{r}
+ev_raw <- read.csv("Data/EarlyVoting_RAW_data.csv") 
+
+ev_raw <- ev_raw |>
+  clean_names()
+glimpse(ev_raw)
+```
+
+```{r}
+#votes by day 
+votes_by_day <- ev_raw |> 
+  summarise(across(starts_with("day"), \(x) sum(x, na.rm = TRUE)))
+
+#votes by party
+votes_by_party <- ev_raw |>
+  group_by(party_code) |> 
+  summarise(total_votes = sum(day1, day2, day3, day4, day5, day6, day7, day8, na.rm = TRUE)) |> 
+  arrange(party_code)
