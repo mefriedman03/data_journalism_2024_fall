@@ -70,12 +70,12 @@ votes_by_age <- ev_raw|>
 2. Are there any precincts where certain demographic groups outperformed their Census data? For example, are there precincts were 65% of the early voters were women despite women only being 50% of the voting age population?
 3.  Which precincts had the most early voters identifying outside of male/female? How did they vote?
 4. Which precincts have historically turned out more early voters than others? How did it compare this election?
-5. 
+5. Do most precincts follow the general pattern of having the most people vote on the first and last days of early voting? Which precincts differ from this pattern?
 
 ### How have we refined our questions?
 
-We refined our questions to focus more on precinct level data instead of overall state data. We are going to look more closely at precincts that have interesting and unusal patterns and why this might be. 
+We refined our questions to focus more on precinct level data instead of overall state data. We are going to look more closely at precincts that have interesting and unusual patterns and why this might be. 
 
 ### Describe any obvious limitations or flaws in our data. Why might it not be able to answer the list of questions we have posed? Describe the limits of the data in terms of the timeframe, what is and is not included and any codes or other information you'd need to find definitions for, and what you've done to better define it. 
 
-The data we have is just early voting data. This doesn't tell us that much about the overall electorate. It could be helpful to bring in actual results data and more information about the overall electorate. We may also use Census data to be able to make more meaningful comparisons and dive into our data more. It could also help to use voter registration data so we can look at voter turnout numbers. 
+The data we have is just early voting data. This doesn't tell us that much about the overall electorate. It could be helpful to bring in actual results data and more information about the overall electorate. We may also use Census data to be able to make more meaningful comparisons and dive into our data more. It could also help to use voter registration data so we can look at voter turnout numbers and to look at the numbers from past elections. 
