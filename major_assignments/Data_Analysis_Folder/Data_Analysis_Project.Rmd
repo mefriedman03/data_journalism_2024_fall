@@ -68,8 +68,8 @@ votes_by_age <- ev_raw|>
 
 1. What precincts did younger age groups dominate voting early in? What do these precincts have in common?
 2. Are there any precincts where certain demographic groups outperformed their Census data? For example, are there precincts were 65% of the early voters were women despite women only being 50% of the voting age population?
-3. 
-4. 
+3.  Which precincts had the most early voters identifying outside of male/female? How did they vote?
+4. Which precincts have historically turned out more early voters than others? How did it compare this election?
 5. 
 
 ### How have we refined our questions?
