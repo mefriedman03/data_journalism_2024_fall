@@ -336,7 +336,7 @@ Another popular use of text analysis is to measure the sentiment of a word - whe
 
 ### Task 17: Load the bing lexicon and produce sentiments for our 2022 and 2024 unique words
 
-**Task** Run the following code and describe the results. Do any of the sentiments seem incorrect or counter-intuitive? **Answer** Rail being negative seems wrong. Critical also being negative seems wrong. It could just mean the same thing as important. 
+**Task** Run the following code and describe the results. Do any of the sentiments seem incorrect or counter-intuitive? **Answer** I have a list of the top words and their lexicon and sentiments. Rail being negative seems wrong. Critical also being negative seems wrong. It could just mean the same thing as important. 
 
 ```{r}
 bing <- get_sentiments("bing")
