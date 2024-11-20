@@ -19,7 +19,7 @@ library(ggthemes)
 
 
 ```{r}
-ev_raw <- read.csv("data/EV_RAW_DATA.csv") 
+ev_raw <- read_csv("data/EV_RAW_DATA.csv") 
 
 ev_raw <- ev_raw |>
   clean_names()
