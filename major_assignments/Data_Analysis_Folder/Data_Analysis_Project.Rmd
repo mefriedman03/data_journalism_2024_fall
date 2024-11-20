@@ -55,6 +55,65 @@ votes_by_age <- ev_raw|>
   summarise(total_votes = sum(day1, day2, day3, day4, day5, day6, day7, day8, na.rm = TRUE))|>
   arrange(age_group)
 ```
+**Q1: . What voting location and or county did younger age groups dominate voting early in? What do these places have in common?**
+
+**A1: Top counties with highest percent of young vote, 1. Saint Mary's, 2. Howard, 3. Charles, 4. Calvert, 5. Montgomery, 6. Frederick and the top location was this College Park Community Center. 
+
+
+
+```{r}
+#total votes by county
+total_votes_by_county <- ev_raw |>
+  group_by(county_name) |>
+  summarise(
+    total_votes = sum(across(starts_with("day"), ~ .x), na.rm = TRUE),
+       .groups = "drop"
+  )
+
+#total votes by ages 18-24 by county
+young_votes_by_county <- ev_raw |>
+  filter(age_group == "18-24") |>
+  group_by(county_name) |>
+  summarise(
+    young_votes = sum(across(starts_with("day"), ~ .x), na.rm = TRUE),
+       .groups = "drop"
+  )
+
+#calculating the voter share or percentage that young voters have in each county
+young_voters_by_county_by_percent <- young_votes_by_county |>
+  left_join(total_votes_by_county, by = "county_name") |>
+  mutate(young_vote_share = young_votes / total_votes) |>
+  arrange(desc(young_vote_share))
+
+head(young_voters_by_county_by_percent)
+
+#total votes by early voting location
+total_votes_by_location <- ev_raw |>
+  group_by(early_vote_center) |>
+  summarise(
+    total_votes = sum(across(starts_with("day"), ~ .x), na.rm = TRUE),
+    .groups = "drop"
+  )
+
+#total votes by ages 18-24 by early voting location
+young_votes_by_location <- ev_raw |>
+  filter(age_group == "18-24") |>
+  group_by(early_vote_center) |>
+  summarise(
+    young_votes = sum(across(starts_with("day"), ~ .x), na.rm = TRUE),
+    .groups = "drop"
+  )
+
+young_voters_by_location_by_percent <- young_votes_by_location |>
+  left_join(total_votes_by_location, by = "early_vote_center") |>
+  mutate(young_vote_share = young_votes / total_votes) |>
+  arrange(desc(young_vote_share))
+
+# View the first few rows of the results
+head(young_voters_by_location_by_percent)
+
+
+
 
 ### Our original questions:
 
