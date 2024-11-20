@@ -14,12 +14,12 @@ library(tidyverse)
 library(janitor)
 library(lubridate)
 library(ggthemes)
-
+library(tidycensus)
 ```
 
 
 ```{r}
-ev_raw <- read.csv("data/EV_RAW_DATA.csv") 
+ev_raw <- read_csv("data/EV_RAW_DATA.csv") 
 
 ev_raw <- ev_raw |>
   clean_names()
@@ -68,9 +68,9 @@ votes_by_age <- ev_raw|>
 
 1. What precincts did younger age groups dominate voting early in? What do these precincts have in common?
 2. Are there any precincts where certain demographic groups outperformed their Census data? For example, are there precincts were 65% of the early voters were women despite women only being 50% of the voting age population?
-3.  Which precincts had the most early voters identifying outside of male/female? How did they vote?
+3. Which precincts had the most early voters identifying outside of male/female? How did they vote?
 4. Which precincts have historically turned out more early voters than others? How did it compare this election?
-5. Do most precincts follow the general pattern of having the most people vote on the first and last days of early voting? Which precincts differ from this pattern?
+5. Do most precincts follow the general pattern of having the most people vote on the first and last days of early voting? 
 
 ### How we've refined our questions:
 
@@ -79,5 +79,116 @@ Based on your feedback, we're refining our questions to focus more on precinct-l
 ### Describing any obvious limitations/flaws in our data - Why might we be unable to answer our previous questions? Describe the limits of the data in terms of the time frame, what is and is not included and any codes or other information we'll need to find definitions for, and what we've done to better define it. 
 
 The data we have is just early voting data. It's interesting to analyze because early voters are likely to be more civic duty-minded. But the early voter data doesn't tell us that much about the overall electorate, so it could be helpful to bring in actual results data and more information about the overall electorate.
+
 We'll likely use Census data so we can make more meaningful comparisons, plus voter registration data so we can look at voter turnout numbers. 
 As far as defining some of the terms in our questions and within our data, in the votes_by_gender table, what does "NA" actually mean? Did voters in that category mark a box? Did they write in something other than male or female? Was there an option that said "prefer not to say"?
+
+### Loading 2020 census data
+
+```{r}
+acs5 <- load_variables(2020, "acs5", cache = TRUE)
+view(acs5)
+```
+
+
+### Answering question 5: Do most precincts follow the general pattern of having the most people vote on the first AND last days of early voting? Do most counties follow the general pattern of having the most people vote on the first AND last days of early voting?
+
+No, most precincts do not follow the pattern of having the most people vote on the first AND last days of early voting. Only about 27% of precincts follow this pattern. For the second question, no most counties do not follow this pattern. The percentage is slightly higher at about 33%. One thing that I did notice through looking at this is that Prince George's County had significantly higher voters on the last day of early voting. Statewide, the first and last days of early voting had the most votes cast.
+
+what percentage of precincts in each county folllow pattern
+
+
+```{r}
+
+### BY POLLING LOCATION
+
+location_by_day <- ev_raw|>
+  group_by(early_vote_center, county_name) |>
+  summarise(across(starts_with("day"), \(x) sum(x, na.rm = TRUE)))
+
+location_by_day <- location_by_day |>
+  rowwise() |>
+  mutate(
+    first_day = `day1`,             
+    last_day = `day8`,           
+    max_votes = sort(c_across(starts_with("day")), decreasing = TRUE)[1],  
+    second_max_votes = sort(c_across(starts_with("day")), decreasing = TRUE)[2],  
+    follows_pattern = first_day %in% c(max_votes, second_max_votes) &
+                      last_day %in% c(max_votes, second_max_votes) &
+                      first_day != last_day)
+
+summing_locations <- location_by_day |>
+  mutate(total_votes = sum(day1, day2, day3, day4, day5, day6, day7, day8, na.rm = TRUE))
+
+location_percentage_follows_pattern <- location_by_day |>
+  ungroup() |> 
+  summarize(
+    location_following = sum(follows_pattern),
+    total_location = n(),
+    percentage = (location_following / total_location) * 100
+  )
+
+### BY PRECINCT
+
+precincts_by_day <- ev_raw|>
+  group_by(precinct, county_name) |>
+  summarise(across(starts_with("day"), \(x) sum(x, na.rm = TRUE)))
+
+precincts_by_day <- precincts_by_day |>
+  rowwise() |>
+  mutate(
+    first_day = `day1`,             
+    last_day = `day8`,           
+    max_votes = sort(c_across(starts_with("day")), decreasing = TRUE)[1],  
+    second_max_votes = sort(c_across(starts_with("day")), decreasing = TRUE)[2],  
+    follows_pattern = first_day %in% c(max_votes, second_max_votes) &
+                      last_day %in% c(max_votes, second_max_votes) &
+                      first_day != last_day)
+
+summing_precincts <- precincts_by_day |>
+  mutate(total_votes = sum(day1, day2, day3, day4, day5, day6, day7, day8, na.rm = TRUE))
+
+precincts_percentage_follows_pattern <- precincts_by_day |>
+  ungroup() |> 
+  summarize(
+    precincts_following = sum(follows_pattern),
+    total_precincts = n(),
+    percentage = (precincts_following / total_precincts) * 100
+  )
+
+### BY COUNTY
+
+counties_by_day <- ev_raw|>
+  group_by(county_name) |>
+  summarise(across(starts_with("day"), \(x) sum(x, na.rm = TRUE)))
+
+counties_by_day <- counties_by_day |>
+  rowwise() |>
+  mutate(
+    first_day = `day1`,             
+    last_day = `day8`,           
+    max_votes = sort(c_across(starts_with("day")), decreasing = TRUE)[1],  
+    second_max_votes = sort(c_across(starts_with("day")), decreasing = TRUE)[2],  
+    follows_pattern = first_day %in% c(max_votes, second_max_votes) &
+                      last_day %in% c(max_votes, second_max_votes) &
+                      first_day != last_day)
+
+
+summing_counties <- counties_by_day |>
+  mutate(total_votes = sum(day1, day2, day3, day4, day5, day6, day7, day8, na.rm = TRUE))
+
+counties_percentage_follows_pattern <- counties_by_day |>
+  ungroup() |> 
+  summarize(
+    counties_following = sum(follows_pattern),
+    total_counties = n(),
+    percentage = (counties_following / total_counties) * 100
+  )
+
+# PERCENTAGE OF LOCATIONS IN COUNTY FOLLOWING PATTERN
+
+
+
+
+
+```
