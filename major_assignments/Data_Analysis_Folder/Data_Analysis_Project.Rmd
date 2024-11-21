@@ -60,7 +60,6 @@ votes_by_age <- ev_raw|>
 **A1: Top counties with highest percent of young vote, 1. Saint Mary's, 2. Howard, 3. Charles, 4. Calvert, 5. Montgomery, 6. Frederick and the top location was this College Park Community Center. 
 
 
-
 ```{r}
 #total votes by county
 total_votes_by_county <- ev_raw |>
@@ -112,7 +111,7 @@ young_voters_by_location_by_percent <- young_votes_by_location |>
 # View the first few rows of the results
 head(young_voters_by_location_by_percent)
 
-
+```
 
 
 ### Our original questions:
@@ -244,7 +243,7 @@ counties_percentage_follows_pattern <- counties_by_day |>
     percentage = (counties_following / total_counties) * 100
   )
 
-# PERCENTAGE OF LOCATIONS IN COUNTY FOLLOWING PATTERN
+### PERCENTAGE OF LOCATIONS IN COUNTY FOLLOWING PATTERN
 
 
 
