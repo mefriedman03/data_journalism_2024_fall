@@ -145,6 +145,25 @@ young_voters_by_location_by_percent <- young_votes_by_location |>
 head(young_voters_by_location_by_percent)
 
 ```
+### Answering Question 3:
+
+ev_raw |> 
+  group_by(gender_code) |> 
+  count()
+```
+#Find percentage of nonbinary early voters:
+```{r} 
+(2777/(80405+77290+2777))*100
+```
+A: 1.7% of early voters were effectively non binary.
+
+```{r}
+#Trying to find precincts with the most nonbinary voters:
+
+nonbinary_voters <- ev_raw |> filter(is.na(gender_code))
+
+nonbinary_voters<- nonbinary_voters|>mutate()
+```
 
 ### Answering question 5: Do most precincts follow the general pattern of having the most people vote on the first AND last days of early voting?  Do most early voting locations follow the general pattern of having the most people vote on the first AND last days of early voting? Do most counties follow the general pattern of having the most people vote on the first AND last days of early voting?
 
