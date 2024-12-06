@@ -91,7 +91,11 @@ view(acs5)
 ```
 ### Question 1: What voting location and or county did younger age groups dominate voting early in? What do these places have in common?
 
-Top counties with highest percent of young vote, 1. Saint Mary's, 2. Howard, 3. Charles, 4. Calvert, 5. Montgomery, 6. Frederick and the top location was the College Park Community Center. 
+The state youth turnout % for early voting was 6.55%. 8 Counties had a higher %. 1. Saint Mary's (7.6%), 2. Howard (7.5%), 3. Charles (7.1%), 4. Calvert (7.1%), 5. Montgomery(6.9%), 6. Frederick(6.9%) 7. Prince George's (6.8%), 8. Washington (6.8%). The top counties tend to have a lower median age compared to other counties.
+
+The top polling location for early youth vote is likely due to the proximity to the University of Maryland. 
+
+The young vote percentage in PG County was 6.8% so the College Park Community Center our performed the county average by about 3 points with 10% being youth vote of the locations voting total.
 
 ```{r}
 #total votes by county
@@ -121,7 +125,7 @@ head(young_voters_by_county_by_percent)
 
 #total votes by early voting location
 total_votes_by_location <- ev_raw |>
-  group_by(early_vote_center) |>
+  group_by(early_vote_center, county_name) |>
   summarise(
     total_votes = sum(across(starts_with("day"), ~ .x), na.rm = TRUE),
     .groups = "drop"
@@ -144,7 +148,20 @@ young_voters_by_location_by_percent <- young_votes_by_location |>
 # View the first few rows of the results
 head(young_voters_by_location_by_percent)
 
+#state youth vote %
+total_young_votes <- ev_raw |>
+  filter(age_group == "18-24") |>
+  summarise(total_young_votes = sum(across(starts_with("day"), ~ .x), na.rm = TRUE))
+
+total_votes <- ev_raw |>
+  summarise(total_votes = sum(across(starts_with("day"), ~ .x), na.rm = TRUE))
+
+state_youth_turnout <- total_young_votes$total_young_votes / total_votes$total_votes * 100
+
+state_youth_turnout
 ```
+
+
 ### Answering Question 3:
 
 ev_raw |> 
