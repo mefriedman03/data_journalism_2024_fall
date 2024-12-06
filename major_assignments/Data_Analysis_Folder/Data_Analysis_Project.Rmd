@@ -163,6 +163,12 @@ A: 1.7% of early voters were effectively non binary.
 nonbinary_voters <- ev_raw |> filter(is.na(gender_code))
 
 nonbinary_voters<- nonbinary_voters|>mutate()
+
+nonbinary_voters<- nonbinary_voters |>
+  group_by(precinct) |>
+  summarise(
+    total_voters=n())
+
 ```
 
 ### Answering Question 4: What counties had the closest margin between registered Republicans and Democrats who voted early? Can we identify any swing counties from this?
