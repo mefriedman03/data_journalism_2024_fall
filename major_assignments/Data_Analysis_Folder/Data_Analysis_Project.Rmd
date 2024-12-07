@@ -84,14 +84,7 @@ We'll likely use Census data so we can make more meaningful comparisons, plus vo
 
 As far as defining some of the terms in our questions and within our data, in the votes_by_gender table, what does "NA" actually mean? Did voters in that category mark a box? Did they write in something other than male or female? Was there an option that said "prefer not to say"?
 
-### Loading 2020 census data
-
-```{r}
-acs5 <- load_variables(2020, "acs5", cache = TRUE)
-view(acs5)
-```
-
-### Question 1: What voting location and or county did younger age groups dominate voting early in? What do these places have in common?
+### Answering Question 1: What voting location and or county did younger age groups dominate voting early in? What do these places have in common?
 
 Top counties with highest percent of young vote, 1. Saint Mary's, 2. Howard, 3. Charles, 4. Calvert, 5. Montgomery, 6. Frederick and the top location was the College Park Community Center. 
 
@@ -147,6 +140,15 @@ young_voters_by_location_by_percent <- young_votes_by_location |>
 head(young_voters_by_location_by_percent)
 
 ```
+
+### Answering Question 2: Are there any precincts where certain demographic groups outperformed their Census data? For example, are there precincts were 65% of the early voters were women despite women only being 50% of the voting age population?
+
+```{r}
+###Loading 2020 census data
+acs5 <- load_variables(2020, "acs5", cache = TRUE)
+view(acs5)
+```
+
 
 ### Answering Question 3:
 
