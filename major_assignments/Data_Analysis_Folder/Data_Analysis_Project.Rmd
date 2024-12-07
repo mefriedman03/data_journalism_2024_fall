@@ -81,6 +81,7 @@ Based on your feedback, we're refining our questions to focus more on precinct-l
 The data we have is just early voting data. It's interesting to analyze because early voters are likely to be more civic duty-minded. But the early voter data doesn't tell us that much about the overall electorate, so it could be helpful to bring in actual results data and more information about the overall electorate.
 
 We'll likely use Census data so we can make more meaningful comparisons, plus voter registration data so we can look at voter turnout numbers. 
+
 As far as defining some of the terms in our questions and within our data, in the votes_by_gender table, what does "NA" actually mean? Did voters in that category mark a box? Did they write in something other than male or female? Was there an option that said "prefer not to say"?
 
 ### Loading 2020 census data
@@ -89,6 +90,7 @@ As far as defining some of the terms in our questions and within our data, in th
 acs5 <- load_variables(2020, "acs5", cache = TRUE)
 view(acs5)
 ```
+
 ### Question 1: What voting location and or county did younger age groups dominate voting early in? What do these places have in common?
 
 Top counties with highest percent of young vote, 1. Saint Mary's, 2. Howard, 3. Charles, 4. Calvert, 5. Montgomery, 6. Frederick and the top location was the College Park Community Center. 
@@ -145,7 +147,9 @@ young_voters_by_location_by_percent <- young_votes_by_location |>
 head(young_voters_by_location_by_percent)
 
 ```
+
 ### Answering Question 3:
+
 ```{r} 
 ev_raw |> 
   group_by(gender_code) |> 
@@ -292,3 +296,7 @@ locations_in_county_following <- location_by_day |>
     percentage_following = (locations_following / total_locations) * 100
   )
 ```
+
+### MOST NEWSWORTHY FINDING
+
+We think our most newsworthy finding so far was found in Question 4 while looking at which counties had the closest margins between registered Republicans and registered Democrats who voted early. This question can help us identify split counties. We thought Kent County was particularly interesting because of how the same number of Democrats and Republicans voted early and because of how many unaffiliated voters voted early. The county seems small in comparison to other counties so we think looking into what factors impact how people in Kent County vote would be interesting. We also think comparing the margins of all of the other counties could make for an interesting story on its own. This would require making some visualizations and doing some more coding. 
