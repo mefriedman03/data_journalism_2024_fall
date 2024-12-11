@@ -189,8 +189,9 @@ party_by_county <- ev_raw |>
   summarize(total_votes = n(), .groups = "drop")|>
   pivot_wider(names_from = party_code,
               values_from = total_votes)|>
-   mutate(REP_DEM_difference = REP - DEM)|>
-   mutate(total_votes = REP + DEM + UNA + OTH + LIB + GRN + NLM)
+  mutate(REP_DEM_difference = REP - DEM)|>
+  mutate(REP_DEM_ratio = REP/DEM)|>
+  mutate(total_votes = REP + DEM + UNA + OTH + LIB + GRN + NLM)
 
 ```
 
@@ -199,7 +200,10 @@ party_by_county <- ev_raw |>
 
 No, most precincts do not follow the pattern of having the most people vote on the first AND last days of early voting. Only about 27% of precincts follow this pattern. For the second question, no most counties do not follow this pattern. The percentage is slightly higher at about 33%. One thing that I did notice through looking at this is that Prince George's County had significantly higher voters on the last day of early voting. Statewide, the first and last days of early voting had the most votes cast. If I look at this by polling locations, I can see that 36% of the ealry voting locations follow the pattern. I also can see that 14 of 24 counties have at least one polling location that follows the pattern. Among them are some of the counties with the most polling locations (Anne Arundel, Prince George's, Montgomery, Baltimore County, Baltimore City). These are some of the more populous regions in the state and some of those locations have more voters at them than others. This could be why statewide the first and last days of early voting had the most voters in Maryland, but this pattern was not followed when broken down by precinct, county, and polling location. 
 
-### Note: I am going to return to make data visualizations and graphics for this question soon! I wanted to focus on starting on another question for this milestone.
+### Note: I am going to return to make data visualizations and graphics for this question soon! I wanted to focus on starting on another question for this milestone. 
+
+### Ideas for visualizations: Some line charts would be good and then we can talk about seeing each county (or voting location) using a facet_wrap in ggplot. A scatterplot could help illustrate the first day/last day pattern (and where it doesn't hold).
+
 
 ```{r}
 
