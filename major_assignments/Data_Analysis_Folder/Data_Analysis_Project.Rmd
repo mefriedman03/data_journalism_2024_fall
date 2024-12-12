@@ -331,110 +331,6 @@ ev_raw |>
 A: 1.7% of early voters were effectively non binary.
 
 ```{r}
-# Find precincts with most N/A gender voters
-nonbinary_precinct_analysis <- ev_raw |>
- filter(is.na(gender_code)) |>
- group_by(precinct, county_name, early_vote_center) |>
- summarise(
-   na_voters = sum(across(starts_with("day"), ~ .x), na.rm = TRUE),
-   .groups = "drop"
- ) |>
- # Get total voters at each precinct for percentage
- left_join(
-   ev_raw |>
-     group_by(precinct) |>
-     summarise(
-       total_precinct_voters = sum(across(starts_with("day"), ~ .x), na.rm = TRUE),
-       .groups = "drop"
-     ),
-   by = "precinct"
- ) |>
- mutate(
-   na_percent = round((na_voters/total_precinct_voters) * 100, 3)
- ) |>
- arrange(desc(na_voters))
-
-# Party breakdown for non-binary early voters
-na_party_breakdown <- ev_raw |>
- filter(is.na(gender_code)) |>
- group_by(party_code) |>
- summarise(
-   na_voters = sum(across(starts_with("day"), ~ .x), na.rm = TRUE),
-   .groups = "drop"
- ) |>
- mutate(
-   total_na = sum(na_voters),
-   party_percent = round((na_voters/total_na) * 100, 3)
- ) |>
- arrange(desc(na_voters))
-
-# County breakdown for non-binary early voters
-na_county_breakdown <- ev_raw |>
- filter(is.na(gender_code)) |>
- group_by(county_name) |>
- summarise(
-   na_voters = sum(across(starts_with("day"), ~ .x), na.rm = TRUE),
-   .groups = "drop"
- ) |>
- mutate(
-   total_na = sum(na_voters),
-   county_percent = round((na_voters/total_na) * 100, 3)
- ) |>
- arrange(desc(na_voters))
-
-# Using population data by county to see what county had the highest percent of non binary voters in relation to total county population
-county_pop <- get_acs(
-  geography = "county",
-  variables = "B01001_001", 
-  state = "MD",
-  year = 2022
-) |>
-  mutate(
-    NAME = gsub(", Maryland", "", NAME),
-    NAME = gsub(" County", "", NAME),
-    NAME = case_when(
-      NAME == "St. Mary's" ~ "Saint Mary's",
-      NAME == "Baltimore" ~ "Baltimore County",
-      NAME == "Baltimore city" ~ "Baltimore City",
-      TRUE ~ NAME
-    )
-  )
-
-# Look at county breakdown of N/A gender voters with census context
-na_county_census_breakdown <- ev_raw |>
-  filter(is.na(gender_code)) |>
-  group_by(county_name) |>
-  summarise(
-    na_voters = sum(across(starts_with("day"), ~ .x), na.rm = TRUE),
-    .groups = "drop"
-  ) |>
-  left_join(county_pop |> select(county_name = NAME, total_pop = estimate), 
-            by = "county_name") |>
-  mutate(
-    total_na = sum(na_voters),
-    county_percent = round((na_voters/total_na) * 100, 3),
-    na_per_10k = round((na_voters/total_pop) * 10000, 3) 
-  ) |>
-  arrange(desc(na_per_10k))
-
-
-```
-
-
-### Answering Question 3:
-
-```{r} 
-ev_raw |> 
-  group_by(gender_code) |> 
-  count()
-```
-#Find percentage of nonbinary early voters:
-```{r} 
-(2777/(80405+77290+2777))*100
-```
-A: 1.7% of early voters were effectively non binary.
-
-```{r}
 # Find precincts with most non binary voters
 nonbinary_precinct_analysis <- ev_raw |>
  filter(is.na(gender_code)) |>
@@ -504,7 +400,7 @@ county_pop <- get_acs(
     )
   )
 
-# Look at county breakdown of N/A gender voters with census context
+# Look at county breakdown of non binary voters with census context
 na_county_census_breakdown <- ev_raw |>
   filter(is.na(gender_code)) |>
   group_by(county_name) |>
@@ -520,7 +416,6 @@ na_county_census_breakdown <- ev_raw |>
     na_per_10k = round((na_voters/total_pop) * 10000, 3) 
   ) |>
   arrange(desc(na_per_10k))
-
 
 ```
 
@@ -612,8 +507,7 @@ swing_precinct_summary <- party_by_precinct |>
  mutate(
    percent_of_precincts = round((number_of_precincts/sum(number_of_precincts)) * 100, 1)
  ) |>
- arrange(desc(number_of_precincts))tes = REP + DEM + UNA + OTH + LIB + GRN + NLM)
-
+ arrange(desc(number_of_precincts))
 ```
 
 
