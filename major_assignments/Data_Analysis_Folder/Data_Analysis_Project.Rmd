@@ -9,12 +9,14 @@ output: html_document
 ```
 
 ```{r}
+#install.packages("ggplot2")
 library(rvest)
 library(tidyverse)
 library(janitor)
 library(lubridate)
 library(ggthemes)
 library(tidycensus)
+library(ggplot2)
 ```
 
 
@@ -228,7 +230,7 @@ Youth_voting_census_comparison <- young_voters_by_county_by_percent |>
 
 ### Answering Question 2: Are there any precincts where certain demographic groups outperformed their Census data? For example, are there precincts were 65% of the early voters were women despite women only being 50% of the voting age population?
 
-Chose to focus on gender for this one! - Did not look at N/A becasue we do that in Q3 and the number of them is so low
+Chose to focus on gender for this one! - Did not look at N/A because we do that in Q3 and the number of them is so low
 
 ```{r}
 # gender breakdown of early voters by county
@@ -313,9 +315,6 @@ gender_comparison <- ev_gender_breakdown |>
  arrange(desc(representation_difference))
 
 ```
-
-
-
 
 ### Answering Question 3:
 
@@ -513,43 +512,65 @@ swing_precinct_summary <- party_by_precinct |>
 
 ### Answering Question 5: Do most precincts follow the general pattern of having the most people vote on the first AND last days of early voting?  Do most early voting locations follow the general pattern of having the most people vote on the first AND last days of early voting? Do most counties follow the general pattern of having the most people vote on the first AND last days of early voting?
 
-No, most precincts do not follow the pattern of having the most people vote on the first AND last days of early voting. Only about 27% of precincts follow this pattern. For the second question, no most counties do not follow this pattern. The percentage is slightly higher at about 33%. One thing that I did notice through looking at this is that Prince George's County had significantly higher voters on the last day of early voting. Statewide, the first and last days of early voting had the most votes cast. If I look at this by polling locations, I can see that 36% of the ealry voting locations follow the pattern. I also can see that 14 of 24 counties have at least one polling location that follows the pattern. Among them are some of the counties with the most polling locations (Anne Arundel, Prince George's, Montgomery, Baltimore County, Baltimore City). These are some of the more populous regions in the state and some of those locations have more voters at them than others. This could be why statewide the first and last days of early voting had the most voters in Maryland, but this pattern was not followed when broken down by precinct, county, and polling location. 
-
-### Note: I am going to return to make data visualizations and graphics for this question soon! I wanted to focus on starting on another question for this milestone. 
-
-### Ideas for visualizations: Some line charts would be good and then we can talk about seeing each county (or voting location) using a facet_wrap in ggplot. A scatterplot could help illustrate the first day/last day pattern (and where it doesn't hold).
-
+No, most precincts do not follow the pattern of having the most people vote on the first AND last days of early voting. Only about 27% of precincts follow this pattern. For the second question, no most counties do not follow this pattern. The percentage is slightly higher at about 33%. One thing that I did notice through looking at this is that Prince George's County had significantly higher voters on the last day of early voting. Statewide, the first and last days of early voting had the most votes cast. If I look at this by polling locations, I can see that 36% of the early voting locations follow the pattern. I also can see that 14 of 24 counties have at least one polling location that follows the pattern. Among them are some of the counties with the most polling locations (Anne Arundel, Prince George's, Montgomery, Baltimore County, Baltimore City). These are some of the more populous regions in the state and some of those locations have more voters at them than others. This could be why statewide the first and last days of early voting had the most voters in Maryland, but this pattern was not followed when broken down by precinct, county, and polling location. 
 
 ```{r}
 
 ### BY POLLING LOCATION
 
-location_by_day <- ev_raw|>
+location_by_day_simple <- ev_raw|>
   group_by(early_vote_center, county_name) |>
   summarise(across(starts_with("day"), \(x) sum(x, na.rm = TRUE)))
 
-location_by_day <- location_by_day |>
-  rowwise() |>
-  mutate(
-    first_day = `day1`,             
-    last_day = `day8`,           
-    max_votes = sort(c_across(starts_with("day")), decreasing = TRUE)[1],  
-    second_max_votes = sort(c_across(starts_with("day")), decreasing = TRUE)[2],  
-    follows_pattern = first_day %in% c(max_votes, second_max_votes) &
-                      last_day %in% c(max_votes, second_max_votes) &
-                      first_day != last_day)
+##location_by_day <- location_by_day_simple |>
+ # rowwise() |>
+ # mutate(
+ #   first_day = `day1`,             
+ # #  last_day = `day8`,           
+  #  max_votes = sort(c_across(starts_with("day")), decreasing = TRUE)[1],  
+ #   second_max_votes = sort(c_across(starts_with("day")), decreasing = TRUE)[2],  
+   # follows_pattern = first_day %in% c(max_votes, second_max_votes) &
+             #         last_day %in% c(max_votes, second_max_votes) &
+              #        first_day != last_day)
 
-summing_locations <- location_by_day |>
-  mutate(total_votes = sum(day1, day2, day3, day4, day5, day6, day7, day8, na.rm = TRUE))
+#summing_locations <- location_by_day |>
+ # mutate(total_votes = sum(day1, day2, day3, day4, day5, day6, day7, day8, na.rm = TRUE))
 
-location_percentage_follows_pattern <- location_by_day |>
-  ungroup() |> 
-  summarize(
-    location_following = sum(follows_pattern),
-    total_location = n(),
-    percentage = (location_following / total_location) * 100
-  )
+#location_percentage_follows_pattern <- location_by_day |>
+#  ungroup() |> 
+ # summarize(
+ #   location_following = sum(follows_pattern),
+ #   total_location = n(),
+  #  percentage = (location_following / total_location) * 100
+ # )
 
+### creating line chart for polling locations by day
+
+location_by_day_long <- location_by_day_simple |>
+  pivot_longer(
+    cols = starts_with("day"),
+    names_to = "day",
+    values_to = "votes"
+  ) |>
+  mutate(day = as.numeric(gsub("day", "", day)))  # Extract numeric day
+
+print(
+  ggplot(location_by_day_long, aes(x = day, y = votes, color = early_vote_center)) +
+  geom_line() +
+  labs(
+    title = "Early Voting Trends by Location",
+    x = "Day",
+    y = "Number of Votes"
+  ) +
+  theme_minimal()
+)
+
+
+
+```
+
+
+```{r}
 ### BY PRECINCT
 
 precincts_by_day <- ev_raw|>
@@ -577,22 +598,55 @@ precincts_percentage_follows_pattern <- precincts_by_day |>
     total_precincts = n(),
     percentage = (precincts_following / total_precincts) * 100
   )
+```
 
+```{r}
 ### BY COUNTY
 
-counties_by_day <- ev_raw|>
+counties_by_day_simple <- ev_raw|>
   group_by(county_name) |>
   summarise(across(starts_with("day"), \(x) sum(x, na.rm = TRUE)))
 
-counties_by_day <- counties_by_day |>
-  rowwise() |>
+library(ggplot2)
+
+counties_long <- counties_by_day_simple |>
+  pivot_longer(cols = starts_with("day"), 
+               names_to = "day", 
+               values_to = "value")
+
+counties_long <- counties_long |>
+  group_by(county_name) |>
+  mutate(last_day = if_else(day == last(day), TRUE, FALSE))
+
+ggplot(counties_long, aes(x = day, y = value, color = county_name, group = county_name)) +
+  geom_line() +
+  geom_text(
+    data = counties_long |> filter(last_day), 
+    aes(label = county_name),
+    hjust = -0.1, 
+    vjust = 0.5, 
+    size = 3
+  ) +
+  scale_x_discrete(labels = function(x) paste0("Day ", gsub("day", "", x))) + 
+  labs(
+    title = "Prince George's County and Montgomery County have most votes first and last days of early voting",
+    x = "Day",
+    y = "Number of Votes",
+    color = "County"
+  ) +
+  theme_minimal()
+
+
+
+counties_by_day <- counties_by_day_simple |>
+ rowwise() |>
   mutate(
     first_day = `day1`,             
     last_day = `day8`,           
     max_votes = sort(c_across(starts_with("day")), decreasing = TRUE)[1],  
     second_max_votes = sort(c_across(starts_with("day")), decreasing = TRUE)[2],  
     follows_pattern = first_day %in% c(max_votes, second_max_votes) &
-                      last_day %in% c(max_votes, second_max_votes) &
+                     last_day %in% c(max_votes, second_max_votes) &
                       first_day != last_day)
 
 
@@ -616,6 +670,7 @@ locations_in_county_following <- location_by_day |>
     total_locations = n(),
     percentage_following = (locations_following / total_locations) * 100
   )
+```
 ```
 
 ### MOST NEWSWORTHY FINDING
