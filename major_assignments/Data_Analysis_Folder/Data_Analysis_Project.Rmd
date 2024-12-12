@@ -89,7 +89,7 @@ The state youth turnout % for early voting was 6.55%. 8 Counties had a higher %.
 
 The top polling location for early youth vote is likely due to the proximity to the University of Maryland. 
 
-The young vote percentage in PG County was 6.8% so the College Park Community Center our performed the county average by about 3 points with 10% being youth vote of the locations voting total.
+The young vote percentage in PG County was 6.8% so the College Park Community Center out performed the county average by about 3 points with 10% being youth vote of the locations voting total.
 
 ```{r}
 #total votes by county
@@ -115,8 +115,6 @@ young_voters_by_county_by_percent <- young_votes_by_county |>
   mutate(young_vote_share = young_votes / total_votes) |>
   arrange(desc(young_vote_share))
 
-head(young_voters_by_county_by_percent)
-
 #total votes by early voting location
 total_votes_by_location <- ev_raw |>
   group_by(early_vote_center, county_name) |>
@@ -139,10 +137,7 @@ young_voters_by_location_by_percent <- young_votes_by_location |>
   mutate(young_vote_share = young_votes / total_votes) |>
   arrange(desc(young_vote_share))
 
-# View the first few rows of the results
-head(young_voters_by_location_by_percent)
-
-#state youth vote %
+#Maryland total early youth vote %
 total_young_votes <- ev_raw |>
   filter(age_group == "18-24") |>
   summarise(total_young_votes = sum(across(starts_with("day"), ~ .x), na.rm = TRUE))
@@ -153,6 +148,276 @@ total_votes <- ev_raw |>
 state_youth_turnout <- total_young_votes$total_young_votes / total_votes$total_votes * 100
 
 state_youth_turnout
+
+
+#18-24 on the census data
+age_18_24 <- get_acs(
+  geography = "county",
+  variables = c(
+    "B01001_007", # M 18-19
+    "B01001_008", # M 20
+    "B01001_009", # M 21
+    "B01001_010", # M 22-24
+    "B01001_031", # F 18-19
+    "B01001_032", # F 20
+    "B01001_033", # F 21
+    "B01001_034"  # F 22-24
+  ),
+  state = "MD",
+  year = 2022
+) |>
+  group_by(GEOID) |>
+  summarise(youth_pop = sum(estimate))
+
+#total population
+total_pop <- get_acs(
+  geography = "county",
+  variables = "B01001_001", 
+  state = "MD",
+  year = 2022
+)
+
+#calculate percentage
+youth_percent <- total_pop |>
+  left_join(age_18_24, by = "GEOID") |>
+  mutate(
+    NAME = gsub(", Maryland", "", NAME),
+    NAME = gsub(" County", "", NAME),
+    NAME = case_when(
+      NAME == "St. Mary's" ~ "Saint Mary's",
+      NAME == "Baltimore" ~ "Baltimore County",
+      NAME == "Baltimore city" ~ "Baltimore City",
+      TRUE ~ NAME
+    ),
+    youth_percent = (youth_pop / estimate) * 100
+  ) |>
+  select(
+    county_name = NAME,
+    total_pop = estimate,
+    youth_pop,
+    youth_percent
+  ) |>
+  arrange(desc(youth_percent))
+
+#combine census data with early voting data
+Youth_voting_census_comparison <- young_voters_by_county_by_percent |>
+  mutate(
+    county_name = case_when(
+      county_name == "St. Mary's" ~ "Saint Mary's",
+      county_name == "Baltimore" ~ "Baltimore County",
+      county_name == "Baltimore city" ~ "Baltimore City",
+      TRUE ~ county_name
+    )
+  ) |>
+  left_join(youth_percent, by = "county_name") |>
+  mutate(
+    young_vote_share = young_vote_share * 100,
+  ) |>
+  select(
+    county_name,
+    young_vote_share,
+    census_youth_percent = youth_percent,
+    total_votes,
+    young_votes,
+    census_youth_pop = youth_pop,
+    census_total_pop = total_pop
+  ) |>
+  arrange(desc(census_youth_percent))
+
+```
+
+### Answering Question 2: Are there any precincts where certain demographic groups outperformed their Census data? For example, are there precincts were 65% of the early voters were women despite women only being 50% of the voting age population?
+
+Chose to focus on gender for this one! - Did not look at N/A becasue we do that in Q3 and the number of them is so low
+
+```{r}
+# gender breakdown of early voters by county
+ev_gender_breakdown <- ev_raw |>
+ mutate(
+   county_name = case_when(
+     county_name == "St. Mary's" ~ "Saint Mary's",
+     county_name == "Baltimore" ~ "Baltimore County",
+     county_name == "Baltimore city" ~ "Baltimore City",
+     TRUE ~ county_name
+   )
+ ) |>
+   filter(gender_code != "N/A") |>  
+ group_by(county_name, gender_code) |>
+ summarise(
+   votes_by_gender = sum(across(starts_with("day"), ~ .x), na.rm = TRUE),
+   .groups = "drop"
+ ) |>
+ group_by(county_name) |>
+ mutate(
+   total_votes = sum(votes_by_gender),
+   voting_gender_percent = round((votes_by_gender/total_votes) * 100, 3)
+ ) |>
+ arrange(desc(voting_gender_percent))
+
+# Census gender population data 
+gender_population_data <- get_acs(
+ geography = "county",
+ variables = c(
+   male = "B01001_002",    # Male total
+   female = "B01001_026"   # Female total
+ ),
+ state = "MD",
+ year = 2022
+)
+
+# Calculate gender percentages using census data
+census_gender_percents <- gender_population_data |>
+ mutate(
+   NAME = gsub(", Maryland", "", NAME),
+   NAME = gsub(" County", "", NAME),
+   NAME = case_when(
+     NAME == "St. Mary's" ~ "Saint Mary's",
+     NAME == "Baltimore" ~ "Baltimore County",
+     NAME == "Baltimore city" ~ "Baltimore City",
+     TRUE ~ NAME
+   )
+ ) |>
+ select(
+   county_name = NAME,
+   gender_code = variable,
+   population = estimate
+ ) |>
+ group_by(county_name) |>
+ mutate(
+   total_pop = sum(population),
+   census_gender_percent = round((population/total_pop) * 100, 3),
+   gender_code = case_when(
+     gender_code == "male" ~ "M",
+     gender_code == "female" ~ "F"
+   )
+ ) |>
+ arrange(county_name, gender_code)
+
+# Compare census gender breakdown by county to early voting gender breakdown by county
+gender_comparison <- ev_gender_breakdown |>
+ left_join(census_gender_percents, by = c("county_name", "gender_code")) |>
+ mutate(
+   representation_difference = voting_gender_percent - census_gender_percent
+ ) |>
+ select(
+   county_name,
+   gender_code,
+   voting_gender_percent,
+   census_gender_percent,
+   representation_difference,
+   votes_by_gender,
+   total_votes,
+   population,
+   total_pop
+ ) |>
+ arrange(desc(representation_difference))
+
+```
+
+
+
+
+### Answering Question 3:
+
+```{r} 
+ev_raw |> 
+  group_by(gender_code) |> 
+  count()
+```
+#Find percentage of nonbinary early voters:
+```{r} 
+(2777/(80405+77290+2777))*100
+```
+A: 1.7% of early voters were effectively non binary.
+
+```{r}
+# Find precincts with most N/A gender voters
+nonbinary_precinct_analysis <- ev_raw |>
+ filter(is.na(gender_code)) |>
+ group_by(precinct, county_name, early_vote_center) |>
+ summarise(
+   na_voters = sum(across(starts_with("day"), ~ .x), na.rm = TRUE),
+   .groups = "drop"
+ ) |>
+ # Get total voters at each precinct for percentage
+ left_join(
+   ev_raw |>
+     group_by(precinct) |>
+     summarise(
+       total_precinct_voters = sum(across(starts_with("day"), ~ .x), na.rm = TRUE),
+       .groups = "drop"
+     ),
+   by = "precinct"
+ ) |>
+ mutate(
+   na_percent = round((na_voters/total_precinct_voters) * 100, 3)
+ ) |>
+ arrange(desc(na_voters))
+
+# Party breakdown for non-binary early voters
+na_party_breakdown <- ev_raw |>
+ filter(is.na(gender_code)) |>
+ group_by(party_code) |>
+ summarise(
+   na_voters = sum(across(starts_with("day"), ~ .x), na.rm = TRUE),
+   .groups = "drop"
+ ) |>
+ mutate(
+   total_na = sum(na_voters),
+   party_percent = round((na_voters/total_na) * 100, 3)
+ ) |>
+ arrange(desc(na_voters))
+
+# County breakdown for non-binary early voters
+na_county_breakdown <- ev_raw |>
+ filter(is.na(gender_code)) |>
+ group_by(county_name) |>
+ summarise(
+   na_voters = sum(across(starts_with("day"), ~ .x), na.rm = TRUE),
+   .groups = "drop"
+ ) |>
+ mutate(
+   total_na = sum(na_voters),
+   county_percent = round((na_voters/total_na) * 100, 3)
+ ) |>
+ arrange(desc(na_voters))
+
+# Using population data by county to see what county had the highest percent of non binary voters in relation to total county population
+county_pop <- get_acs(
+  geography = "county",
+  variables = "B01001_001", 
+  state = "MD",
+  year = 2022
+) |>
+  mutate(
+    NAME = gsub(", Maryland", "", NAME),
+    NAME = gsub(" County", "", NAME),
+    NAME = case_when(
+      NAME == "St. Mary's" ~ "Saint Mary's",
+      NAME == "Baltimore" ~ "Baltimore County",
+      NAME == "Baltimore city" ~ "Baltimore City",
+      TRUE ~ NAME
+    )
+  )
+
+# Look at county breakdown of N/A gender voters with census context
+na_county_census_breakdown <- ev_raw |>
+  filter(is.na(gender_code)) |>
+  group_by(county_name) |>
+  summarise(
+    na_voters = sum(across(starts_with("day"), ~ .x), na.rm = TRUE),
+    .groups = "drop"
+  ) |>
+  left_join(county_pop |> select(county_name = NAME, total_pop = estimate), 
+            by = "county_name") |>
+  mutate(
+    total_na = sum(na_voters),
+    county_percent = round((na_voters/total_na) * 100, 3),
+    na_per_10k = round((na_voters/total_pop) * 10000, 3) 
+  ) |>
+  arrange(desc(na_per_10k))
+
+
 ```
 
 
@@ -170,34 +435,184 @@ ev_raw |>
 A: 1.7% of early voters were effectively non binary.
 
 ```{r}
-#Trying to find precincts with the most nonbinary voters:
+# Find precincts with most non binary voters
+nonbinary_precinct_analysis <- ev_raw |>
+ filter(is.na(gender_code)) |>
+ group_by(precinct, county_name, early_vote_center) |>
+ summarise(
+   na_voters = sum(across(starts_with("day"), ~ .x), na.rm = TRUE),
+   .groups = "drop"
+ ) |>
+ # Get total voters at each precinct for percentage
+ left_join(
+   ev_raw |>
+     group_by(precinct) |>
+     summarise(
+       total_precinct_voters = sum(across(starts_with("day"), ~ .x), na.rm = TRUE),
+       .groups = "drop"
+     ),
+   by = "precinct"
+ ) |>
+ mutate(
+   na_percent = round((na_voters/total_precinct_voters) * 100, 3)
+ ) |>
+ arrange(desc(na_voters))
 
-nonbinary_voters <- ev_raw |> filter(is.na(gender_code))
+# Party breakdown for non-binary early voters
+na_party_breakdown <- ev_raw |>
+ filter(is.na(gender_code)) |>
+ group_by(party_code) |>
+ summarise(
+   na_voters = sum(across(starts_with("day"), ~ .x), na.rm = TRUE),
+   .groups = "drop"
+ ) |>
+ mutate(
+   total_na = sum(na_voters),
+   party_percent = round((na_voters/total_na) * 100, 3)
+ ) |>
+ arrange(desc(na_voters))
 
-nonbinary_voters<- nonbinary_voters|>mutate()
+# County breakdown for non-binary early voters
+na_county_breakdown <- ev_raw |>
+ filter(is.na(gender_code)) |>
+ group_by(county_name) |>
+ summarise(
+   na_voters = sum(across(starts_with("day"), ~ .x), na.rm = TRUE),
+   .groups = "drop"
+ ) |>
+ mutate(
+   total_na = sum(na_voters),
+   county_percent = round((na_voters/total_na) * 100, 3)
+ ) |>
+ arrange(desc(na_voters))
 
-nonbinary_voters<- nonbinary_voters |>
-  group_by(precinct) |>
+# Using population data by county to see what county had the highest percent of non binary voters in relation to total county population
+county_pop <- get_acs(
+  geography = "county",
+  variables = "B01001_001", 
+  state = "MD",
+  year = 2022
+) |>
+  mutate(
+    NAME = gsub(", Maryland", "", NAME),
+    NAME = gsub(" County", "", NAME),
+    NAME = case_when(
+      NAME == "St. Mary's" ~ "Saint Mary's",
+      NAME == "Baltimore" ~ "Baltimore County",
+      NAME == "Baltimore city" ~ "Baltimore City",
+      TRUE ~ NAME
+    )
+  )
+
+# Look at county breakdown of N/A gender voters with census context
+na_county_census_breakdown <- ev_raw |>
+  filter(is.na(gender_code)) |>
+  group_by(county_name) |>
   summarise(
-    total_voters=n())
+    na_voters = sum(across(starts_with("day"), ~ .x), na.rm = TRUE),
+    .groups = "drop"
+  ) |>
+  left_join(county_pop |> select(county_name = NAME, total_pop = estimate), 
+            by = "county_name") |>
+  mutate(
+    total_na = sum(na_voters),
+    county_percent = round((na_voters/total_na) * 100, 3),
+    na_per_10k = round((na_voters/total_pop) * 10000, 3) 
+  ) |>
+  arrange(desc(na_per_10k))
+
 
 ```
 
 ### Answering Question 4: What counties had the closest margin between registered Republicans and Democrats who voted early? Can we identify any swing counties from this?
 
-Wicomico, Kent, Caroline, Talbot, Dorchester and Somerset counties had the closest margin between registered Republicans and Democrats who voted early. Kent County had exactly the same number of registered Republicans and Democrats who voted early. The number of unaffiliated voters in Kent County was not that much lower than the number of registered Republicans and Democrats who voted early. The total number of votes in Kent County during early voting was also quite low. I think the counties I listed are good starting places of where to look at swing counties, but all of the counties who had more Republicans than Democrats vote early are also places to look. Several of the counties with more Democrats than Republicans vote had much larger margins so I think it would be very safe to eliminate these from being swing counties. 
+Wicomico, Kent, Caroline, Talbot, Dorchester and Somerset counties had the closest margin between registered Republicans and Democrats who voted early. Kent County had exactly the same number of registered Republicans and Democrats who voted early. The number of unaffiliated voters in Kent County was not that much lower than the number of registered Republicans and Democrats who voted early. The total number of votes in Kent County during early voting was also quite low. I think the counties I listed are good starting places of where to look at swing counties, but all of the counties who had more Republicans than Democrats vote early are also places to look. Several of the counties with more Democrats than Republicans vote had much larger margins so I think it would be very safe to eliminate these from being swing counties. - NEEDS EDITS!!!
 
 ```{r}
-#total votes by party by county
 party_by_county <- ev_raw |>
-  filter(party_code %in% c("REP", "DEM", "UNA", "OTH", "LIB", "GRN", "NLM")) |>
   group_by(county_name, party_code) |>
-  summarize(total_votes = n(), .groups = "drop")|>
-  pivot_wider(names_from = party_code,
-              values_from = total_votes)|>
-  mutate(REP_DEM_difference = REP - DEM)|>
-  mutate(REP_DEM_ratio = REP/DEM)|>
-  mutate(total_votes = REP + DEM + UNA + OTH + LIB + GRN + NLM)
+  summarise(
+    votes = sum(across(starts_with("day"), ~ .x), na.rm = TRUE),
+    .groups = "drop"
+  ) |>
+  group_by(county_name) |>
+  mutate(
+    total_votes = sum(votes),
+    party_share = round((votes / total_votes) * 100, 1)
+  ) |>
+  summarise(
+    total_votes = first(total_votes),
+    votes_REP = sum(votes[party_code == "REP"], na.rm = TRUE),
+    votes_DEM = sum(votes[party_code == "DEM"], na.rm = TRUE),
+    votes_UNA = sum(votes[party_code == "UNA"], na.rm = TRUE),
+    votes_OTH = sum(votes[party_code == "OTH"], na.rm = TRUE),
+    votes_LIB = sum(votes[party_code == "LIB"], na.rm = TRUE),
+    votes_GRN = sum(votes[party_code == "GRN"], na.rm = TRUE),
+    votes_NLM = sum(votes[party_code == "NLM"], na.rm = TRUE),
+    party_share_REP = sum(party_share[party_code == "REP"], na.rm = TRUE),
+    party_share_DEM = sum(party_share[party_code == "DEM"], na.rm = TRUE),
+    party_share_UNA = sum(party_share[party_code == "UNA"], na.rm = TRUE),
+    party_share_OTH = sum(party_share[party_code == "OTH"], na.rm = TRUE),
+    party_share_LIB = sum(party_share[party_code == "LIB"], na.rm = TRUE),
+    party_share_GRN = sum(party_share[party_code == "GRN"], na.rm = TRUE),
+    party_share_NLM = sum(party_share[party_code == "NLM"], na.rm = TRUE)
+  ) |>
+  mutate(
+    margin_DEM_REP = abs(party_share_DEM - party_share_REP)
+  ) |>
+  arrange(margin_DEM_REP)
+
+
+#now by precinct 
+party_by_precinct <- ev_raw |>
+ group_by(precinct, county_name, party_code) |>
+ summarise(
+   votes = sum(across(starts_with("day"), ~ .x), na.rm = TRUE),
+   .groups = "drop"
+ ) |>
+ group_by(precinct, county_name) |>
+ mutate(
+   total_votes = sum(votes),
+   party_share = round((votes / total_votes) * 100, 1)
+ ) |>
+ summarise(
+   total_votes = first(total_votes),
+   votes_REP = sum(votes[party_code == "REP"], na.rm = TRUE),
+   votes_DEM = sum(votes[party_code == "DEM"], na.rm = TRUE),
+   votes_UNA = sum(votes[party_code == "UNA"], na.rm = TRUE),
+   votes_OTH = sum(votes[party_code == "OTH"], na.rm = TRUE),
+   votes_LIB = sum(votes[party_code == "LIB"], na.rm = TRUE),
+   votes_GRN = sum(votes[party_code == "GRN"], na.rm = TRUE),
+   votes_NLM = sum(votes[party_code == "NLM"], na.rm = TRUE),
+   party_share_REP = sum(party_share[party_code == "REP"], na.rm = TRUE),
+   party_share_DEM = sum(party_share[party_code == "DEM"], na.rm = TRUE),
+   party_share_UNA = sum(party_share[party_code == "UNA"], na.rm = TRUE),
+   party_share_OTH = sum(party_share[party_code == "OTH"], na.rm = TRUE),
+   party_share_LIB = sum(party_share[party_code == "LIB"], na.rm = TRUE),
+   party_share_GRN = sum(party_share[party_code == "GRN"], na.rm = TRUE),
+   party_share_NLM = sum(party_share[party_code == "NLM"], na.rm = TRUE),
+   county_name = first(county_name)
+ ) |>
+ mutate(
+   margin_DEM_REP = abs(party_share_DEM - party_share_REP),
+   swing_precinct = case_when(
+     margin_DEM_REP <= 5 ~ "Very Competitive (within 5%)",
+     margin_DEM_REP <= 10 ~ "Competitive (5-10%)",
+     TRUE ~ "Not Competitive (>10%)"
+   )
+ ) |>
+ arrange(margin_DEM_REP)
+
+swing_precinct_summary <- party_by_precinct |>
+ group_by(swing_precinct) |>
+ summarise(
+   number_of_precincts = n(),
+   .groups = "drop"
+ ) |>
+ mutate(
+   percent_of_precincts = round((number_of_precincts/sum(number_of_precincts)) * 100, 1)
+ ) |>
+ arrange(desc(number_of_precincts))tes = REP + DEM + UNA + OTH + LIB + GRN + NLM)
 
 ```
 
