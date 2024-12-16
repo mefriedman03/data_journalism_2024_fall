@@ -350,20 +350,27 @@ gender_comparison <- ev_gender_breakdown |>
 
 ```
 
-### Answering Question 3:
+### Answering Question 3: Which precincts had the most early voters identifying outside of male/female? How did they vote?
 
-```{r} 
-ev_raw |> 
-  group_by(gender_code) |> 
-  count()
-```
-#Find percentage of nonbinary early voters:
-```{r} 
-(2777/(80405+77290+2777))*100
-```
-A: 1.7% of early voters were effectively non binary.
+Non-binary of N/A voters according to the early voting records represent  0.301% of all early voters. Baltimore county (453), Anne Arundel (418), Montgomery (399) and Baltimore City (324) were the counties with the highest number of non-binary voters however when compared to the overall population of the county. However Queen Anne's (8.15 per 10k), Talbot (7.97 per 10k), and Kent (7.78 per 10k) had he most non-binary voters per capita. 
+
+11 Counties had over 0.301% of their voters identify as non-binary. Baltimore City (0.0605%), Kent (0.414%) and Anne Arundel (0.408%) had the highest totals comapred to their overall early vote totals. Also, Democrats had the highest percent of non-binary voters 1629 of the total 2989. 
+
 
 ```{r}
+#male/female/n.a totals
+gender_vote_totals <- ev_raw |>
+ group_by(gender_code) |>
+ summarise(
+   votes = sum(across(starts_with("day"), ~ .x), na.rm = TRUE),
+   .groups = "drop"
+ ) |>
+ mutate(
+   total_votes = sum(votes),
+   percent_of_votes = round((votes/total_votes) * 100, 3)
+ ) |>
+ arrange(desc(votes))
+
 # Find precincts with most non binary voters
 nonbinary_precinct_analysis <- ev_raw |>
  filter(is.na(gender_code)) |>
@@ -433,7 +440,7 @@ county_pop <- get_acs(
     )
   )
 
-# Look at county breakdown of non binary voters with census context
+# Look at county breakdown of non binary voters with census context (using per 10k)
 na_county_census_breakdown <- ev_raw |>
   filter(is.na(gender_code)) |>
   group_by(county_name) |>
@@ -449,6 +456,21 @@ na_county_census_breakdown <- ev_raw |>
     na_per_10k = round((na_voters/total_pop) * 10000, 3) 
   ) |>
   arrange(desc(na_per_10k))
+
+# Compare non-binary voters to total voters by county - (In what counties did non-binary voters make up the highest percents)
+na_voting_percentages <- total_votes_by_county |>
+ left_join(na_county_breakdown, by = "county_name") |>
+ mutate(
+   percent_na_voters = round((na_voters/total_votes) * 100, 3)
+ ) |>
+ select(
+   county_name,
+   total_votes,
+   na_voters,
+   percent_na_voters
+ ) |>
+ arrange(desc(percent_na_voters))
+
 
 ```
 
