@@ -478,7 +478,7 @@ na_voting_percentages <- total_votes_by_county |>
 
 We identified two swing counties: Kent County is the most competitive from early results with (42.7% DEM, 42.1% REP, margin of 0.6%). Anne Arundel shows close competition (40.8% DEM, 39.1% REP, margin of 1.7%). 
 
-89.1% of precincts in Maryland were not competitive with a greater than 10% margin between democrats and republicans. 5.5% of precincts could be competitive with a 5-10% margin between democrats and republicans. 4.1% of precincts were very competitive with a 1-5% margin between democrats and republicans. 1.3% or 25 total precincts were extremely competitive with less than 1% margin between democrats and republican. 3 of these precincts only recorded 1 total and neither were for the democratic or republican candidate and 3 other counties recorded 15 or fewer votes. In total we found 19 total very competitive precincts that could be used to predict election results. Baltimore County accounted for 8 of the 19 total very competitive precincts; however the overall county favored Dem by 24 points in the early results. 
+89.1% of precincts in Maryland were not competitive with a greater than 10% margin between democrats and republicans. 5.5% of precincts could be competitive with a 5-10% margin between democrats and republicans. 4.1% of precincts were very competitive with a 1-5% margin between democrats and republicans. 1.3% or 25 total precincts were extremely competitive with less than 1% margin between democrats and republican. 3 of these precincts only recorded 1 total and neither were for the democratic or republican candidate and 3 other countries recorded 15 or fewer votes. In total we found 19 total very competitive precincts that could be used to predict election results. Baltimore County accounted for 8 of the 19 total very competitive precincts; however the overall county favored Dem by 24 points in the early results. 
 
 
 ```{r}
@@ -742,8 +742,3 @@ locations_in_county_following <- location_by_day |>
     percentage_following = (locations_following / total_locations) * 100
   )
 ```
-```
-
-### MOST NEWSWORTHY FINDING
-
-We think our most newsworthy finding so far was found in Question 4 while looking at which counties had the closest margins between registered Republicans and registered Democrats who voted early. This question can help us identify split counties. We thought Kent County was particularly interesting because of how the same number of Democrats and Republicans voted early and because of how many unaffiliated voters voted early. The county seems small in comparison to other counties so we think looking into what factors impact how people in Kent County vote would be interesting. We also think comparing the margins of all of the other counties could make for an interesting story on its own. This would require making some visualizations and doing some more coding. 
