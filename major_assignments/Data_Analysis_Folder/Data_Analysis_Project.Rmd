@@ -476,44 +476,50 @@ na_voting_percentages <- total_votes_by_county |>
 
 ### Answering Question 4: What counties had the closest margin between registered Republicans and Democrats who voted early? Can we identify any swing counties from this?
 
-Wicomico, Kent, Caroline, Talbot, Dorchester and Somerset counties had the closest margin between registered Republicans and Democrats who voted early. Kent County had exactly the same number of registered Republicans and Democrats who voted early. The number of unaffiliated voters in Kent County was not that much lower than the number of registered Republicans and Democrats who voted early. The total number of votes in Kent County during early voting was also quite low. I think the counties I listed are good starting places of where to look at swing counties, but all of the counties who had more Republicans than Democrats vote early are also places to look. Several of the counties with more Democrats than Republicans vote had much larger margins so I think it would be very safe to eliminate these from being swing counties. - NEEDS EDITS!!!
+We identified two swing counties: Kent County is the most competitive from early results with (42.7% DEM, 42.1% REP, margin of 0.6%). Anne Arundel shows close competition (40.8% DEM, 39.1% REP, margin of 1.7%). 
 
+89.1% of precincts in Maryland were not competitive with a greater than 10% margin between democrats and republicans. 5.5% of precincts could be competitive with a 5-10% margin between democrats and republicans. 4.1% of precincts were very competitive with a 1-5% margin between democrats and republicans. 1.3% or 25 total precincts were extremely competitive with less than 1% margin between democrats and republican. 3 of these precincts only recorded 1 total and neither were for the democratic or republican candidate and 3 other counties recorded 15 or fewer votes. In total we found 19 total very competitive precincts that could be used to predict election results. Baltimore County accounted for 8 of the 19 total very competitive precincts however the overall county favored Dem very 24 points in the early results. 
 
 
 ```{r}
 party_by_county <- ev_raw |>
-  group_by(county_name, party_code) |>
-  summarise(
-    votes = sum(across(starts_with("day"), ~ .x), na.rm = TRUE),
-    .groups = "drop"
-  ) |>
-  group_by(county_name) |>
-  mutate(
-    total_votes = sum(votes),
-    party_share = round((votes / total_votes) * 100, 1)
-  ) |>
-  summarise(
-    total_votes = first(total_votes),
-    votes_REP = sum(votes[party_code == "REP"], na.rm = TRUE),
-    votes_DEM = sum(votes[party_code == "DEM"], na.rm = TRUE),
-    votes_UNA = sum(votes[party_code == "UNA"], na.rm = TRUE),
-    votes_OTH = sum(votes[party_code == "OTH"], na.rm = TRUE),
-    votes_LIB = sum(votes[party_code == "LIB"], na.rm = TRUE),
-    votes_GRN = sum(votes[party_code == "GRN"], na.rm = TRUE),
-    votes_NLM = sum(votes[party_code == "NLM"], na.rm = TRUE),
-    party_share_REP = sum(party_share[party_code == "REP"], na.rm = TRUE),
-    party_share_DEM = sum(party_share[party_code == "DEM"], na.rm = TRUE),
-    party_share_UNA = sum(party_share[party_code == "UNA"], na.rm = TRUE),
-    party_share_OTH = sum(party_share[party_code == "OTH"], na.rm = TRUE),
-    party_share_LIB = sum(party_share[party_code == "LIB"], na.rm = TRUE),
-    party_share_GRN = sum(party_share[party_code == "GRN"], na.rm = TRUE),
-    party_share_NLM = sum(party_share[party_code == "NLM"], na.rm = TRUE)
-  ) |>
-  mutate(
-    margin_DEM_REP = abs(party_share_DEM - party_share_REP)
-  ) |>
-  arrange(margin_DEM_REP)
-
+ group_by(county_name, party_code) |>
+ summarise(
+   votes = sum(across(starts_with("day"), ~ .x), na.rm = TRUE),
+   .groups = "drop"
+ ) |>
+ group_by(county_name) |>
+ mutate(
+   total_votes = sum(votes),
+   party_share = round((votes / total_votes) * 100, 1)
+ ) |>
+ summarise(
+   total_votes = first(total_votes),
+   votes_REP = sum(votes[party_code == "REP"], na.rm = TRUE),
+   votes_DEM = sum(votes[party_code == "DEM"], na.rm = TRUE),
+   votes_UNA = sum(votes[party_code == "UNA"], na.rm = TRUE),
+   votes_OTH = sum(votes[party_code == "OTH"], na.rm = TRUE),
+   votes_LIB = sum(votes[party_code == "LIB"], na.rm = TRUE),
+   votes_GRN = sum(votes[party_code == "GRN"], na.rm = TRUE),
+   votes_NLM = sum(votes[party_code == "NLM"], na.rm = TRUE),
+   party_share_REP = sum(party_share[party_code == "REP"], na.rm = TRUE),
+   party_share_DEM = sum(party_share[party_code == "DEM"], na.rm = TRUE),
+   party_share_UNA = sum(party_share[party_code == "UNA"], na.rm = TRUE),
+   party_share_OTH = sum(party_share[party_code == "OTH"], na.rm = TRUE),
+   party_share_LIB = sum(party_share[party_code == "LIB"], na.rm = TRUE),
+   party_share_GRN = sum(party_share[party_code == "GRN"], na.rm = TRUE),
+   party_share_NLM = sum(party_share[party_code == "NLM"], na.rm = TRUE)
+ ) |>
+ mutate(
+   margin_DEM_REP = abs(party_share_DEM - party_share_REP),
+   competitiveness = case_when(
+     margin_DEM_REP <= 1 ~ "Extremely Competitive (<1%)",
+     margin_DEM_REP <= 5 ~ "Very Competitive (1-5%)",
+     margin_DEM_REP <= 10 ~ "Could be Competitive (5-10%)",
+     TRUE ~ "Non Competitive (>10%)"
+   )
+ ) |>
+ arrange(margin_DEM_REP)
 
 #now by precinct 
 party_by_precinct <- ev_raw |>
@@ -547,16 +553,17 @@ party_by_precinct <- ev_raw |>
  ) |>
  mutate(
    margin_DEM_REP = abs(party_share_DEM - party_share_REP),
-   swing_precinct = case_when(
-     margin_DEM_REP <= 5 ~ "Very Competitive (within 5%)",
-     margin_DEM_REP <= 10 ~ "Competitive (5-10%)",
-     TRUE ~ "Not Competitive (>10%)"
+   competitiveness = case_when(
+     margin_DEM_REP <= 1 ~ "Extremely Competitive (<1%)",
+     margin_DEM_REP <= 5 ~ "Very Competitive (1-5%)",
+     margin_DEM_REP <= 10 ~ "Could be Competitive (5-10%)",
+     TRUE ~ "Non Competitive (>10%)"
    )
  ) |>
  arrange(margin_DEM_REP)
 
-swing_precinct_summary <- party_by_precinct |>
- group_by(swing_precinct) |>
+competitiveness_summary <- party_by_precinct |>
+ group_by(competitiveness) |>
  summarise(
    number_of_precincts = n(),
    .groups = "drop"
@@ -564,7 +571,13 @@ swing_precinct_summary <- party_by_precinct |>
  mutate(
    percent_of_precincts = round((number_of_precincts/sum(number_of_precincts)) * 100, 1)
  ) |>
- arrange(desc(number_of_precincts))
+ arrange(factor(competitiveness, levels = c(
+   "Extremely Competitive (<1%)",
+   "Very Competitive (1-5%)",
+   "Could be Competitive (5-10%)",
+   "Non Competitive (>10%)"
+ )))
+
 ```
 
 
