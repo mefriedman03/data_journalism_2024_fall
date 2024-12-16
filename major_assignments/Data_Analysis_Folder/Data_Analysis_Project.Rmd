@@ -18,7 +18,9 @@ library(ggthemes)
 library(tidycensus)
 library(ggplot2)
 ```
-
+There are a lot of people who were shocked and confused by the results of the election. Over and over again, they reference the dramatic shift of so many states from blue to red, trying to make sense of a country they no longer recognize. One of the keys to understanding what happened, why people voted the way they did, is to investigate counties divided in themselves; the smaller the county, the more significant the split. Kent County might be such a county split between Democratic and Republican voters —the same number of registered Democrats and Republicans voted early, indicating a similar split among those who voted on election day. Here's how we found that:
+### [MOVE CODE FROM Q 4 HERE (?)]
+Kent County is mostly white — over 81%. The median household income is lower than the national average at $74,402 — especially low for Maryland, whose median average is nearly $99,000. At 12.1%, Kent County’s poverty rate is closer to the national (12.5%) than to the state’s (9.5%).
 
 ```{r}
 ev_raw <- read_csv("data/EV_RAW_DATA.csv") 
@@ -422,6 +424,8 @@ na_county_census_breakdown <- ev_raw |>
 
 Wicomico, Kent, Caroline, Talbot, Dorchester and Somerset counties had the closest margin between registered Republicans and Democrats who voted early. Kent County had exactly the same number of registered Republicans and Democrats who voted early. The number of unaffiliated voters in Kent County was not that much lower than the number of registered Republicans and Democrats who voted early. The total number of votes in Kent County during early voting was also quite low. I think the counties I listed are good starting places of where to look at swing counties, but all of the counties who had more Republicans than Democrats vote early are also places to look. Several of the counties with more Democrats than Republicans vote had much larger margins so I think it would be very safe to eliminate these from being swing counties. - NEEDS EDITS!!!
 
+
+
 ```{r}
 party_by_county <- ev_raw |>
   group_by(county_name, party_code) |>
@@ -512,7 +516,7 @@ swing_precinct_summary <- party_by_precinct |>
 
 ### Answering Question 5: Do most precincts follow the general pattern of having the most people vote on the first AND last days of early voting?  Do most early voting locations follow the general pattern of having the most people vote on the first AND last days of early voting? Do most counties follow the general pattern of having the most people vote on the first AND last days of early voting?
 
-No, most precincts do not follow the pattern of having the most people vote on the first AND last days of early voting. Only about 27% of precincts follow this pattern. For the second question, no most counties do not follow this pattern. The percentage is slightly higher at about 33%. One thing that I did notice through looking at this is that Prince George's County had significantly higher voters on the last day of early voting. Statewide, the first and last days of early voting had the most votes cast. If I look at this by polling locations, I can see that 36% of the early voting locations follow the pattern. I also can see that 14 of 24 counties have at least one polling location that follows the pattern. Among them are some of the counties with the most polling locations (Anne Arundel, Prince George's, Montgomery, Baltimore County, Baltimore City). These are some of the more populous regions in the state and some of those locations have more voters at them than others. This could be why statewide the first and last days of early voting had the most voters in Maryland, but this pattern was not followed when broken down by precinct, county, and polling location. 
+No, most precincts do not follow the pattern of having the most people vote on the first AND last days of early voting. Only about 27% of precincts follow this pattern. For the second question, no most counties do not follow this pattern. The percentage is slightly higher at about 33%. One thing that We did notice through looking at this is that Prince George's County had significantly higher voters on the last day of early voting. Statewide, the first and last days of early voting had the most votes cast. If we look at this by polling locations, we can see that 36% of the early voting locations follow the pattern. We can also see that 14 of 24 counties have at least one polling location that follows the pattern. Among them are some of the counties with the most polling locations (Anne Arundel, Prince George's, Montgomery, Baltimore County, Baltimore City). These are some of the more populous regions in the state and some of those locations have more voters at them than others. This could be why statewide the first and last days of early voting had the most voters in Maryland, but this pattern was not followed when broken down by precinct, county, and polling location. 
 
 ```{r}
 
