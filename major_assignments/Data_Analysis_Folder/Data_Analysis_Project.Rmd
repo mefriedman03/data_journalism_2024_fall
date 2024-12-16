@@ -580,27 +580,27 @@ location_by_day_simple <- ev_raw|>
   group_by(early_vote_center, county_name) |>
   summarise(across(starts_with("day"), \(x) sum(x, na.rm = TRUE)))
 
-##location_by_day <- location_by_day_simple |>
- # rowwise() |>
- # mutate(
- #   first_day = `day1`,             
- # #  last_day = `day8`,           
-  #  max_votes = sort(c_across(starts_with("day")), decreasing = TRUE)[1],  
- #   second_max_votes = sort(c_across(starts_with("day")), decreasing = TRUE)[2],  
-   # follows_pattern = first_day %in% c(max_votes, second_max_votes) &
-             #         last_day %in% c(max_votes, second_max_votes) &
-              #        first_day != last_day)
+location_by_day <- location_by_day_simple |>
+  rowwise() |>
+  mutate(
+    first_day = `day1`,             
+    last_day = `day8`,           
+    max_votes = sort(c_across(starts_with("day")), decreasing = TRUE)[1],  
+    second_max_votes = sort(c_across(starts_with("day")), decreasing = TRUE)[2],  
+    follows_pattern = first_day %in% c(max_votes, second_max_votes) &
+                      last_day %in% c(max_votes, second_max_votes) &
+                      first_day != last_day)
 
-#summing_locations <- location_by_day |>
- # mutate(total_votes = sum(day1, day2, day3, day4, day5, day6, day7, day8, na.rm = TRUE))
+summing_locations <- location_by_day |>
+  mutate(total_votes = sum(day1, day2, day3, day4, day5, day6, day7, day8, na.rm = TRUE))
 
-#location_percentage_follows_pattern <- location_by_day |>
-#  ungroup() |> 
- # summarize(
- #   location_following = sum(follows_pattern),
- #   total_location = n(),
-  #  percentage = (location_following / total_location) * 100
- # )
+location_percentage_follows_pattern <- location_by_day |>
+  ungroup() |> 
+  summarize(
+    location_following = sum(follows_pattern),
+    total_location = n(),
+    percentage = (location_following / total_location) * 100
+  )
 
 ### creating line chart for polling locations by day
 
