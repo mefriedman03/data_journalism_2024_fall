@@ -18,9 +18,6 @@ library(ggthemes)
 library(tidycensus)
 library(ggplot2)
 ```
-There are a lot of people who were shocked and confused by the results of the election. Over and over again, they reference the dramatic shift of so many states from blue to red, trying to make sense of a country they no longer recognize. One of the keys to understanding what happened, why people voted the way they did, is to investigate counties divided in themselves; the smaller the county, the more significant the split. Kent County might be such a county split between Democratic and Republican voters —the same number of registered Democrats and Republicans voted early, indicating a similar split among those who voted on election day. Here's how we found that:
-### [MOVE CODE FROM Q 4 HERE (?)]
-Kent County is mostly white — over 81%. The median household income is lower than the national average at $74,402 — especially low for Maryland, whose median average is nearly $99,000. At 12.1%, Kent County’s poverty rate is closer to the national (12.5%) than to the state’s (9.5%).
 
 ```{r}
 ev_raw <- read_csv("data/EV_RAW_DATA.csv") 
@@ -90,13 +87,14 @@ As far as defining some of the terms in our questions and within our data, in th
 
 ### Question 1: What voting location and or county did younger age groups dominate voting early in? What do these places have in common?
 
-The state youth turnout % for early voting was 6.55%. 8 Counties had a higher %. 1. Saint Mary's (7.6%), 2. Howard (7.5%), 3. Charles (7.1%), 4. Calvert (7.1%), 5. Montgomery(6.9%), 6. Frederick(6.9%) 7. Prince George's (6.8%), 8. Washington (6.8%). The top counties tend to have a lower median age compared to other counties.
+The state youth turnout percent for early voting was 6.55%. 8 Counties had a higher percent share of young voters. 1. Saint Mary's (7.6%), 2. Howard (7.5%), 3. Charles (7.1%), 4. Calvert (7.1%), 5. Montgomery(6.9%), 6. Frederick(6.9%) 7. Prince George's (6.8%), 8. Washington (6.8%). The top counties mostly have a lower median age compared to other counties.
 
-The top polling location for early youth vote is likely due to the proximity to the University of Maryland. 
+The College Park Community Center was the top polling location for early youth vote. This is likely due to its proximity to the University of Maryland. 
 
-The young vote percentage in PG County was 6.8% so the College Park Community Center out performed the county average by about 3 points with 10% being youth vote of the locations voting total.
+The young vote percentage in Prince George’s County was 6.8% so the College Park Community Center out performed the county average by about 3 points. More than 10% of early voters at the College Park Community Center were ages 18-24. 
 
-The counties with highest percent of young voters (aged 18-24) did not specifically correlate to early voting youth turnout. For example Wicomico, Somerset, Allegany and Kent county all have more than 10% of their total population in the 18-24 range. However none of them ranked in the top 8 for youth voter turnout. The bar chart below shows how all counties youth population compares to early youth turnout. 
+The counties with the highest percent of young voters did not specifically correlate to early voting youth turnout. For example Wicomico, Somerset, Allegany and Kent county all have more than 10% of their total population in the 18-24 range. However, none of them ranked in the top 8 for youth voter turnout. The bar chart below shows how all counties' youth population compares to early youth turnout. 
+
 
 ```{r}
 #total votes by county
@@ -264,7 +262,9 @@ ggplot(youth_comparison_clean) +
 
 ### Answering Question 2: Are there any precincts where certain demographic groups outperformed their Census data? For example, are there precincts were 65% of the early voters were women despite women only being 50% of the voting age population?
 
-Looking at the overall population split between male and female in each county and the split between male and female in early voting we concluded that Women are over represented in early voting compared to their population share across ALL counties. The largest gaps in female population to were in Somerset (9.3% higher), Prince George's (9.1% higher), and Baltimore City (8.1% higher). The smallest gaps (Worcester at 1.3%, Dorchester at 1.8%) still showed women voting above their population share. 
+Looking at the overall population split between male and female in each county and the split between male and female in early voting we concluded that women are over represented in early voting compared to their population share across ALL counties. The largest gaps in female population were in Somerset County (9.3% higher), Prince George's County (9.1% higher), and Baltimore City (8.1% higher). The smallest gaps (Worcester County at 1.3%, Dorchester County at 1.8%) still showed women voting above their population share. 
+
+If we were to pursue this further, we would look to see if this carries into overall election results, if women are typically overrepresent in election results and what might be behind this.
 
 ```{r}
 # gender breakdown of early voters by county
@@ -350,12 +350,11 @@ gender_comparison <- ev_gender_breakdown |>
 
 ```
 
-### Answering Question 3: Which precincts had the most early voters identifying outside of male/female? How did they vote?
+### Question 3: Which precincts had the most early voters identifying outside of male/female? How did they vote?
 
-Non-binary of N/A voters according to the early voting records represent  0.301% of all early voters. Baltimore county (453), Anne Arundel (418), Montgomery (399) and Baltimore City (324) were the counties with the highest number of non-binary voters however when compared to the overall population of the county. However Queen Anne's (8.15 per 10k), Talbot (7.97 per 10k), and Kent (7.78 per 10k) had he most non-binary voters per capita. 
+Nonbinary, or N/A voters according to the early voting records, represent 0.301% of all early voters. Baltimore County (453), Anne Arundel County (418), Montgomery County (399) and Baltimore City (324) were the jurisdictions with the highest number of nonbinary voters when compared to the overall population of the county. However, Queen Anne's County (8.15 per 10k), Talbot County (7.97 per 10k) and Kent County (7.78 per 10k) had the most nonbinary voters per capita. 
 
-11 Counties had over 0.301% of their voters identify as non-binary. Baltimore City (0.0605%), Kent (0.414%) and Anne Arundel (0.408%) had the highest totals comapred to their overall early vote totals. Also, Democrats had the highest percent of non-binary voters 1629 of the total 2989. 
-
+11 Counties had more than 0.301% of their voters identify as nonbinary. Baltimore City (0.0605%), Kent (0.414%) and Anne Arundel (0.408%) had the highest total of nonbinary voters compared to their overall early vote totals. Also, Democrats had the highest percent of nonbinary voters overall with 1629 of the total 2989 nonbinary voters identifying as Democrats. We chose not to focus on this question because of the very small number of voters and the not limited amount of other existing data about this. 
 
 ```{r}
 #male/female/n.a totals
@@ -474,12 +473,15 @@ na_voting_percentages <- total_votes_by_county |>
 
 ```
 
-### Answering Question 4: What counties had the closest margin between registered Republicans and Democrats who voted early? Can we identify any swing counties from this?
+### Question 4: What counties had the closest margin between registered Republicans and Democrats who voted early? Can we identify any swing counties from this?
 
-We identified two swing counties: Kent County is the most competitive from early results with (42.7% DEM, 42.1% REP, margin of 0.6%). Anne Arundel shows close competition (40.8% DEM, 39.1% REP, margin of 1.7%). 
+We identified two counties with the closest margin during early voting: Kent County is the most competitive from early results with (42.7% DEM, 42.1% REP, margin of 0.6%). Anne Arundel shows close competition (40.8% DEM, 39.1% REP, margin of 1.7%). 
 
-89.1% of precincts in Maryland were not competitive with a greater than 10% margin between democrats and republicans. 5.5% of precincts could be competitive with a 5-10% margin between democrats and republicans. 4.1% of precincts were very competitive with a 1-5% margin between democrats and republicans. 1.3% or 25 total precincts were extremely competitive with less than 1% margin between democrats and republican. 3 of these precincts only recorded 1 total and neither were for the democratic or republican candidate and 3 other countries recorded 15 or fewer votes. In total we found 19 total very competitive precincts that could be used to predict election results. Baltimore County accounted for 8 of the 19 total very competitive precincts; however the overall county favored Dem by 24 points in the early results. 
+89.1% of precincts in Maryland were not competitive. We defined competitive precincts as ones with a greater than 10% margin between Democrats and Republicans. 5.5% of precincts could be competitive with a 5-10% margin between Democrats and Republicans. 4.1% of precincts were very competitive with a 1-5% margin between Democrats and Republicans. 
 
+1.3%, or 25 total precincts, were extremely competitive with less than 1% margin between Democrats and Republicans. 3 of these precincts only recorded 1 total vote and neither were for the Democratic or Republican candidate. 3 other precincts recorded 15 or fewer votes. In total, we found 19 very competitive precincts that could be used to predict election results. Baltimore County accounted for 8 of the 19 total very competitive precincts. However, the overall county favored Democrats by 24 points in the early voting results. 
+
+If we were to pursue this as our story, we might have focused on the differences between overall county results and early voting results and what could have caused this. 
 
 ```{r}
 party_by_county <- ev_raw |>
@@ -581,9 +583,16 @@ competitiveness_summary <- party_by_precinct |>
 ```
 
 
-### Answering Question 5: Do most precincts follow the general pattern of having the most people vote on the first AND last days of early voting?  Do most early voting locations follow the general pattern of having the most people vote on the first AND last days of early voting? Do most counties follow the general pattern of having the most people vote on the first AND last days of early voting?
+### Question 5: Do most precincts follow the general pattern of having the most people vote on the first AND last days of early voting?  Do most early voting locations follow the general pattern of having the most people vote on the first AND last days of early voting? Do most counties follow the general pattern of having the most people vote on the first AND last days of early voting?
 
-No, most precincts do not follow the pattern of having the most people vote on the first AND last days of early voting. Only about 27% of precincts follow this pattern. For the second question, no most counties do not follow this pattern. The percentage is slightly higher at about 33%. One thing that We did notice through looking at this is that Prince George's County had significantly higher voters on the last day of early voting. Statewide, the first and last days of early voting had the most votes cast. If we look at this by polling locations, we can see that 36% of the early voting locations follow the pattern. We can also see that 14 of 24 counties have at least one polling location that follows the pattern. Among them are some of the counties with the most polling locations (Anne Arundel, Prince George's, Montgomery, Baltimore County, Baltimore City). These are some of the more populous regions in the state and some of those locations have more voters at them than others. This could be why statewide the first and last days of early voting had the most voters in Maryland, but this pattern was not followed when broken down by precinct, county, and polling location. 
+
+Statewide, the first and last days of early voting had the most votes cast. Most precincts do not follow the pattern of having the most people vote on the first and last days of early voting. Only about 27% of precincts follow this pattern. 
+
+Most counties also do not follow this pattern. The percentage is slightly higher at about 33%. One thing that we did notice through looking at this is that Prince George's County had significantly higher voters on the last day of early voting. 
+
+If we look at this by polling locations, we see that 36% of the early voting locations follow the pattern. We can also see that 14 of 24 counties have at least one polling location that follows the pattern. Among them are some of the counties with the most polling locations (Anne Arundel, Prince George's, Montgomery, Baltimore County, Baltimore City). These are some of the more populous regions in the state and some of those locations have more voters at them than others. This could be why statewide the first and last days of early voting had the most voters in Maryland, but this pattern was not followed when broken down by precinct, county, and polling location. 
+
+After our analysis, we decided we would not prioritize further exploring this question as a story idea and that some of our other findings were more interesting and newsworthy. 
 
 ```{r}
 
@@ -636,10 +645,7 @@ print(
   theme_minimal()
 )
 
-
-
 ```
-
 
 ```{r}
 ### BY PRECINCT
