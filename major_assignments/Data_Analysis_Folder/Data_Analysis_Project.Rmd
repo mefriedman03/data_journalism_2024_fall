@@ -623,28 +623,6 @@ location_percentage_follows_pattern <- location_by_day |>
     total_location = n(),
     percentage = (location_following / total_location) * 100
   )
-
-### creating line chart for polling locations by day
-
-location_by_day_long <- location_by_day_simple |>
-  pivot_longer(
-    cols = starts_with("day"),
-    names_to = "day",
-    values_to = "votes"
-  ) |>
-  mutate(day = as.numeric(gsub("day", "", day)))  # Extract numeric day
-
-print(
-  ggplot(location_by_day_long, aes(x = day, y = votes, color = early_vote_center)) +
-  geom_line() +
-  labs(
-    title = "Early Voting Trends by Location",
-    x = "Day",
-    y = "Number of Votes"
-  ) +
-  theme_minimal()
-)
-
 ```
 
 ```{r}
