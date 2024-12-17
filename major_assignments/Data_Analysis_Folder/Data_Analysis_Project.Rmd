@@ -748,3 +748,6 @@ locations_in_county_following <- location_by_day |>
     percentage_following = (locations_following / total_locations) * 100
   )
 ```
+
+### FINAL MEMO
+
